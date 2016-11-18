@@ -2,9 +2,8 @@ import java.util.Scanner;
 
 public class Application {
     private boolean[] bombPlacementBoard = new boolean[25];
-    private int[] board = new int[25];
+    private String[] board = new String[25];
     private int numberOfBombs = 5;
-    private boolean isGameLost = false;
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -16,16 +15,17 @@ public class Application {
         placeBombOnBoard();
 
         setBoard();
-        while (!isGameLost) {
+        while (true) {
             displayBoard();
             System.out.println("Podaj liczbe");
             int playerMove = scanner.nextInt();
-            if(bombPlacementBoard[playerMove]) {
+            if(bombPlacementBoard[playerMove - 1]) {
                 System.out.println("przegrales, trafiles na bombe");
                 break;
             }
             else {
                 System.out.println("uff, to nie byla bomba");
+                board[playerMove - 1] = "";
             }
         }
     }
@@ -41,7 +41,7 @@ public class Application {
 
     private void setBoard() {
         for (int i = 0; i < board.length; i++) {
-            board[i] = i + 1;
+            board[i] = Integer.toString(i + 1);
         }
     }
 
@@ -51,7 +51,7 @@ public class Application {
         System.out.println("bomby: ");
         for (int i = 0; i < numberOfBombs; i++) {
             randomNumber = randomNumber();
-            bombPlacementBoard[randomNumber] = true;
+            bombPlacementBoard[randomNumber - 1] = true;
             System.out.print(randomNumber + ", ");
         }
         System.out.println();
