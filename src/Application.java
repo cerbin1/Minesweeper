@@ -21,6 +21,7 @@ public class Application {
             int playerMove = scanner.nextInt();
             if(bombPlacementBoard[playerMove - 1]) {
                 System.out.println("przegrales, trafiles na bombe");
+                displayAllBombs();
                 break;
             }
             else {
@@ -59,5 +60,19 @@ public class Application {
 
     private int randomNumber() {
         return (int) Math.floor(Math.random() * bombPlacementBoard.length);
+    }
+
+    private void displayAllBombs() {
+        for (int i = 0; i < board.length; i++) {
+            if(bombPlacementBoard[i]) {
+                System.out.print("[X]");
+            }
+            else {
+                System.out.print("[" + board[i] + "]");
+            }
+            if((i + 1) % 5 == 0) {
+                System.out.println();
+            }
+        }
     }
 }
