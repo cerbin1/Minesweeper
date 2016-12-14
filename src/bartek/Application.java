@@ -1,3 +1,4 @@
+package bartek;
 
 public class Application {
 
