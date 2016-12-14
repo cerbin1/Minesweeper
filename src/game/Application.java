@@ -1,4 +1,4 @@
-package bartek;
+package game;
 
 public class Application {
 
