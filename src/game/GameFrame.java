@@ -2,10 +2,15 @@ package game;
 
 import javax.swing.*;
 
-public class GameFrame extends JFrame{
-    public GameFrame() {
+class GameFrame extends JFrame {
+    GameFrame() {
         super("Minesweeper");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(300, 300);
+    }
+
+    void displayGameBoard() {
         setVisible(true);
     }
 }
