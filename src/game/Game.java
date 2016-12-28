@@ -70,18 +70,12 @@ public class Game {
             field[x][y].isDiscovered = true;
         } else {
             field[x][y].isDiscovered = true;
-            field[x][y].button.setText(Integer.toString(field[x][y].getNumberOfBombsAdjacent()));
-            floodFill(x - 1, y - 1, field);
-            floodFill(x - 1, y, field);
-            floodFill(x - 1, y + 1, field);
-            floodFill(x, y - 1, field);
-            floodFill(x, y, field);
-            floodFill(x, y + 1, field);
-            floodFill(x + 1, y - 1, field);
-            floodFill(x + 1, y, field);
-            floodFill(x + 1, y + 1, field);
+            field[x][y].button.setBackground(Color.darkGray);
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    floodFill(x + i, y + j, field);
+                }
+            }
         }
-
-
     }
 }
