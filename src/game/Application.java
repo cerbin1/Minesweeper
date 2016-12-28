@@ -32,21 +32,23 @@ public class Application extends JPanel {
                         if (e.getButton() == MouseEvent.BUTTON1) {
                             if (Field.isGameDone) {
                                 System.out.println("Rozpocznij nowa gre");
+                            } else if (field.isDiscovered || field.isFlag) {
+                                System.out.println("pole klikniete juz lub flaga");
+                            } else if (field.isBomb) {
+                                System.out.println("Bomba, przegrales");
+                                game.displayAllBombs(fields);
                             } else {
-                                if (field.isBomb) {
-                                    System.out.println("Bomba, przegrales");
-                                    game.displayAllBombs(fields);
-                                } else {
-                                    field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
-                                    System.out.println(field.getNumberOfBombsAdjacent());
-                                    System.out.println("Left mouse clicked");
-                                }
+                                field.isDiscovered = true;
+                                field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                                System.out.println(field.getNumberOfBombsAdjacent());
+                                System.out.println("Left mouse clicked");
                             }
                         }
                         if (Field.isGameDone) {
                             System.out.println("Rozpocznij nowa gre");
                         } else {
                             if (e.getButton() == MouseEvent.BUTTON3) {
+                                field.isFlag = true;
                                 field.button.setText("?");
                                 System.out.println("Right mouse clicked");
                             }

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 public class Field {
     static boolean isGameDone = false;
     boolean isBomb;
+    boolean isDiscovered;
+    boolean isFlag;
     int numberOfBombsAdjacent;
     JButton button;
 
@@ -13,6 +15,8 @@ public class Field {
         button = new JButton();
         button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
         isBomb = false;
+        isDiscovered = false;
+        isFlag = false;
         numberOfBombsAdjacent = 0;
     }
 
