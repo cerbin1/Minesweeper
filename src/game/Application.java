@@ -21,8 +21,8 @@ public class Application extends JPanel {
     static void fillBooleanBoardWithBombs(boolean[][] array, int numberOfBombs) {
         for (int i = 0; i < numberOfBombs; i++) {
             while(true) {
-                int x = (int)Math.round(Math.random() * 10);
-                int y = (int)Math.round(Math.random() * 10);
+                int x = (int)Math.round(Math.random() * 9);
+                int y = (int)Math.round(Math.random() * 9);
                 if(!array[x][y]) {
                     array[x][y] = true;
                     break;
