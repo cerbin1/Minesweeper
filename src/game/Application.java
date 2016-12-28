@@ -15,7 +15,7 @@ public class Application extends JPanel {
         frame.setSize(600, 600);
         frame.setVisible(true);
 
-        Field[][] fields = new Field[10][10]; // przykładowy konflikt żebyś se mógł rozwiązać :D
+        Field[][] fields = new Field[10][10];
 
         JPanel panel = new JPanel();
 
