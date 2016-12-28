@@ -24,10 +24,6 @@ public class Application extends JPanel {
             for (int j = 0; j < 10; j++) {
                 fields[i][j] = new Field(50, 50);
                 Field field = fields[i][j];
-                if (game.bombs[i][j]) {
-                    field.isBomb = true;
-                    System.out.println(Integer.toString(i) + Integer.toString(j));
-                }
 
                 field.button.addMouseListener(new MouseAdapter() {
                     @Override
@@ -61,6 +57,7 @@ public class Application extends JPanel {
             }
         }
         frame.add(panel);
+        game.setBombs(fields, 10);
     }
 
     public static void main(String[] args) {
