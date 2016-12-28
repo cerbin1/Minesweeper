@@ -58,9 +58,13 @@ public class Application extends JPanel {
                         }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    if (field.isDiscovered || field.isFlag) {
-                        System.out.println("pole klikniete juz lub flaga");
-                    } else {
+                    if (field.isDiscovered) {
+                        System.out.println("pole juz klikniete");
+                    } else if(field.isFlag) {
+                        field.isFlag = false;
+                        field.button.setText("");
+                    }
+                    else {
                         field.isFlag = true;
                         field.button.setText("?");
                     }
