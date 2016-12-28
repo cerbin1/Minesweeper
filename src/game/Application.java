@@ -8,7 +8,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
 
-    static boolean[][] createBombsArray() {
+    private static boolean[][] createBombsArray() {
         boolean[][] array = new boolean[10][10];
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -18,7 +18,7 @@ public class Application extends JPanel {
         return array;
     }
 
-    static void fillBooleanBoardWithBombs(boolean[][] array, int numberOfBombs) {
+    private static void fillBooleanBoardWithBombs(boolean[][] array, int numberOfBombs) {
         for (int i = 0; i < numberOfBombs; i++) {
             while(true) {
                 int x = (int)Math.round(Math.random() * 9);
