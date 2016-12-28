@@ -50,4 +50,38 @@ public class Game {
             }
         }
     }
+
+    void floodFill(int x, int y, Field[][] field) {
+        System.out.println(Integer.toString(x) + Integer.toString(y));
+        if ((0 > x || x >= 10) || (0 > y || y >= 10)) {
+            System.out.println("Przekroczona plansza");
+            return;
+        }
+        if (field[x][y].isFlag || field[x][y].isBomb) {
+            System.out.println("Pole nie jest puste");
+            return;
+        }
+        if (field[x][y].isDiscovered) {
+            System.out.println("Pole juz odkryte");
+            return;
+        }
+        if (field[x][y].numberOfBombsAdjacent > 0) {
+            field[x][y].button.setText(Integer.toString(field[x][y].getNumberOfBombsAdjacent()));
+            field[x][y].isDiscovered = true;
+        } else {
+            field[x][y].isDiscovered = true;
+            field[x][y].button.setText(Integer.toString(field[x][y].getNumberOfBombsAdjacent()));
+            floodFill(x - 1, y - 1, field);
+            floodFill(x - 1, y, field);
+            floodFill(x - 1, y + 1, field);
+            floodFill(x, y - 1, field);
+            floodFill(x, y, field);
+            floodFill(x, y + 1, field);
+            floodFill(x + 1, y - 1, field);
+            floodFill(x + 1, y, field);
+            floodFill(x + 1, y + 1, field);
+        }
+
+
+    }
 }

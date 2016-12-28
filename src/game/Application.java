@@ -26,7 +26,7 @@ public class Application extends JPanel {
                 fields[i][j] = new Field(50, 50);
                 Field field = fields[i][j];
 
-                field.button.addMouseListener(getMouseAdapter(fields, game, field));
+                field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j));
 
                 panel.add(field.button);
             }
@@ -36,7 +36,7 @@ public class Application extends JPanel {
         game.displayAllBombs(fields);
     }
 
-    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field) {
+    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j) {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -50,10 +50,12 @@ public class Application extends JPanel {
                         System.out.println("Bomba, przegrales");
                         game.displayAllBombs(fields);
                     } else {
-                        field.isDiscovered = true;
-                        field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
-                        System.out.println(field.getNumberOfBombsAdjacent());
-                        System.out.println("Left mouse clicked");
+                        if (field.numberOfBombsAdjacent > 0) {
+                            field.isDiscovered = true;
+                            field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                        } else {
+                            game.floodFill(i, j, fields);
+                        }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (field.isDiscovered || field.isFlag) {
@@ -61,7 +63,6 @@ public class Application extends JPanel {
                     } else {
                         field.isFlag = true;
                         field.button.setText("?");
-                        System.out.println("Right mouse clicked");
                     }
                 }
             }
