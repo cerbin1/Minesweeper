@@ -29,10 +29,10 @@ public class Application extends JPanel {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         System.out.println(e.getButton());
-                        if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (Field.isGameDone) {
-                                System.out.println("Rozpocznij nowa gre");
-                            } else if (field.isDiscovered || field.isFlag) {
+                        if (Field.isGameDone) {
+                            System.out.println("Rozpocznij nowa gre");
+                        } else if (e.getButton() == MouseEvent.BUTTON1) {
+                            if (field.isDiscovered || field.isFlag) {
                                 System.out.println("pole klikniete juz lub flaga");
                             } else if (field.isBomb) {
                                 System.out.println("Bomba, przegrales");
@@ -43,15 +43,10 @@ public class Application extends JPanel {
                                 System.out.println(field.getNumberOfBombsAdjacent());
                                 System.out.println("Left mouse clicked");
                             }
-                        }
-                        if (Field.isGameDone) {
-                            System.out.println("Rozpocznij nowa gre");
-                        } else {
-                            if (e.getButton() == MouseEvent.BUTTON3) {
-                                field.isFlag = true;
-                                field.button.setText("?");
-                                System.out.println("Right mouse clicked");
-                            }
+                        } else if (e.getButton() == MouseEvent.BUTTON3) {
+                            field.isFlag = true;
+                            field.button.setText("?");
+                            System.out.println("Right mouse clicked");
                         }
                     }
                 });
