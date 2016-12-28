@@ -1,35 +1,16 @@
 package game;
 
-
 import java.awt.*;
 
 public class Game {
-
-    boolean[][] bombs;
-
-    public Game() {
-        bombs = createBombsArray();
-        fillBooleanBoardWithBombs(bombs, 10);
-    }
-
-
-    private boolean[][] createBombsArray() {
-        boolean[][] array = new boolean[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                array[i][j] = false;
-            }
-        }
-        return array;
-    }
-
-    private void fillBooleanBoardWithBombs(boolean[][] array, int numberOfBombs) {
+    void setBombs(Field[][] fields, int numberOfBombs) {
         for (int i = 0; i < numberOfBombs; i++) {
             while (true) {
                 int x = (int) Math.round(Math.random() * 9);
                 int y = (int) Math.round(Math.random() * 9);
-                if (!array[x][y]) {
-                    array[x][y] = true;
+                if (!fields[x][y].isBomb) {
+                    fields[x][y].isBomb = true;
+                    System.out.println(Integer.toString(x) + Integer.toString(y));
                     break;
                 }
             }
