@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 
 public class Field {
+    static boolean isGameDone = false;
     boolean isBomb;
     JButton button;
 
