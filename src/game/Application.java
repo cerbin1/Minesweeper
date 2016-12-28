@@ -70,6 +70,7 @@ public class Application extends JPanel {
                                             if (fields[k][l].isBomb) {
                                                 fields[k][l].button.setText("x");
                                                 fields[k][l].button.setForeground(Color.RED);
+                                                Field.isGameDone = true;
 
                                             }
                                         }
