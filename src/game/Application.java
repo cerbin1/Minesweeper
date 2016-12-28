@@ -26,31 +26,7 @@ public class Application extends JPanel {
                 fields[i][j] = new Field(50, 50);
                 Field field = fields[i][j];
 
-                field.button.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) { // można by wydzielić metodę która zwraca mouseAdaptera
-                        System.out.println(e.getButton());
-                        if (Field.isGameDone) {
-                            System.out.println("Rozpocznij nowa gre");
-                        } else if (e.getButton() == MouseEvent.BUTTON1) {
-                            if (field.isDiscovered || field.isFlag) {
-                                System.out.println("pole klikniete juz lub flaga");
-                            } else if (field.isBomb) {
-                                System.out.println("Bomba, przegrales");
-                                game.displayAllBombs(fields);
-                            } else {
-                                field.isDiscovered = true;
-                                field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
-                                System.out.println(field.getNumberOfBombsAdjacent());
-                                System.out.println("Left mouse clicked");
-                            }
-                        } else if (e.getButton() == MouseEvent.BUTTON3) {
-                            field.isFlag = true;
-                            field.button.setText("?");
-                            System.out.println("Right mouse clicked");
-                        }
-                    }
-                });
+                field.button.addMouseListener(getMouseAdapter(fields, game, field));
 
                 panel.add(field.button);
             }
@@ -58,6 +34,34 @@ public class Application extends JPanel {
         frame.add(panel);
         game.setBombs(fields, 10);
         game.displayAllBombs(fields);
+    }
+
+    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field) {
+        return new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                System.out.println(e.getButton());
+                if (Field.isGameDone) {
+                    System.out.println("Rozpocznij nowa gre");
+                } else if (e.getButton() == MouseEvent.BUTTON1) {
+                    if (field.isDiscovered || field.isFlag) {
+                        System.out.println("pole klikniete juz lub flaga");
+                    } else if (field.isBomb) {
+                        System.out.println("Bomba, przegrales");
+                        game.displayAllBombs(fields);
+                    } else {
+                        field.isDiscovered = true;
+                        field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                        System.out.println(field.getNumberOfBombsAdjacent());
+                        System.out.println("Left mouse clicked");
+                    }
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
+                    field.isFlag = true;
+                    field.button.setText("?");
+                    System.out.println("Right mouse clicked");
+                }
+            }
+        };
     }
 
     public static void main(String[] args) {
