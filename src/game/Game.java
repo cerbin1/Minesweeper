@@ -15,6 +15,7 @@ public class Game {
                 }
             }
         }
+        countNumberOfBombsAdjacentToField(fields);
     }
 
     void displayAllBombs(Field[][] fields) {
@@ -23,7 +24,28 @@ public class Game {
                 if (fields[k][l].isBomb) {
                     fields[k][l].button.setText("x");
                     fields[k][l].button.setForeground(Color.RED);
-                    Field.isGameDone = true;
+//                    Field.isGameDone = true;
+                }
+            }
+        }
+    }
+
+    void countNumberOfBombsAdjacentToField(Field[][] fields) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                isBombAdjacentToField(i, j, fields);
+            }
+        }
+
+    }
+
+    void isBombAdjacentToField(int x, int y, Field[][] fields) {
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                if((0 <= x + i && x + i < 10) && (0 <= y + j && y + j < 10)) {
+                    if(fields[x + i][y + j].isBomb) {
+                        fields[x + i][y + j].numberOfBombsAdjacent++;
+                    }
                 }
             }
         }
