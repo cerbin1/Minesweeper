@@ -37,7 +37,7 @@ public class Application extends JPanel {
                                     System.out.println("Bomba, przegrales");
                                     game.displayAllBombs(fields);
                                 } else {
-                                    field.button.setText("x");
+                                    field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
                                     System.out.println("Left mouse clicked");
                                 }
                             }
@@ -58,6 +58,7 @@ public class Application extends JPanel {
         }
         frame.add(panel);
         game.setBombs(fields, 10);
+        game.displayAllBombs(fields);
     }
 
     public static void main(String[] args) {
