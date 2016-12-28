@@ -27,7 +27,7 @@ public class Application extends JPanel {
 
                 field.button.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mousePressed(MouseEvent e) {
+                    public void mousePressed(MouseEvent e) { // można by wydzielić metodę która zwraca mouseAdaptera
                         System.out.println(e.getButton());
                         if (e.getButton() == MouseEvent.BUTTON1) { // czemu tu jest najpierw button, potem isGameDone
                             if (Field.isGameDone) {
