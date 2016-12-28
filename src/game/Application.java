@@ -29,7 +29,7 @@ public class Application extends JPanel {
                     @Override
                     public void mousePressed(MouseEvent e) {
                         System.out.println(e.getButton());
-                        if (e.getButton() == MouseEvent.BUTTON1) {
+                        if (e.getButton() == MouseEvent.BUTTON1) { // czemu tu jest najpierw button, potem isGameDone
                             if (Field.isGameDone) {
                                 System.out.println("Rozpocznij nowa gre");
                             } else {
@@ -46,7 +46,7 @@ public class Application extends JPanel {
                         if (Field.isGameDone) {
                             System.out.println("Rozpocznij nowa gre");
                         } else {
-                            if (e.getButton() == MouseEvent.BUTTON3) {
+                            if (e.getButton() == MouseEvent.BUTTON3) { // a tu najpierw isGameDone a potem button? ;|
                                 field.button.setText("?");
                                 System.out.println("Right mouse clicked");
                             }
