@@ -19,7 +19,6 @@ public class Application extends JPanel {
 
         JPanel panel = new JPanel();
 
-        Field[][] fields = new Field[10][10];
         Game game = new Game();
 
         for (int i = 0; i < 10; i++) {
@@ -33,7 +32,7 @@ public class Application extends JPanel {
                         System.out.println(e.getButton());
                         if (Field.isGameDone) {
                             System.out.println("Rozpocznij nowa gre");
-                        } else if (e.getButton() == MouseEvent.BUTTON1) {// czemu tu jest najpierw button, potem isGameDone
+                        } else if (e.getButton() == MouseEvent.BUTTON1) {
                             if (field.isDiscovered || field.isFlag) {
                                 System.out.println("pole klikniete juz lub flaga");
                             } else if (field.isBomb) {
@@ -45,7 +44,7 @@ public class Application extends JPanel {
                                 System.out.println(field.getNumberOfBombsAdjacent());
                                 System.out.println("Left mouse clicked");
                             }
-                        } else if (e.getButton() == MouseEvent.BUTTON3) { // a tu najpierw isGameDone a potem button? ;|
+                        } else if (e.getButton() == MouseEvent.BUTTON3) {
                             field.isFlag = true;
                             field.button.setText("?");
                             System.out.println("Right mouse clicked");
