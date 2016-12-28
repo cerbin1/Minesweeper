@@ -44,7 +44,7 @@ public class Game {
             for (int j = -1; j < 2; j++) {
                 if((0 <= x + i && x + i < 10) && (0 <= y + j && y + j < 10)) {
                     if(fields[x + i][y + j].isBomb) {
-                        fields[x + i][y + j].numberOfBombsAdjacent++;
+                        fields[x][y].numberOfBombsAdjacent++;
                     }
                 }
             }

@@ -38,6 +38,7 @@ public class Application extends JPanel {
                                     game.displayAllBombs(fields);
                                 } else {
                                     field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                                    System.out.println(field.getNumberOfBombsAdjacent());
                                     System.out.println("Left mouse clicked");
                                 }
                             }
