@@ -2,6 +2,9 @@ package game;
 
 import javax.swing.*;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
@@ -25,6 +28,35 @@ public class Application extends JPanel {
                     field.isBomb = true;
                     System.out.println(Integer.toString(i) + Integer.toString(j));
                 }
+
+                field.button.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+                        System.out.println(e.getButton());
+                        if (e.getButton() == MouseEvent.BUTTON1) {
+                            if (Field.isGameDone) {
+                                System.out.println("Rozpocznij nowa gre");
+                            } else {
+                                if (field.isBomb) {
+                                    System.out.println("Bomba, przegrales");
+                                    game.displayAllBombs(fields);
+                                } else {
+                                    field.button.setText("x");
+                                    System.out.println("Left mouse clicked");
+                                }
+                            }
+                        }
+                        if (Field.isGameDone) {
+                            System.out.println("Rozpocznij nowa gre");
+                        } else {
+                            if (e.getButton() == MouseEvent.BUTTON3) {
+                                field.button.setText("?");
+                                System.out.println("Right mouse clicked");
+                            }
+                        }
+                    }
+                });
+
                 panel.add(field.button);
             }
         }
