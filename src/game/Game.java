@@ -10,8 +10,8 @@ public class Game {
                 int y = (int) Math.round(Math.random() * 9);
                 if (!fields[x][y].isBomb) {
                     fields[x][y].isBomb = true;
-                    System.out.println(Integer.toString(x) + Integer.toString(y));
-                    break;
+                   /// System.out.println(Integer.toString(x) + Integer.toString(y));
+                   /// break; chuj Ci w dupe xd
                 }
             }
         }
@@ -32,7 +32,7 @@ public class Game {
 
     void countNumberOfBombsAdjacentToField(Field[][] fields) {
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 10; i++) {
                 isBombAdjacentToField(i, j, fields);
             }
         }

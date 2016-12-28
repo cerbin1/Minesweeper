@@ -14,13 +14,13 @@ public class Field {
     public Field(int buttonWidth, int buttonHeight) {
         button = new JButton();
         button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        isBomb = false;
         isDiscovered = false;
         isFlag = false;
-        numberOfBombsAdjacent = 0;
+        isBomb = false; // TODO zainicjalizuj przy deklaracji
+        numberOfBombsAdjacent = 0; // TODO zainicjalizuj przy deklaracji
     }
 
-    int getNumberOfBombsAdjacent() {
+    int getNumberOfBombsAdjacent() { // TODO zmienić nazwe na getBombsAdjacentCount()
         return numberOfBombsAdjacent;
     }
 }

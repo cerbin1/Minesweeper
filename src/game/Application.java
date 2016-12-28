@@ -15,6 +15,8 @@ public class Application extends JPanel {
         frame.setSize(600, 600);
         frame.setVisible(true);
 
+        Field[][] fields = new Field[10][10]; // przykładowy konflikt żebyś se mógł rozwiązać :D
+
         JPanel panel = new JPanel();
 
         Field[][] fields = new Field[10][10];
@@ -27,11 +29,11 @@ public class Application extends JPanel {
 
                 field.button.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mousePressed(MouseEvent e) {
+                    public void mousePressed(MouseEvent e) { // można by wydzielić metodę która zwraca mouseAdaptera
                         System.out.println(e.getButton());
                         if (Field.isGameDone) {
                             System.out.println("Rozpocznij nowa gre");
-                        } else if (e.getButton() == MouseEvent.BUTTON1) {
+                        } else if (e.getButton() == MouseEvent.BUTTON1) {// czemu tu jest najpierw button, potem isGameDone
                             if (field.isDiscovered || field.isFlag) {
                                 System.out.println("pole klikniete juz lub flaga");
                             } else if (field.isBomb) {
@@ -43,7 +45,7 @@ public class Application extends JPanel {
                                 System.out.println(field.getNumberOfBombsAdjacent());
                                 System.out.println("Left mouse clicked");
                             }
-                        } else if (e.getButton() == MouseEvent.BUTTON3) {
+                        } else if (e.getButton() == MouseEvent.BUTTON3) { // a tu najpierw isGameDone a potem button? ;|
                             field.isFlag = true;
                             field.button.setText("?");
                             System.out.println("Right mouse clicked");
