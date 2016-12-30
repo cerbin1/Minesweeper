@@ -13,7 +13,6 @@ public class Game {
                 int y = (int) Math.round(Math.random() * 9);
                 if (!fields[x][y].isBomb) {
                     fields[x][y].isBomb = true;
-                    System.out.println(Integer.toString(x) + Integer.toString(y));
                     break;
                 }
             }
@@ -61,17 +60,13 @@ public class Game {
     }
 
     void floodFill(int x, int y, Field[][] field) {
-        System.out.println(Integer.toString(x) + Integer.toString(y));
         if ((0 > x || x >= 10) || (0 > y || y >= 10)) {
-            System.out.println("Przekroczona plansza");
             return;
         }
         if (field[x][y].isFlag || field[x][y].isBomb) {
-            System.out.println("Pole nie jest puste");
             return;
         }
         if (field[x][y].isDiscovered) {
-            System.out.println("Pole juz odkryte");
             return;
         }
         if (field[x][y].numberOfBombsAdjacent > 0) {
