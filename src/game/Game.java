@@ -28,7 +28,7 @@ public class Game {
                 if (fields[k][l].isBomb) {
                     fields[k][l].button.setText("x");
                     fields[k][l].button.setForeground(Color.RED);
-//                    Field.isGameDone = true;
+                    //TODO add Game.isGameDone = true;
                 }
             }
         }
@@ -87,11 +87,10 @@ public class Game {
         int points = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if(fields[i][j].isFlag) {
-                    if(fields[i][j].isFlag) {
+                if (fields[i][j].isFlag) {
+                    if (fields[i][j].isFlag) {
                         points++;
-                    }
-                    else {
+                    } else {
                         points--;
                     }
                 }

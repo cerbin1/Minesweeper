@@ -61,16 +61,15 @@ public class Application extends JPanel {
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (field.isDiscovered) {
                         System.out.println("pole juz klikniete");
-                    } else if(field.isFlag) {
+                    } else if (field.isFlag) {
                         field.isFlag = false;
                         field.button.setText("");
-                    }
-                    else {
+                    } else {
                         field.isFlag = true;
                         field.button.setText("?");
-                        if(game.countPointsFromFlags(fields) == Game.numberOfBombs) {
+                        if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
                             System.out.println("Wygrales!");
-                            Game.isGameDone = true;
+                            //TODO add Game.isGameDone = true;
                         }
                     }
                 }
