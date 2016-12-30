@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
-    private static void createAndShowGUI() {
+    private static void createAndShowBoard() {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -102,7 +102,7 @@ public class Application extends JPanel {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                createAndShowBoard();
             }
         });
     }
