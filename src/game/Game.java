@@ -3,6 +3,9 @@ package game;
 import java.awt.*;
 
 public class Game {
+
+    int numberOfBombs;
+
     void setBombs(Field[][] fields, int numberOfBombs) {
         for (int i = 0; i < numberOfBombs; i++) {
             while (true) {
@@ -78,4 +81,16 @@ public class Game {
             }
         }
     }
+
+    void checkIfPlayerWinByFlags(Field[][] fields) {
+        int points = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(fields[i][j].isFlag && fields[i][j].isFlag) {
+                    points++;
+                }
+            }
+        }
+    }
+
 }
