@@ -3,7 +3,6 @@ package game;
 import java.awt.*;
 
 public class Game {
-
     static int numberOfBombs = 10;
     static boolean isGameDone = false;
 
@@ -29,10 +28,9 @@ public class Game {
                 if (cell.isBomb) {
                     cell.button.setText("x");
                     cell.button.setForeground(Color.DARK_GRAY);
-                    if(cell.isFlag) {
+                    if (cell.isFlag) {
                         cell.button.setBackground(Color.GREEN);
-                    }
-                    else {
+                    } else {
                         cell.button.setBackground(Color.red);
                     }
                     //TODO add Game.isGameDone = true;
@@ -116,7 +114,7 @@ public class Game {
         int numberOfFields = 10 * 10;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if(fields[i][j].isDiscovered) {
+                if (fields[i][j].isDiscovered) {
                     numberOfFields--;
                 }
             }

@@ -79,6 +79,7 @@ public class Application extends JPanel {
                         field.button.setForeground(Color.BLACK);
                         if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
                             System.out.println("Wygrales!");
+                            game.displayAllBombs(fields);
                             //TODO add Game.isGameDone = true;
                         }
                     }
