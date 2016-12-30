@@ -38,6 +38,7 @@ public class Application extends JPanel {
         frame.add(panel);
         frame.setResizable(false);
         game.setBombs(fields, Game.numberOfBombs);
+        game.displayAllBombs(fields);//TODO after tests delete this
     }
 
     private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j) {
