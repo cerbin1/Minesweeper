@@ -1,6 +1,7 @@
 package game;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -15,7 +16,7 @@ public class Application extends JPanel {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setSize(600, 600);
+        frame.setSize(580, 630);
         frame.setVisible(true);
 
         Field[][] fields = new Field[10][10];
@@ -35,6 +36,11 @@ public class Application extends JPanel {
                 panel.add(field.button);
             }
         }
+
+        JLabel textLabel = new JLabel();
+        textLabel.setText("Zecznij klikec");
+        panel.add(textLabel);
+
         frame.add(panel);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
