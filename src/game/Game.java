@@ -25,9 +25,16 @@ public class Game {
     void displayAllBombs(Field[][] fields) {
         for (int k = 0; k < 10; k++) {
             for (int l = 0; l < 10; l++) {
-                if (fields[k][l].isBomb) {
-                    fields[k][l].button.setText("x");
-                    fields[k][l].button.setForeground(Color.RED);
+                Field cell = fields[k][l];
+                if (cell.isBomb) {
+                    cell.button.setText("x");
+                    cell.button.setForeground(Color.DARK_GRAY);
+                    if(cell.isFlag) {
+                        cell.button.setBackground(Color.GREEN);
+                    }
+                    else {
+                        cell.button.setBackground(Color.red);
+                    }
                     //TODO add Game.isGameDone = true;
                 }
             }

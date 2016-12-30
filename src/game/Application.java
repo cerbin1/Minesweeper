@@ -76,7 +76,7 @@ public class Application extends JPanel {
                         field.isFlag = true;
                         field.button.setText("?");
                         field.button.setFont(new Font("Arial", Font.BOLD, 20));
-                        field.button.setForeground(Color.cyan);
+                        field.button.setForeground(Color.BLACK);
                         if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
                             System.out.println("Wygrales!");
                             //TODO add Game.isGameDone = true;
