@@ -109,7 +109,7 @@ public class Game {
 
     Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
         Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
-        return colors[numberOfBombs];
+        return colors[numberOfBombs - 1];
     }
 
     int countFieldsDiscovered(Field[][] fields) {
