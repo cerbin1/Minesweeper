@@ -58,16 +58,12 @@ public class Application extends JPanel {
                             field.button.setForeground(game.getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
                             field.isDiscovered = true;
                             field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
-                            if (game.countFieldsDiscovered(fields) - Game.numberOfBombs == 0) {
-                                System.out.println("Wygrales!");
-                                game.displayAllBombs(fields);
-                            }
                         } else {
                             game.floodFill(i, j, fields);
-                            if (game.countFieldsDiscovered(fields) - Game.numberOfBombs == 0) {
-                                System.out.println("Wygrales!");
-                                game.displayAllBombs(fields);
-                            }
+                        }
+                        if (game.countFieldsDiscovered(fields) - Game.numberOfBombs == 0) {
+                            System.out.println("Wygrales!");
+                            game.displayAllBombs(fields);
                         }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
