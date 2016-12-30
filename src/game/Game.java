@@ -105,4 +105,16 @@ public class Game {
         return colors[numberOfBombs];
     }
 
+    int countFieldsDiscovered(Field[][] fields) {
+        int numberOfFields = 10 * 10;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if(fields[i][j].isDiscovered) {
+                    numberOfFields--;
+                }
+            }
+        }
+        return numberOfFields;
+    }
+
 }
