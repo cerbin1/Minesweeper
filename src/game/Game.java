@@ -4,7 +4,8 @@ import java.awt.*;
 
 public class Game {
 
-    int numberOfBombs;
+    static int numberOfBombs = 10;
+    static boolean isGameDone = false;
 
     void setBombs(Field[][] fields, int numberOfBombs) {
         for (int i = 0; i < numberOfBombs; i++) {
@@ -82,15 +83,21 @@ public class Game {
         }
     }
 
-    void checkIfPlayerWinByFlags(Field[][] fields) {
+    int countPointsFromFlags(Field[][] fields) {
         int points = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if(fields[i][j].isFlag && fields[i][j].isFlag) {
-                    points++;
+                if(fields[i][j].isFlag) {
+                    if(fields[i][j].isFlag) {
+                        points++;
+                    }
+                    else {
+                        points--;
+                    }
                 }
             }
         }
+        return points;
     }
 
 }

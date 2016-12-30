@@ -33,7 +33,7 @@ public class Application extends JPanel {
         }
         frame.add(panel);
         frame.setResizable(false);
-        game.setBombs(fields, 10);
+        game.setBombs(fields, Game.numberOfBombs);
         game.displayAllBombs(fields);
     }
 
@@ -42,7 +42,7 @@ public class Application extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 System.out.println(e.getButton());
-                if (Field.isGameDone) {
+                if (Game.isGameDone) {
                     System.out.println("Rozpocznij nowa gre");
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
                     if (field.isDiscovered || field.isFlag) {
@@ -68,6 +68,10 @@ public class Application extends JPanel {
                     else {
                         field.isFlag = true;
                         field.button.setText("?");
+                        if(game.countPointsFromFlags(fields) == Game.numberOfBombs) {
+                            System.out.println("Wygrales!");
+                            Game.isGameDone = true;
+                        }
                     }
                 }
             }
