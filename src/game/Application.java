@@ -32,6 +32,7 @@ public class Application extends JPanel {
             }
         }
         frame.add(panel);
+        frame.setResizable(false);
         game.setBombs(fields, 10);
         game.displayAllBombs(fields);
     }
