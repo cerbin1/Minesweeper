@@ -45,7 +45,6 @@ public class Application extends JPanel {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                System.out.println(e.getButton());
                 if (Game.isGameDone) {
                     System.out.println("Rozpocznij nowa gre");
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
