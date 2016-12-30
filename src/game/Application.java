@@ -1,7 +1,10 @@
 package game;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -34,7 +37,6 @@ public class Application extends JPanel {
         frame.add(panel);
         frame.setResizable(false);
         game.setBombs(fields, Game.numberOfBombs);
-        game.displayAllBombs(fields);
     }
 
     private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j) {
@@ -67,6 +69,8 @@ public class Application extends JPanel {
                     } else {
                         field.isFlag = true;
                         field.button.setText("?");
+                        field.button.setFont(new Font("Arial", Font.BOLD, 20));
+                        field.button.setForeground(Color.cyan);
                         if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
                             System.out.println("Wygrales!");
                             //TODO add Game.isGameDone = true;
