@@ -19,15 +19,15 @@ public class Application extends JPanel {
         frame.setSize(580, 630);
         frame.setVisible(true);
 
-        Field[][] fields = new Field[10][10];
+        Field[][] fields = new Field[Game.height][Game.width];
 
         JPanel panel = new JPanel();
         JLabel textLabel = new JLabel();
         
         Game game = new Game();
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < Game.height; i++) {
+            for (int j = 0; j < Game.width; j++) {
                 fields[i][j] = new Field(50, 50);
                 Field field = fields[i][j];
 

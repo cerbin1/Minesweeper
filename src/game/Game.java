@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class Game {
     static int numberOfBombs = 10;
+    static int height = 10;
+    static int width = 10;
     static boolean isGameDone = false;
 
     void setBombs(Field[][] fields, int numberOfBombs) {
@@ -21,8 +23,8 @@ public class Game {
     }
 
     void displayAllBombs(Field[][] fields) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 Field cell = fields[i][j];
                 if (cell.isBomb) {
                     cell.button.setText("x");
@@ -39,8 +41,8 @@ public class Game {
     }
 
     void countNumberOfBombsAdjacentToField(Field[][] fields) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 isBombAdjacentToField(i, j, fields);
             }
         }
@@ -50,7 +52,7 @@ public class Game {
     void isBombAdjacentToField(int x, int y, Field[][] fields) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if ((0 <= x + i && x + i < 10) && (0 <= y + j && y + j < 10)) {
+                if ((0 <= x + i && x + i < height) && (0 <= y + j && y + j < width)) {
                     if (fields[x + i][y + j].isBomb) {
                         fields[x][y].numberOfBombsAdjacent++;
                     }
@@ -60,7 +62,7 @@ public class Game {
     }
 
     void floodFill(int x, int y, Field[][] field) {
-        if ((0 > x || x >= 10) || (0 > y || y >= 10)) {
+        if ((0 > x || x >= height) || (0 > y || y >= width)) {
             return;
         }
         if (field[x][y].isFlag || field[x][y].isBomb) {
@@ -86,8 +88,8 @@ public class Game {
 
     int countPointsFromFlags(Field[][] fields) {
         int points = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if (fields[i][j].isFlag) {
                     if (fields[i][j].isFlag) {
                         points++;
@@ -106,9 +108,9 @@ public class Game {
     }
 
     int countFieldsDiscovered(Field[][] fields) {
-        int numberOfFields = 10 * 10;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        int numberOfFields = height * width;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 if (fields[i][j].isDiscovered) {
                     numberOfFields--;
                 }
