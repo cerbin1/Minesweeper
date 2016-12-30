@@ -71,6 +71,7 @@ public class Game {
         }
         if (field[x][y].numberOfBombsAdjacent > 0) {
             field[x][y].button.setText(Integer.toString(field[x][y].getNumberOfBombsAdjacent()));
+            field[x][y].button.setForeground(getColorOfNumberOfBombsAdjacentToField(field[x][y].numberOfBombsAdjacent));
             field[x][y].isDiscovered = true;
         } else {
             field[x][y].isDiscovered = true;
@@ -97,6 +98,11 @@ public class Game {
             }
         }
         return points;
+    }
+
+    Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
+        Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
+        return colors[numberOfBombs];
     }
 
 }

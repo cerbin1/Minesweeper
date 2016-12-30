@@ -30,6 +30,7 @@ public class Application extends JPanel {
                 Field field = fields[i][j];
 
                 field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j));
+                field.button.setFont(new Font("Arial", Font.BOLD, 20));
 
                 panel.add(field.button);
             }
@@ -54,6 +55,7 @@ public class Application extends JPanel {
                         game.displayAllBombs(fields);
                     } else {
                         if (field.numberOfBombsAdjacent > 0) {
+                            field.button.setForeground(game.getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
                             field.isDiscovered = true;
                             field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
                         } else {
