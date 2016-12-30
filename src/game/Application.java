@@ -37,6 +37,7 @@ public class Application extends JPanel {
         }
         frame.add(panel);
         frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         game.setBombs(fields, Game.numberOfBombs);
         game.displayAllBombs(fields);//TODO after tests delete this
     }
