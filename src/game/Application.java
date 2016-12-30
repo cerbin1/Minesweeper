@@ -22,7 +22,8 @@ public class Application extends JPanel {
         Field[][] fields = new Field[10][10];
 
         JPanel panel = new JPanel();
-
+        JLabel textLabel = new JLabel();
+        
         Game game = new Game();
 
         for (int i = 0; i < 10; i++) {
@@ -30,14 +31,13 @@ public class Application extends JPanel {
                 fields[i][j] = new Field(50, 50);
                 Field field = fields[i][j];
 
-                field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j));
+                field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j, textLabel));
                 field.button.setFont(new Font("Arial", Font.BOLD, 20));
 
                 panel.add(field.button);
             }
         }
 
-        JLabel textLabel = new JLabel();
         textLabel.setText("Zecznij klikec");
         panel.add(textLabel);
 
@@ -48,44 +48,48 @@ public class Application extends JPanel {
         game.displayAllBombs(fields);//TODO after tests delete this
     }
 
-    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j) {
+    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j, JLabel label) {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (Game.isGameDone) {
-                    System.out.println("Rozpocznij nowa gre");
+                    label.setText("Rozpocznij nowa gre");
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
                     if (field.isDiscovered || field.isFlag) {
-                        System.out.println("pole klikniete juz lub flaga");
+                        label.setText("pole klikniete juz lub flaga");
                     } else if (field.isBomb) {
-                        System.out.println("Bomba, przegrales");
+                        label.setText("Bomba, przegrales");
                         game.displayAllBombs(fields);
                     } else {
                         if (field.numberOfBombsAdjacent > 0) {
+                            label.setText("");
                             field.button.setForeground(game.getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
                             field.isDiscovered = true;
                             field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
                         } else {
                             game.floodFill(i, j, fields);
+                            label.setText("");
                         }
                         if (game.countFieldsDiscovered(fields) - Game.numberOfBombs == 0) {
-                            System.out.println("Wygrales!");
+                            label.setText("Wygrales!");
                             game.displayAllBombs(fields);
                         }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (field.isDiscovered) {
-                        System.out.println("pole juz klikniete");
+                        label.setText("pole juz klikniete");
                     } else if (field.isFlag) {
                         field.isFlag = false;
                         field.button.setText("");
+                        label.setText("");
                     } else {
+                        label.setText("");
                         field.isFlag = true;
                         field.button.setText("?");
                         field.button.setFont(new Font("Arial", Font.BOLD, 20));
                         field.button.setForeground(Color.BLACK);
                         if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
-                            System.out.println("Wygrales!");
+                            label.setText("Wygrales!");
                             game.displayAllBombs(fields);
                             //TODO add Game.isGameDone = true;
                         }
