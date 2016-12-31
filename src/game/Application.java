@@ -4,8 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,14 +18,15 @@ public class Application extends JPanel {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setSize(580, 630);
         frame.setVisible(true);
 
         Field[][] fields = new Field[Game.height][Game.width];
 
         JPanel panel = new JPanel();
+        JPanel outerPanel = new JPanel();
+        panel.setLayout(new GridLayout(Game.height, Game.width));
         JLabel textLabel = new JLabel();
-        
+
         Game game = new Game();
 
         for (int i = 0; i < Game.height; i++) {
@@ -38,12 +41,14 @@ public class Application extends JPanel {
             }
         }
 
-        textLabel.setText("Zecznij klikec");
-        panel.add(textLabel);
-
-        frame.add(panel);
-        frame.setResizable(false);
+        textLabel.setText("Zecznij klikac");
+        outerPanel.setLayout(new BorderLayout());
+        outerPanel.add(panel, BorderLayout.CENTER);
+        outerPanel.add(textLabel, BorderLayout.PAGE_END);
+        frame.add(outerPanel);
+        frame.setResizable(true);
         frame.setLocationRelativeTo(null);
+        frame.pack();
         game.setBombs(fields, Game.numberOfBombs);
         game.displayAllBombs(fields);//TODO after tests delete this
     }
