@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
-    private static void createAndShowBoard() {
+    private void createAndShowBoard() {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public class Application extends JPanel {
         game.displayAllBombs(fields);//TODO after tests delete this
     }
 
-    private static MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j, JLabel label) {
+    private MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j, JLabel label) {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -106,7 +106,7 @@ public class Application extends JPanel {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowBoard();
+                new Application().createAndShowBoard();
             }
         });
     }
