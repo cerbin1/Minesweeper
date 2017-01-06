@@ -31,13 +31,12 @@ public class Application extends JPanel {
 
         for (int i = 0; i < Game.height; i++) {
             for (int j = 0; j < Game.width; j++) {
-                fields[i][j] = new Field(50, 50);
-                Field field = fields[i][j];
-
+                Field field = new Field(50, 50);
                 field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j, textLabel));
                 field.button.setFont(new Font("Arial", Font.BOLD, 20));
 
                 panel.add(field.button);
+                fields[i][j] = field;
             }
         }
 
