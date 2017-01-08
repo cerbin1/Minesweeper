@@ -1,101 +1,163 @@
 package game;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
+    private final int height;
+    private final int width;
+    private final int numberOfBombs;
+
+    private Game game;
+    private JButton[][] buttons;
+
+    private JLabel textLabel = new JLabel();
+
+    private Application(int height, int width, int numberOfBombs) {
+        this.height = height;
+        this.width = width;
+        this.numberOfBombs = numberOfBombs;
+        this.game = new Game(numberOfBombs, height, width);
+
+        this.buttons = createJButtons(height, width);
+        registerFloodFillListeners();
+    }
+
+    private JButton[][] createJButtons(int height, int width) {
+        JButton[][] buttons = new JButton[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < width; j++) {
+                buttons[i][j] = createSingleJButton(i, j);
+            }
+        }
+        return buttons;
+    }
+
+
+    private JButton createSingleJButton(int i, int j) {
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(50, 50));
+        button.addMouseListener(getMouseAdapter(i, j));
+        button.setFont(new Font("Arial", Font.BOLD, 20));
+        return button;
+    }
+
+    private void registerFloodFillListeners() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < width; j++) {
+                Field field = game.getField(i, j);
+                JButton button = buttons[i][j];
+                field.registerFloodFillListener(() -> button.setBackground(Color.darkGray));
+            }
+        }
+    }
+
+    private void displayAllBombs() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                JButton button = buttons[i][j];
+                Field field = game.getField(i, j);
+
+                if (field.isBomb) {
+                    button.setText("x");
+                    button.setForeground(Color.DARK_GRAY);
+                    if (field.isFlag) {
+                        button.setBackground(Color.GREEN);
+                    } else {
+                        button.setBackground(Color.red);
+                    }
+
+                    button.setText(Integer.toString(field.getAdjacentBombsCount()));
+                    button.setForeground(getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
+                }
+            }
+        }
+    }
+
+    private Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
+        Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
+        return colors[numberOfBombs - 1];
+    }
+
     private void createAndShowBoard() {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        Field[][] fields = new Field[Game.height][Game.width];
+        textLabel.setText("Zecznij klikac");
 
         JPanel panel = new JPanel();
-        JPanel outerPanel = new JPanel();
-        panel.setLayout(new GridLayout(Game.height, Game.width));
-        JLabel textLabel = new JLabel();
-
-        Game game = new Game();
-
-        for (int i = 0; i < Game.height; i++) {
-            for (int j = 0; j < Game.width; j++) {
-                Field field = new Field(50, 50);
-                field.button.addMouseListener(getMouseAdapter(fields, game, field, i, j, textLabel));
-                field.button.setFont(new Font("Arial", Font.BOLD, 20));
-
-                panel.add(field.button);
-                fields[i][j] = field;
+        panel.setLayout(new GridLayout(game.height, game.width));
+        for (int i = 0; i < game.height; i++) {
+            for (int j = 0; j < game.width; j++) {
+                panel.add(buttons[i][j]);
             }
         }
 
-        textLabel.setText("Zecznij klikac");
+        JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BorderLayout());
         outerPanel.add(panel, BorderLayout.CENTER);
         outerPanel.add(textLabel, BorderLayout.PAGE_END);
+
         frame.add(outerPanel);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.pack();
-        game.setBombs(fields, Game.numberOfBombs);
-        game.displayAllBombs(fields);//TODO after tests delete this
+
+        displayAllBombs();
     }
 
-    private MouseAdapter getMouseAdapter(final Field[][] fields, final Game game, final Field field, int i, int j, JLabel label) {
+    private MouseAdapter getMouseAdapter(int x, int y) {
         return new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (Game.isGameDone) {
-                    label.setText("Rozpocznij nowa gre");
+                Field field = game.getField(x, y);
+                JButton button = buttons[x][y];
+                if (game.isGameDone) {
+                    textLabel.setText("Rozpocznij nowa gre");
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
                     if (field.isDiscovered || field.isFlag) {
-                        label.setText("pole klikniete juz lub flaga");
+                        textLabel.setText("pole klikniete juz lub flaga = " + field);
                     } else if (field.isBomb) {
-                        label.setText("Bomba, przegrales");
-                        game.displayAllBombs(fields);
+                        textLabel.setText("Bomba, przegrales");
+                        displayAllBombs();
                     } else {
                         if (field.numberOfBombsAdjacent > 0) {
-                            label.setText("");
-                            field.button.setForeground(game.getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
+                            textLabel.setText("");
+                            button.setForeground(getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
                             field.isDiscovered = true;
-                            field.button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                            button.setText(Integer.toString(field.getAdjacentBombsCount()));
                         } else {
-                            game.floodFill(i, j, fields);
-                            label.setText("");
+                            game.floodFill(x, y);
+                            textLabel.setText("");
                         }
-                        if (game.countFieldsDiscovered(fields) - Game.numberOfBombs == 0) {
-                            label.setText("Wygrales!");
-                            game.displayAllBombs(fields);
+                        if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
+                            textLabel.setText("Wygrales!");
+                            displayAllBombs();
                         }
                     }
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
                     if (field.isDiscovered) {
-                        label.setText("pole juz klikniete");
+                        textLabel.setText("pole juz klikniete");
                     } else if (field.isFlag) {
                         field.isFlag = false;
-                        field.button.setText("");
-                        label.setText("");
+                        button.setText("");
+                        textLabel.setText("");
                     } else {
-                        label.setText("");
+                        textLabel.setText("");
                         field.isFlag = true;
-                        field.button.setText("?");
-                        field.button.setFont(new Font("Arial", Font.BOLD, 20));
-                        field.button.setForeground(Color.BLACK);
-                        if (game.countPointsFromFlags(fields) == Game.numberOfBombs) {
-                            label.setText("Wygrales!");
-                            game.displayAllBombs(fields);
-                            //TODO add Game.isGameDone = true;
+                        button.setText("?");
+                        button.setFont(new Font("Arial", Font.BOLD, 20));
+                        button.setForeground(Color.BLACK);
+                        if (game.countFlagPoints() == game.numberOfBombs) {
+                            textLabel.setText("Wygrales!");
+                            displayAllBombs();
                         }
                     }
                 }
@@ -104,10 +166,8 @@ public class Application extends JPanel {
     }
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Application().createAndShowBoard();
-            }
+        SwingUtilities.invokeLater(() -> {
+            new Application(10, 10, 10).createAndShowBoard();
         });
     }
 }
