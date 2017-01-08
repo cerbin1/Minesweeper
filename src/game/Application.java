@@ -69,12 +69,7 @@ public class Application extends JPanel {
                 Field field = game.getField(i, j);
 
                 if (field.isBomb) {
-                    button.setForeground(Color.DARK_GRAY);
-                    if (field.isFlag) {
-                        button.setBackground(Color.GREEN);
-                    } else {
-                        button.setBackground(Color.red);
-                    }
+                    button.setBackground(field.isFlag ? Color.GREEN : Color.RED);
                     button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                 }
             }
