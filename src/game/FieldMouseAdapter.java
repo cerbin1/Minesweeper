@@ -14,9 +14,9 @@ public class FieldMouseAdapter extends MouseAdapter {
     private final int x;
     private final int y;
 
-    FieldMouseAdapter(Application application, Game game, int x, int y) {
+    FieldMouseAdapter(Application application, int x, int y) {
         this.application = application;
-        this.game = game;
+        this.game = application.getGame();
         this.x = x;
         this.y = y;
     }

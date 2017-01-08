@@ -41,7 +41,7 @@ public class Application extends JPanel {
     private JButton createSingleJButton(int i, int j) {
         JButton button = new JButton();
         button.setPreferredSize(new Dimension(50, 50));
-        button.addMouseListener(new FieldMouseAdapter(this, game, i, j));
+        button.addMouseListener(new FieldMouseAdapter(this, i, j));
         button.setFont(new Font("Arial", Font.BOLD, 20));
         return button;
     }
@@ -124,8 +124,10 @@ public class Application extends JPanel {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Application(10, 10, 10).createAndShowBoard();
-        });
+        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
+    }
+
+    Game getGame() {
+        return game;
     }
 }
