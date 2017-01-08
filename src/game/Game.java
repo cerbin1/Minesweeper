@@ -95,7 +95,6 @@ class Game {
         if (fields[x][y].getNumberOfBombsAdjacent() > 0) {
             fields[x][y].isDiscovered = true;
             buttons[x][y].setText(Integer.toString(fields[x][y].getNumberOfBombsAdjacent()));
-            buttons[x][y].setForeground(Application.getColorOfNumberOfBombsAdjacentToField(fields[x][y].getNumberOfBombsAdjacent()));
         } else {
             fields[x][y].isDiscovered = true;
             buttons[x][y].setBackground(Color.darkGray);
