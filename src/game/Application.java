@@ -40,18 +40,8 @@ public class Application extends JPanel {
         JPanel panel = new JPanel();
         JPanel outerPanel = new JPanel();
         panel.setLayout(new GridLayout(game.getHeight(), game.getWidth()));
-        buttons = new JButton[game.getHeight()][game.getWidth()];
+        buttons = createJButtons(width, height);
 
-        for (int i = 0; i < game.getWidth(); i++) {
-            for (int j = 0; j < game.getHeight(); j++) {
-                buttons[i][j] = new JButton();
-                buttons[i][j].addMouseListener(getMouseAdapter(game.getField(i, j), i, j));
-                buttons[i][j].setFont(new Font("Arial", Font.BOLD, 20));
-                buttons[i][j].setPreferredSize(new Dimension(50, 50));
-
-                panel.add(buttons[i][j]);
-            }
-        }
 
         textLabel.setText("Zecznij klikac");
         outerPanel.setLayout(new BorderLayout());
@@ -61,6 +51,23 @@ public class Application extends JPanel {
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.pack();
+    }
+
+    private JButton[][] createJButtons(int width, int height) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                buttons[i][j] = createSingleJButton(i, j);
+            }
+        }
+        return buttons;
+    }
+
+    private JButton createSingleJButton(int x, int y) {
+        JButton button = new JButton();
+        button.addMouseListener(getMouseAdapter(game.getField(x, y), x, y));
+        button.setFont(new Font("Arial", Font.BOLD, 20));
+        button.setPreferredSize(new Dimension(50, 50));
+        return button;
     }
 
     private MouseAdapter getMouseAdapter(final Field cell, int x, int y) {
