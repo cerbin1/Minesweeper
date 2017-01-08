@@ -1,14 +1,38 @@
 package game;
 
+import javax.swing.*;
 import java.awt.*;
 
-public class Game {
-    static int numberOfBombs = 10;
-    static int height = 10;
-    static int width = 10;
-    static boolean isGameDone = false;
+class Game {
+    int getNumberOfBombs() {
+        return numberOfBombs;
+    }
 
-    void setBombs(Field[][] fields, int numberOfBombs) {
+    private final int numberOfBombs;
+
+    int getHeight() {
+        return height;
+    }
+
+    int getWidth() {
+        return width;
+    }
+
+    private final int height;
+    private final int width;
+    boolean isGameDone = false;
+    private final Field[][] fields;
+
+    Game(int width, int height, int numberOfBombs) {
+        this.width = width;
+        this.height = height;
+        this.numberOfBombs = numberOfBombs;
+        fields = new Field[width][height];
+        setBombs();
+        fillBombCounters();
+    }
+
+    private void setBombs() {
         for (int i = 0; i < numberOfBombs; i++) {
             while (true) {
                 int x = (int) Math.round(Math.random() * 9);
@@ -19,74 +43,55 @@ public class Game {
                 }
             }
         }
-        countNumberOfBombsAdjacentToField(fields);
     }
 
-    void displayAllBombs(Field[][] fields) {
+    private void fillBombCounters() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                Field cell = fields[i][j];
-                if (cell.isBomb) {
-                    cell.button.setText("x");
-                    cell.button.setForeground(Color.DARK_GRAY);
-                    if (cell.isFlag) {
-                        cell.button.setBackground(Color.GREEN);
-                    } else {
-                        cell.button.setBackground(Color.red);
-                    }
-                    //TODO add Game.isGameDone = true;
-                }
-            }
-        }
-    }
-
-    void countNumberOfBombsAdjacentToField(Field[][] fields) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                isBombAdjacentToField(i, j, fields);
+                fillSingleBombCounter(i, j);
             }
         }
 
     }
 
-    void isBombAdjacentToField(int x, int y, Field[][] fields) {
+    private void fillSingleBombCounter(int x, int y) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < height) && (0 <= y + j && y + j < width)) {
                     if (fields[x + i][y + j].isBomb) {
-                        fields[x][y].numberOfBombsAdjacent++;
+                        fields[x][y].incrementNumberOfBombsAdjacent();
                     }
                 }
             }
         }
     }
 
-    void floodFill(int x, int y, Field[][] field) {
+    void floodFill(int x, int y, JButton[][] buttons) {
         if ((0 > x || x >= height) || (0 > y || y >= width)) {
             return;
         }
-        if (field[x][y].isFlag || field[x][y].isBomb) {
+        if (fields[x][y].isFlag || fields[x][y].isBomb) {
             return;
         }
-        if (field[x][y].isDiscovered) {
+        if (fields[x][y].isDiscovered) {
             return;
         }
-        if (field[x][y].numberOfBombsAdjacent > 0) {
-            field[x][y].button.setText(Integer.toString(field[x][y].getNumberOfBombsAdjacent()));
-            field[x][y].button.setForeground(getColorOfNumberOfBombsAdjacentToField(field[x][y].numberOfBombsAdjacent));
-            field[x][y].isDiscovered = true;
+        if (fields[x][y].getNumberOfBombsAdjacent() > 0) {
+            fields[x][y].isDiscovered = true;
+            buttons[x][y].setText(Integer.toString(fields[x][y].getNumberOfBombsAdjacent()));
+            buttons[x][y].setForeground(Application.getColorOfNumberOfBombsAdjacentToField(numberOfBombs));
         } else {
-            field[x][y].isDiscovered = true;
-            field[x][y].button.setBackground(Color.darkGray);
+            fields[x][y].isDiscovered = true;
+            buttons[x][y].setBackground(Color.darkGray);
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    floodFill(x + i, y + j, field);
+                    floodFill(x + i, y + j, buttons);
                 }
             }
         }
     }
 
-    int countPointsFromFlags(Field[][] fields) {
+    int countPointsFromFlags() {
         int points = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -102,12 +107,7 @@ public class Game {
         return points;
     }
 
-    Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
-        Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
-        return colors[numberOfBombs - 1];
-    }
-
-    int countFieldsDiscovered(Field[][] fields) {
+    int countFieldsDiscovered() {
         int numberOfFields = height * width;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -118,5 +118,4 @@ public class Game {
         }
         return numberOfFields;
     }
-
 }

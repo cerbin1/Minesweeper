@@ -1,28 +1,16 @@
 package game;
 
-import javax.swing.JButton;
-import java.awt.Dimension;
-
-public class Field {
-    boolean isBomb;
-    boolean isDiscovered;
-    boolean isFlag;
-    int numberOfBombsAdjacent;
-    JButton button;
-
-    public Field(int buttonWidth, int buttonHeight) {
-        button = new JButton();
-        button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-        isDiscovered = false;
-        isFlag = false;
-        isBomb = false; // TODO zainicjalizuj przy deklaracji
-        numberOfBombsAdjacent = 0; // TODO zainicjalizuj przy deklaracji
-    }
+class Field {
+    boolean isBomb = false;
+    boolean isDiscovered = false;
+    boolean isFlag = false;
+    private int numberOfBombsAdjacent = 0;
 
     int getNumberOfBombsAdjacent() { // TODO zmienić nazwe na getBombsAdjacentCount()
         return numberOfBombsAdjacent;
     }
+
+    void incrementNumberOfBombsAdjacent() {
+        numberOfBombsAdjacent++;
+    }
 }
-
-
-
