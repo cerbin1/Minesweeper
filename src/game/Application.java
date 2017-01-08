@@ -9,6 +9,10 @@ import java.awt.event.MouseEvent;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
+    private final static Color[] BOMBS_COUNTER_COLORS = {
+            Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
+    };
+
     private final int height;
     private final int width;
     private final int numberOfBombs;
@@ -55,8 +59,7 @@ public class Application extends JPanel {
                 field.registerFloodFillListener(() -> {
                     if (field.numberOfBombsAdjacent == 0) {
                         button.setBackground(Color.darkGray);
-                    }
-                    else {
+                    } else {
                         button.setText("" + field.numberOfBombsAdjacent);
                     }
                 });
@@ -87,8 +90,7 @@ public class Application extends JPanel {
     }
 
     private Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
-        Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
-        return colors[numberOfBombs - 1];
+        return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
     }
 
     private void createAndShowBoard() {
