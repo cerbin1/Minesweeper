@@ -12,7 +12,9 @@ import java.awt.event.MouseEvent;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
-
+    private final Color[] NEAR_BOMBS_COUNTER_COLORS = {
+            Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
+    };
     private JLabel textLabel;
     private Game game;
     private JButton[][] buttons;
@@ -67,7 +69,7 @@ public class Application extends JPanel {
                     } else {
                         if (cell.getNumberOfBombsAdjacent() > 0) {
                             textLabel.setText("");
-                            buttons[x][y].setForeground(getColorOfNumberOfBombsAdjacentToField(cell.getNumberOfBombsAdjacent()));
+                            buttons[x][y].setForeground(NEAR_BOMBS_COUNTER_COLORS[cell.getNumberOfBombsAdjacent() - 1]);
                             cell.isDiscovered = true;
                             buttons[x][y].setText(Integer.toString(cell.getNumberOfBombsAdjacent()));
                         } else {
@@ -116,12 +118,6 @@ public class Application extends JPanel {
                 }
             }
         }
-    }
-
-
-    static Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
-        Color[] colors = {Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK};
-        return colors[numberOfBombs - 1];
     }
 
     public static void main(String[] args) {
