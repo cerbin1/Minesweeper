@@ -83,13 +83,13 @@ public class Application extends JPanel {
                     }
 
                     button.setText(Integer.toString(field.getAdjacentBombsCount()));
-                    button.setForeground(getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
+                    button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                 }
             }
         }
     }
 
-    private Color getColorOfNumberOfBombsAdjacentToField(int numberOfBombs) {
+    private Color getBombCounterColor(int numberOfBombs) {
         return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
     }
 
@@ -97,6 +97,7 @@ public class Application extends JPanel {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
         frame.setVisible(true);
 
         textLabel.setText("Zecznij klikac");
@@ -115,8 +116,6 @@ public class Application extends JPanel {
         outerPanel.add(textLabel, BorderLayout.PAGE_END);
 
         frame.add(outerPanel);
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
         frame.pack();
 
         displayAllBombs();
@@ -139,7 +138,7 @@ public class Application extends JPanel {
                     } else {
                         if (field.numberOfBombsAdjacent > 0) {
                             textLabel.setText("");
-                            button.setForeground(getColorOfNumberOfBombsAdjacentToField(field.numberOfBombsAdjacent));
+                            button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                             field.isDiscovered = true;
                             button.setText(Integer.toString(field.getAdjacentBombsCount()));
                         } else {

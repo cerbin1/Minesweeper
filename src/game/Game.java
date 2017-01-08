@@ -70,18 +70,16 @@ class Game {
         if ((0 > x || x >= height) || (0 > y || y >= width)) {
             return;
         }
-        if (fields[x][y].isFlag || fields[x][y].isBomb) {
+        Field field = fields[x][y];
+
+        if (field.isFlag || field.isBomb || field.isDiscovered) {
             return;
         }
-        if (fields[x][y].isDiscovered) {
-            return;
-        }
-        if (fields[x][y].numberOfBombsAdjacent > 0) {
-            fields[x][y].isDiscovered = true;
-            fields[x][y].triggerFloodFill();
-        } else {
-            fields[x][y].isDiscovered = true;
-            fields[x][y].triggerFloodFill();
+
+        field.isDiscovered = true;
+        field.triggerFloodFill();
+
+        if (field.numberOfBombsAdjacent == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     floodFill(x + i, y + j);
