@@ -15,9 +15,20 @@ public class Application extends JPanel {
     private final Color[] NEAR_BOMBS_COUNTER_COLORS = {
             Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
     };
+
+    private final int height;
+    private final int width;
+
     private JLabel textLabel;
     private Game game;
     private JButton[][] buttons;
+
+    private Application(int height, int width, int numberOfBombs) {
+        this.height = height;
+        this.width = width;
+        this.game = new Game(width, height, numberOfBombs);
+        textLabel = new JLabel();
+    }
 
 
     private void createAndShowBoard() {
@@ -25,12 +36,10 @@ public class Application extends JPanel {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        game = new Game(10, 10, 10);
 
         JPanel panel = new JPanel();
         JPanel outerPanel = new JPanel();
         panel.setLayout(new GridLayout(game.getHeight(), game.getWidth()));
-        textLabel = new JLabel();
         buttons = new JButton[game.getHeight()][game.getWidth()];
 
         for (int i = 0; i < game.getWidth(); i++) {
@@ -123,7 +132,7 @@ public class Application extends JPanel {
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new Application().createAndShowBoard();
+                new Application(10, 10, 10).createAndShowBoard();
             }
         });
     }
