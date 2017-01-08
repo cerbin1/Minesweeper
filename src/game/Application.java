@@ -5,10 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,7 +16,6 @@ public class Application extends JPanel {
     private JLabel textLabel;
     private Game game;
     private JButton[][] buttons;
-    Field[][] cells;
 
 
     private void createAndShowBoard() {
@@ -37,10 +33,10 @@ public class Application extends JPanel {
 
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
-                cells[i][j] = new Field();
                 buttons[i][j] = new JButton();
-                buttons[i][j].addMouseListener(getMouseAdapter(cells[i][j], i, j));
+                buttons[i][j].addMouseListener(getMouseAdapter(game.getField(i, j), i, j));
                 buttons[i][j].setFont(new Font("Arial", Font.BOLD, 20));
+                buttons[i][j].setPreferredSize(new Dimension(50, 50));
 
                 panel.add(buttons[i][j]);
             }
@@ -109,11 +105,10 @@ public class Application extends JPanel {
     private void displayAllBombs() {
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
-                Field cell = cells[i][j];
-                if (cell.isBomb) {
+                if (game.getField(i, j).isBomb) {
                     buttons[i][j].setText("x");
                     buttons[i][j].setForeground(Color.DARK_GRAY);
-                    if (cell.isFlag) {
+                    if (game.getField(i, j).isFlag) {
                         buttons[i][j].setBackground(Color.GREEN);
                     } else {
                         buttons[i][j].setBackground(Color.red);

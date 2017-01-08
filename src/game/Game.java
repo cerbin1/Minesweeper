@@ -21,15 +21,31 @@ class Game {
     private final int height;
     private final int width;
     boolean isGameDone = false;
+
+    Field getField(int x, int y) {
+        return fields[x][y];
+    }
+
     private final Field[][] fields;
 
     Game(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
         this.numberOfBombs = numberOfBombs;
-        fields = new Field[width][height];
+        fields = initializeFields(width, height);
         setBombs();
         fillBombCounters();
+
+    }
+
+    private Field[][] initializeFields(int width, int height) {
+        Field[][] fields = new Field[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                fields[i][j] = new Field();
+            }
+        }
+        return fields;
     }
 
     private void setBombs() {
@@ -79,7 +95,7 @@ class Game {
         if (fields[x][y].getNumberOfBombsAdjacent() > 0) {
             fields[x][y].isDiscovered = true;
             buttons[x][y].setText(Integer.toString(fields[x][y].getNumberOfBombsAdjacent()));
-            buttons[x][y].setForeground(Application.getColorOfNumberOfBombsAdjacentToField(numberOfBombs));
+            buttons[x][y].setForeground(Application.getColorOfNumberOfBombsAdjacentToField(fields[x][y].getNumberOfBombsAdjacent()));
         } else {
             fields[x][y].isDiscovered = true;
             buttons[x][y].setBackground(Color.darkGray);
