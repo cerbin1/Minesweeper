@@ -2,7 +2,6 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -42,7 +41,7 @@ public class Application extends JPanel {
     private JButton createSingleJButton(int i, int j) {
         JButton button = new JButton();
         button.setPreferredSize(new Dimension(50, 50));
-        button.addMouseListener(getMouseAdapter(i, j));
+        button.addMouseListener(new FieldMouseAdapter(this, game, i, j));
         button.setFont(new Font("Arial", Font.BOLD, 20));
         return button;
     }
@@ -122,10 +121,6 @@ public class Application extends JPanel {
 
     void clearStatusText() {
         textLabel.setText("");
-    }
-
-    private MouseAdapter getMouseAdapter(int x, int y) {
-        return new FieldMouseAdapter(this, game, x, y);
     }
 
     public static void main(String[] args) {
