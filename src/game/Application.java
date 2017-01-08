@@ -21,7 +21,7 @@ public class Application extends JPanel {
     private Application(int height, int width, int numberOfBombs) {
         this.height = height;
         this.width = width;
-        this.game = new Game(numberOfBombs, height, width);
+        this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(height, width);
         registerFloodFillListeners();
