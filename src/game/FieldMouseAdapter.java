@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static java.awt.Color.*;
+import static java.awt.Color.BLACK;
 
 public class FieldMouseAdapter extends MouseAdapter {
 

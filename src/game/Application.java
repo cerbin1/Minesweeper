@@ -1,10 +1,8 @@
 package game;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
