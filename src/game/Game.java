@@ -1,7 +1,5 @@
 package game;
 
-import java.awt.*;
-
 class Game {
     final int width;
     final int height;

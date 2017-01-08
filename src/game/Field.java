@@ -21,14 +21,4 @@ class Field {
     int getAdjacentBombsCount() {
         return numberOfBombsAdjacent;
     }
-
-    @Override
-    public String toString() {
-        return "Field{" +
-                "isBomb=" + isBomb +
-                ", isDiscovered=" + isDiscovered +
-                ", isFlag=" + isFlag +
-                ", numberOfBombsAdjacent=" + numberOfBombsAdjacent +
-                '}';
-    }
 }

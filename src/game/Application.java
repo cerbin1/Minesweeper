@@ -15,7 +15,6 @@ public class Application extends JPanel {
 
     private final int height;
     private final int width;
-    private final int numberOfBombs;
 
     private Game game;
     private JButton[][] buttons;
@@ -25,7 +24,7 @@ public class Application extends JPanel {
     private Application(int height, int width, int numberOfBombs) {
         this.height = height;
         this.width = width;
-        this.numberOfBombs = numberOfBombs;
+        int numberOfBombs1 = numberOfBombs;
         this.game = new Game(numberOfBombs, height, width);
 
         this.buttons = createJButtons(height, width);
@@ -127,46 +126,57 @@ public class Application extends JPanel {
             public void mousePressed(MouseEvent e) {
                 Field field = game.getField(x, y);
                 JButton button = buttons[x][y];
+
                 if (game.isGameDone) {
                     textLabel.setText("Rozpocznij nowa gre");
                 } else if (e.getButton() == MouseEvent.BUTTON1) {
-                    if (field.isDiscovered || field.isFlag) {
-                        textLabel.setText("pole klikniete juz lub flaga = " + field);
-                    } else if (field.isBomb) {
-                        textLabel.setText("Bomba, przegrales");
-                        displayAllBombs();
-                    } else {
-                        if (field.numberOfBombsAdjacent > 0) {
-                            textLabel.setText("");
-                            button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
-                            field.isDiscovered = true;
-                            button.setText(Integer.toString(field.getAdjacentBombsCount()));
-                        } else {
-                            game.floodFill(x, y);
-                            textLabel.setText("");
-                        }
-                        if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
-                            textLabel.setText("Wygrales!");
-                            displayAllBombs();
-                        }
-                    }
+                    leftButtonClick(field, button);
                 } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    if (field.isDiscovered) {
-                        textLabel.setText("pole juz klikniete");
-                    } else if (field.isFlag) {
-                        field.isFlag = false;
-                        button.setText("");
-                        textLabel.setText("");
+                    rightButtonClick(field, button);
+                }
+            }
+
+            private void leftButtonClick(Field field, JButton button) {
+                if (field.isDiscovered || field.isFlag) {
+                    textLabel.setText("pole klikniete juz lub flaga");
+                    return;
+                }
+                if (field.isBomb) {
+                    textLabel.setText("Bomba, przegrales");
+                    displayAllBombs();
+                } else {
+                    textLabel.setText("");
+                    if (field.numberOfBombsAdjacent > 0) {
+                        field.isDiscovered = true;
+                        button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
+                        button.setText(Integer.toString(field.getAdjacentBombsCount()));
                     } else {
-                        textLabel.setText("");
-                        field.isFlag = true;
-                        button.setText("?");
-                        button.setFont(new Font("Arial", Font.BOLD, 20));
-                        button.setForeground(Color.BLACK);
-                        if (game.countFlagPoints() == game.numberOfBombs) {
-                            textLabel.setText("Wygrales!");
-                            displayAllBombs();
-                        }
+                        game.floodFill(x, y);
+                    }
+                    if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
+                        textLabel.setText("Wygrales!");
+                        displayAllBombs();
+                    }
+                }
+            }
+
+            private void rightButtonClick(Field field, JButton button) {
+                textLabel.setText("");
+                if (field.isDiscovered) {
+                    textLabel.setText("pole juz klikniete");
+                    return;
+                }
+                if (field.isFlag) {
+                    field.isFlag = false;
+                    button.setText("");
+                } else {
+                    field.isFlag = true;
+                    button.setText("?");
+                    button.setFont(new Font("Arial", Font.BOLD, 20));
+                    button.setForeground(Color.BLACK);
+                    if (game.countFlagPoints() == game.numberOfBombs) {
+                        textLabel.setText("Wygrales!");
+                        displayAllBombs();
                     }
                 }
             }
