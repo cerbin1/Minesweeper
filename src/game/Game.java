@@ -78,6 +78,7 @@ class Game {
         }
         if (fields[x][y].numberOfBombsAdjacent > 0) {
             fields[x][y].isDiscovered = true;
+            fields[x][y].triggerFloodFill();
         } else {
             fields[x][y].isDiscovered = true;
             fields[x][y].triggerFloodFill();

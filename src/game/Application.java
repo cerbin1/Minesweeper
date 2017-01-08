@@ -52,7 +52,14 @@ public class Application extends JPanel {
             for (int j = 0; j < width; j++) {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
-                field.registerFloodFillListener(() -> button.setBackground(Color.darkGray));
+                field.registerFloodFillListener(() -> {
+                    if (field.numberOfBombsAdjacent == 0) {
+                        button.setBackground(Color.darkGray);
+                    }
+                    else {
+                        button.setText("" + field.numberOfBombsAdjacent);
+                    }
+                });
             }
         }
     }
