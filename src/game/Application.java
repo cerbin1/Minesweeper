@@ -24,7 +24,6 @@ public class Application extends JPanel {
     private Application(int height, int width, int numberOfBombs) {
         this.height = height;
         this.width = width;
-        int numberOfBombs1 = numberOfBombs;
         this.game = new Game(numberOfBombs, height, width);
 
         this.buttons = createJButtons(height, width);
@@ -66,29 +65,26 @@ public class Application extends JPanel {
         }
     }
 
-    private void displayAllBombs() {
+    void displayAllBombs() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 JButton button = buttons[i][j];
                 Field field = game.getField(i, j);
 
                 if (field.isBomb) {
-                    button.setText("x");
                     button.setForeground(Color.DARK_GRAY);
                     if (field.isFlag) {
                         button.setBackground(Color.GREEN);
                     } else {
                         button.setBackground(Color.red);
                     }
-
-                    button.setText(Integer.toString(field.getAdjacentBombsCount()));
                     button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                 }
             }
         }
     }
 
-    private Color getBombCounterColor(int numberOfBombs) {
+    Color getBombCounterColor(int numberOfBombs) {
         return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
     }
 
@@ -116,71 +112,22 @@ public class Application extends JPanel {
 
         frame.add(outerPanel);
         frame.pack();
+    }
 
-        displayAllBombs();
+    JButton getButton(int x, int y) {
+        return buttons[x][y];
+    }
+
+    void setStatusText(String text) {
+        textLabel.setText(text);
+    }
+
+    void clearStatusText() {
+        textLabel.setText("");
     }
 
     private MouseAdapter getMouseAdapter(int x, int y) {
-        return new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                Field field = game.getField(x, y);
-                JButton button = buttons[x][y];
-
-                if (game.isGameDone) {
-                    textLabel.setText("Rozpocznij nowa gre");
-                } else if (e.getButton() == MouseEvent.BUTTON1) {
-                    leftButtonClick(field, button);
-                } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    rightButtonClick(field, button);
-                }
-            }
-
-            private void leftButtonClick(Field field, JButton button) {
-                if (field.isDiscovered || field.isFlag) {
-                    textLabel.setText("pole klikniete juz lub flaga");
-                    return;
-                }
-                if (field.isBomb) {
-                    textLabel.setText("Bomba, przegrales");
-                    displayAllBombs();
-                } else {
-                    textLabel.setText("");
-                    if (field.numberOfBombsAdjacent > 0) {
-                        field.isDiscovered = true;
-                        button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
-                        button.setText(Integer.toString(field.getAdjacentBombsCount()));
-                    } else {
-                        game.floodFill(x, y);
-                    }
-                    if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
-                        textLabel.setText("Wygrales!");
-                        displayAllBombs();
-                    }
-                }
-            }
-
-            private void rightButtonClick(Field field, JButton button) {
-                textLabel.setText("");
-                if (field.isDiscovered) {
-                    textLabel.setText("pole juz klikniete");
-                    return;
-                }
-                if (field.isFlag) {
-                    field.isFlag = false;
-                    button.setText("");
-                } else {
-                    field.isFlag = true;
-                    button.setText("?");
-                    button.setFont(new Font("Arial", Font.BOLD, 20));
-                    button.setForeground(Color.BLACK);
-                    if (game.countFlagPoints() == game.numberOfBombs) {
-                        textLabel.setText("Wygrales!");
-                        displayAllBombs();
-                    }
-                }
-            }
-        };
+        return new FieldMouseAdapter(this, game, x, y);
     }
 
     public static void main(String[] args) {
