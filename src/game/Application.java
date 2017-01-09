@@ -27,9 +27,9 @@ public class Application extends JPanel {
 
     private JLabel textLabel = new JLabel();
 
-    private Application(int height, int width, int numberOfBombs) {
-        this.height = height;
+    private Application(int width, int height, int numberOfBombs) {
         this.width = width;
+        this.height = height;
         this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(width, height);
