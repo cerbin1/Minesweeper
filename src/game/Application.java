@@ -18,8 +18,8 @@ public class Application extends JPanel {
             Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
     };
 
-    private final int height;
     private final int width;
+    private final int height;
 
     private Game game;
     private JButton[][] buttons;
@@ -37,7 +37,7 @@ public class Application extends JPanel {
 
     private JButton[][] createJButtons(int height, int width) {
         JButton[][] buttons = new JButton[width][height];
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 buttons[i][j] = createSingleJButton(i, j);
             }
@@ -55,7 +55,7 @@ public class Application extends JPanel {
     }
 
     private void registerFloodFillListeners() {
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
@@ -98,7 +98,7 @@ public class Application extends JPanel {
         textLabel.setText("Zecznij klikac");
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(game.height, game.width));
+        panel.setLayout(new GridLayout(game.width, game.height));
         for (int i = 0; i < game.height; i++) {
             for (int j = 0; j < game.width; j++) {
                 panel.add(buttons[i][j]);
