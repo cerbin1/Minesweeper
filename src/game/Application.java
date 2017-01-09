@@ -54,6 +54,7 @@ public class Application extends JPanel {
     }
 
     private JButton[][] createJButtons(int width, int height) {
+        JButton[][] buttons = new JButton[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 buttons[i][j] = createSingleJButton(i, j);
