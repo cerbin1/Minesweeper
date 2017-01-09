@@ -9,7 +9,7 @@ class GameFactory {
             throw new RuntimeException("Board size too small");
         }
         if (numberOfBombs >= width * height) {
-            throw new RuntimeException("Number of bombs exeeds board size");
+            throw new RuntimeException("Number of bombs exceeds board size");
         }
         return new Game(width, height, numberOfBombs);
     }
