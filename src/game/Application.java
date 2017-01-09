@@ -11,11 +11,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import static java.awt.Color.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
     private final static Color[] BOMBS_COUNTER_COLORS = {
-            Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
+            BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK
     };
 
     private final int width;
@@ -77,7 +78,7 @@ public class Application extends JPanel {
                 Field field = game.getField(i, j);
 
                 if (field.isBomb) {
-                    button.setBackground(field.isFlag ? Color.GREEN : Color.RED);
+                    button.setBackground(field.isFlag ? GREEN : RED);
                     button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                 }
             }
