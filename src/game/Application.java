@@ -31,11 +31,11 @@ public class Application extends JPanel {
         this.width = width;
         this.game = GameFactory.create(width, height, numberOfBombs);
 
-        this.buttons = createJButtons(height, width);
+        this.buttons = createJButtons(width, height);
         registerFloodFillListeners();
     }
 
-    private JButton[][] createJButtons(int height, int width) {
+    private JButton[][] createJButtons(int width, int height) {
         JButton[][] buttons = new JButton[width][height];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
