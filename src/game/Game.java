@@ -19,8 +19,8 @@ class Game {
 
     private Field[][] createFields(int width, int height) {
         Field[][] fields = new Field[width][height];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 fields[i][j] = new Field();
             }
         }
@@ -41,8 +41,8 @@ class Game {
     }
 
     private void fillBombsCounters() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 fillSingleBombCounter(i, j, fields);
             }
         }
@@ -51,7 +51,7 @@ class Game {
     private void fillSingleBombCounter(int x, int y, Field[][] fields) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if ((0 <= x + i && x + i < height) && (0 <= y + j && y + j < width)) {
+                if ((0 <= x + i && x + i < width) && (0 <= y + j && y + j < height)) {
                     if (fields[x + i][y + j].isBomb) {
                         fields[x][y].numberOfBombsAdjacent++;
                     }
@@ -65,7 +65,7 @@ class Game {
     }
 
     void floodFill(int x, int y) {
-        if ((0 > x || x >= height) || (0 > y || y >= width)) {
+        if ((0 > x || x >= width) || (0 > y || y >= height)) {
             return;
         }
         Field field = fields[x][y];
@@ -88,8 +88,8 @@ class Game {
 
     int countFlagPoints() {
         int points = 0;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
                 if (field.isBomb) {
                     if (field.isFlag) {
@@ -105,8 +105,8 @@ class Game {
 
     int countDiscoveredFields() {
         int numberOfFields = height * width;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 if (fields[i][j].isDiscovered) {
                     numberOfFields--;
                 }

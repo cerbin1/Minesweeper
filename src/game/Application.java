@@ -38,8 +38,8 @@ public class Application extends JPanel {
 
     private JButton[][] createJButtons(int width, int height) {
         JButton[][] buttons = new JButton[width][height];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 buttons[i][j] = createSingleJButton(i, j);
             }
         }
@@ -56,8 +56,8 @@ public class Application extends JPanel {
     }
 
     private void registerFloodFillListeners() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
                 field.registerFloodFillListener(() -> {
@@ -72,8 +72,8 @@ public class Application extends JPanel {
     }
 
     void displayAllBombs() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 JButton button = buttons[i][j];
                 Field field = game.getField(i, j);
 
@@ -100,8 +100,8 @@ public class Application extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
-        for (int i = 0; i < game.height; i++) {
-            for (int j = 0; j < game.width; j++) {
+        for (int i = 0; i < game.width; i++) {
+            for (int j = 0; j < game.height; j++) {
                 panel.add(buttons[i][j]);
             }
         }
@@ -128,7 +128,7 @@ public class Application extends JPanel {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
+        SwingUtilities.invokeLater(() -> new Application(15, 10, 10).createAndShowBoard());
     }
 
     Game getGame() {
