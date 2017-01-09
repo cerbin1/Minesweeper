@@ -22,10 +22,6 @@ class Game {
     private final int width;
     boolean isGameDone = false;
 
-    Field getField(int x, int y) {
-        return fields[x][y];
-    }
-
     private final Field[][] fields;
 
     Game(int width, int height, int numberOfBombs) {
@@ -82,28 +78,34 @@ class Game {
         }
     }
 
-    void floodFill(int x, int y, JButton[][] buttons) {
+    Field getField(int x, int y) {
+        return fields[x][y];
+    }
+
+    void floodFill(int x, int y) {
         if ((0 > x || x >= height) || (0 > y || y >= width)) {
             return;
         }
-        if (fields[x][y].isFlag || fields[x][y].isBomb) {
+
+        Field field = fields[x][y];
+
+        if (field.isFlag || field.isBomb || field.isDiscovered) {
             return;
         }
-        if (fields[x][y].isDiscovered) {
-            return;
-        }
-        if (fields[x][y].getNumberOfBombsAdjacent() > 0) {
-            fields[x][y].isDiscovered = true;
-            buttons[x][y].setText(Integer.toString(fields[x][y].getNumberOfBombsAdjacent()));
-        } else {
-            fields[x][y].isDiscovered = true;
-            buttons[x][y].setBackground(Color.darkGray);
+
+
+            field.isDiscovered = true;
+
+        field.triggerFloodFill();
+
+        if(field.getNumberOfBombsAdjacent() == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
-                    floodFill(x + i, y + j, buttons);
+                    floodFill(x + i, y + j);
                 }
             }
         }
+
     }
 
     int countPointsFromFlags() {

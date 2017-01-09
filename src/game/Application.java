@@ -4,15 +4,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
-    private final Color[] NEAR_BOMBS_COUNTER_COLORS = {
+    final Color[] NEAR_BOMBS_COUNTER_COLORS = {
             Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
     };
 
@@ -65,63 +66,25 @@ public class Application extends JPanel {
 
     private JButton createSingleJButton(int x, int y) {
         JButton button = new JButton();
-        button.addMouseListener(getMouseAdapter(game.getField(x, y), x, y));
+        button.addMouseListener(new FieldMouseAdapter(this, x, y));
         button.setFont(new Font("Arial", Font.BOLD, 20));
         button.setPreferredSize(new Dimension(50, 50));
         return button;
     }
 
-    private MouseAdapter getMouseAdapter(final Field cell, int x, int y) {
-        return new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if (game.isGameDone) {
-                    textLabel.setText("Rozpocznij nowa gre");
-                } else if (e.getButton() == MouseEvent.BUTTON1) {
-                    if (cell.isDiscovered || cell.isFlag) {
-                        textLabel.setText("pole klikniete juz lub flaga");
-                    } else if (cell.isBomb) {
-                        textLabel.setText("Bomba, przegrales");
-                        displayAllBombs();
-                    } else {
-                        if (cell.getNumberOfBombsAdjacent() > 0) {
-                            textLabel.setText("");
-                            buttons[x][y].setForeground(NEAR_BOMBS_COUNTER_COLORS[cell.getNumberOfBombsAdjacent() - 1]);
-                            cell.isDiscovered = true;
-                            buttons[x][y].setText(Integer.toString(cell.getNumberOfBombsAdjacent()));
-                        } else {
-                            game.floodFill(x, y, buttons);
-                            textLabel.setText("");
-                        }
-                        if (game.countFieldsDiscovered() - game.getNumberOfBombs() == 0) {
-                            textLabel.setText("Wygrales!");
-                            displayAllBombs();
-                        }
-                    }
-                } else if (e.getButton() == MouseEvent.BUTTON3) {
-                    if (cell.isDiscovered) {
-                        textLabel.setText("pole juz klikniete");
-                    } else if (cell.isFlag) {
-                        cell.isFlag = false;
-                        buttons[x][y].setText("");
-                        textLabel.setText("");
-                    } else {
-                        textLabel.setText("");
-                        cell.isFlag = true;
-                        buttons[x][y].setText("?");
-                        buttons[x][y].setFont(new Font("Arial", Font.BOLD, 20));
-                        buttons[x][y].setForeground(Color.BLACK);
-                        if (game.countPointsFromFlags() == game.getNumberOfBombs()) {
-                            textLabel.setText("Wygrales!");
-                            displayAllBombs();
-                        }
-                    }
-                }
+    private void registerFloodFillListeners() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                Field field = game.getField(i, j);
+                JButton button = buttons[i][j];
+                field.registerFloodFillListener
             }
-        };
+        }
     }
 
-    private void displayAllBombs() {
+
+
+    void displayAllBombs() {
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
                 if (game.getField(i, j).isBomb) {
@@ -137,8 +100,20 @@ public class Application extends JPanel {
         }
     }
 
+    JButton getButton(int x, int y) {
+        return buttons[x][y];
+    }
+
+    Game getGame() {
+        return game;
+    }
+
     void setMessageText(String text) {
         textLabel.setText(text);
+    }
+
+    void clearMessageBox() {
+        textLabel.setText("");
     }
 
     public static void main(String[] args) {
