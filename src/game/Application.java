@@ -137,6 +137,10 @@ public class Application extends JPanel {
         }
     }
 
+    void setMessageText(String text) {
+        textLabel.setText(text);
+    }
+
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -144,4 +148,5 @@ public class Application extends JPanel {
             }
         });
     }
+
 }
