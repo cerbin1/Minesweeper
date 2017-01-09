@@ -1,10 +1,12 @@
 package game;
 
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Font;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import static java.awt.Color.BLACK;
 
 public class FieldMouseAdapter extends MouseAdapter {
     private final Application application;
@@ -22,7 +24,7 @@ public class FieldMouseAdapter extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         if (game.isGameDone) {
-            application.setMessageText("Rozpocznij nowa gre");
+            application.setStatusText("Rozpocznij nowa gre");
             return;
         }
 
@@ -30,44 +32,39 @@ public class FieldMouseAdapter extends MouseAdapter {
         JButton button = application.getButton(x, y);
 
         if (e.getButton() == MouseEvent.BUTTON1) {
-            leftMouseClick(field, button);
+            leftButtonClick(field, button);
         } else if (e.getButton() == MouseEvent.BUTTON3) {
-            rightMouseClick(field, button);
+            rightButtonClick(field, button);
         }
-
-
     }
 
-    void leftMouseClick(Field field, JButton button) {
+    private void leftButtonClick(Field field, JButton button) {
         if (field.isDiscovered || field.isFlag) {
-            application.setMessageText("Pole klikniete lub flaga");
+            application.setStatusText("pole klikniete juz lub flaga");
             return;
         }
-
         if (field.isBomb) {
-            application.setMessageText("Bomba, przegrywasz!");
+            application.setStatusText("Bomba, przegrales");
             application.displayAllBombs();
-            game.isGameDone = true;
         } else {
-            application.clearMessageBox();
-            if (field.getNumberOfBombsAdjacent() > 0) {
+            application.clearStatusText();
+            if (field.numberOfBombsAdjacent > 0) {
                 field.isDiscovered = true;
-                button.setForeground(application.NEAR_BOMBS_COUNTER_COLORS[field.getNumberOfBombsAdjacent() - 1]);
-                button.setText(Integer.toString(field.getNumberOfBombsAdjacent()));
+                button.setForeground(application.getBombCounterColor(field.numberOfBombsAdjacent));
+                button.setText(Integer.toString(field.getAdjacentBombsCount()));
             } else {
                 game.floodFill(x, y);
             }
-            if (game.countFieldsDiscovered() - game.getNumberOfBombs() == 0) {
-                application.setMessageText("Wygrales!");
+            if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
+                application.setStatusText("Wygrales!");
             }
         }
-
     }
 
-    void rightMouseClick(Field field, JButton button) {
-        application.clearMessageBox();
+    private void rightButtonClick(Field field, JButton button) {
+        application.clearStatusText();
         if (field.isDiscovered) {
-            application.setMessageText("Pole juz klikniete");
+            application.setStatusText("pole juz klikniete");
             return;
         }
         if (field.isFlag) {
@@ -77,12 +74,10 @@ public class FieldMouseAdapter extends MouseAdapter {
             field.isFlag = true;
             button.setText("?");
             button.setFont(new Font("Arial", Font.BOLD, 20));
-            button.setForeground(Color.BLACK);
-        }
-
-        if (game.countPointsFromFlags() == game.getNumberOfBombs()) {
-            application.setMessageText("Wygrales");
+            button.setForeground(BLACK);
+            if (game.countFlagPoints() == game.numberOfBombs) {
+                application.setStatusText("Wygrales!");
+            }
         }
     }
-
 }

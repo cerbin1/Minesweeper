@@ -4,13 +4,21 @@ class Field {
     boolean isBomb = false;
     boolean isDiscovered = false;
     boolean isFlag = false;
-    private int numberOfBombsAdjacent = 0;
+    int numberOfBombsAdjacent = 0;
 
-    int getNumberOfBombsAdjacent() { // TODO zmienić nazwe na getBombsAdjacentCount()
-        return numberOfBombsAdjacent;
+    private FloodFillListener listener;
+
+    void registerFloodFillListener(FloodFillListener listener) {
+        this.listener = listener;
     }
 
-    void incrementNumberOfBombsAdjacent() {
-        numberOfBombsAdjacent++;
+    void triggerFloodFill() {
+        if (listener != null) {
+            listener.floodFill();
+        }
+    }
+
+    int getAdjacentBombsCount() {
+        return numberOfBombsAdjacent;
     }
 }

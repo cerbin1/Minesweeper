@@ -1,50 +1,33 @@
 package game;
 
-import javax.swing.*;
-import java.awt.*;
-
 class Game {
-    int getNumberOfBombs() {
-        return numberOfBombs;
-    }
+    final int width;
+    final int height;
+    final int numberOfBombs;
+    final private Field[][] fields;
 
-    private final int numberOfBombs;
-
-    int getHeight() {
-        return height;
-    }
-
-    int getWidth() {
-        return width;
-    }
-
-    private final int height;
-    private final int width;
     boolean isGameDone = false;
-
-    private final Field[][] fields;
 
     Game(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
         this.numberOfBombs = numberOfBombs;
-        fields = initializeFields(width, height);
-        setBombs();
-        fillBombCounters();
-
+        this.fields = createFields(width, height);
+        populateBombs();
+        fillBombsCounters();
     }
 
-    private Field[][] initializeFields(int width, int height) {
+    private Field[][] createFields(int width, int height) {
         Field[][] fields = new Field[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 fields[i][j] = new Field();
             }
         }
         return fields;
     }
 
-    private void setBombs() {
+    private void populateBombs() {
         for (int i = 0; i < numberOfBombs; i++) {
             while (true) {
                 int x = (int) Math.round(Math.random() * 9);
@@ -57,21 +40,20 @@ class Game {
         }
     }
 
-    private void fillBombCounters() {
+    private void fillBombsCounters() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                fillSingleBombCounter(i, j);
+                fillSingleBombCounter(i, j, fields);
             }
         }
-
     }
 
-    private void fillSingleBombCounter(int x, int y) {
+    private void fillSingleBombCounter(int x, int y, Field[][] fields) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < height) && (0 <= y + j && y + j < width)) {
                     if (fields[x + i][y + j].isBomb) {
-                        fields[x][y].incrementNumberOfBombsAdjacent();
+                        fields[x][y].numberOfBombsAdjacent++;
                     }
                 }
             }
@@ -86,34 +68,31 @@ class Game {
         if ((0 > x || x >= height) || (0 > y || y >= width)) {
             return;
         }
-
         Field field = fields[x][y];
 
         if (field.isFlag || field.isBomb || field.isDiscovered) {
             return;
         }
 
-
-            field.isDiscovered = true;
-
+        field.isDiscovered = true;
         field.triggerFloodFill();
 
-        if(field.getNumberOfBombsAdjacent() == 0) {
+        if (field.numberOfBombsAdjacent == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     floodFill(x + i, y + j);
                 }
             }
         }
-
     }
 
-    int countPointsFromFlags() {
+    int countFlagPoints() {
         int points = 0;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (fields[i][j].isFlag) {
-                    if (fields[i][j].isFlag) {
+                Field field = fields[i][j];
+                if (field.isBomb) {
+                    if (field.isFlag) {
                         points++;
                     } else {
                         points--;
@@ -124,7 +103,7 @@ class Game {
         return points;
     }
 
-    int countFieldsDiscovered() {
+    int countDiscoveredFields() {
         int numberOfFields = height * width;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {

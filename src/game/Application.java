@@ -1,127 +1,128 @@
 package game;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application extends JPanel {
-    final Color[] NEAR_BOMBS_COUNTER_COLORS = {
+    private final static Color[] BOMBS_COUNTER_COLORS = {
             Color.BLUE, Color.GREEN, Color.RED, Color.MAGENTA, Color.ORANGE, Color.LIGHT_GRAY, Color.YELLOW, Color.PINK
     };
 
     private final int height;
     private final int width;
 
-    private JLabel textLabel;
     private Game game;
     private JButton[][] buttons;
+
+    private JLabel textLabel = new JLabel();
 
     private Application(int height, int width, int numberOfBombs) {
         this.height = height;
         this.width = width;
-        this.game = new Game(width, height, numberOfBombs);
-        textLabel = new JLabel();
+        this.game = GameFactory.create(width, height, numberOfBombs);
+
+        this.buttons = createJButtons(height, width);
+        registerFloodFillListeners();
     }
 
-
-    private void createAndShowBoard() {
-        JFrame frame = new JFrame("Minesweeper");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        JPanel panel = new JPanel();
-        JPanel outerPanel = new JPanel();
-        panel.setLayout(new GridLayout(game.getHeight(), game.getWidth()));
-        buttons = createJButtons(width, height);
-
-
-        textLabel.setText("Zecznij klikac");
-        outerPanel.setLayout(new BorderLayout());
-        outerPanel.add(panel, BorderLayout.CENTER);
-        outerPanel.add(textLabel, BorderLayout.PAGE_END);
-        frame.add(outerPanel);
-        frame.setResizable(true);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-    }
-
-    private JButton[][] createJButtons(int width, int height) {
+    private JButton[][] createJButtons(int height, int width) {
         JButton[][] buttons = new JButton[width][height];
         for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+            for (int j = 0; j < width; j++) {
                 buttons[i][j] = createSingleJButton(i, j);
             }
         }
         return buttons;
     }
 
-    private JButton createSingleJButton(int x, int y) {
+
+    private JButton createSingleJButton(int i, int j) {
         JButton button = new JButton();
-        button.addMouseListener(new FieldMouseAdapter(this, x, y));
-        button.setFont(new Font("Arial", Font.BOLD, 20));
         button.setPreferredSize(new Dimension(50, 50));
+        button.addMouseListener(new FieldMouseAdapter(this, i, j));
+        button.setFont(new Font("Arial", Font.BOLD, 20));
         return button;
     }
 
     private void registerFloodFillListeners() {
         for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+            for (int j = 0; j < width; j++) {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
-                field.registerFloodFillListener
+                field.registerFloodFillListener(() -> {
+                    if (field.numberOfBombsAdjacent == 0) {
+                        button.setBackground(Color.darkGray);
+                    } else {
+                        button.setText("" + field.numberOfBombsAdjacent);
+                    }
+                });
             }
         }
     }
 
-
-
     void displayAllBombs() {
-        for (int i = 0; i < game.getWidth(); i++) {
-            for (int j = 0; j < game.getHeight(); j++) {
-                if (game.getField(i, j).isBomb) {
-                    buttons[i][j].setText("x");
-                    buttons[i][j].setForeground(Color.DARK_GRAY);
-                    if (game.getField(i, j).isFlag) {
-                        buttons[i][j].setBackground(Color.GREEN);
-                    } else {
-                        buttons[i][j].setBackground(Color.red);
-                    }
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                JButton button = buttons[i][j];
+                Field field = game.getField(i, j);
+
+                if (field.isBomb) {
+                    button.setBackground(field.isFlag ? Color.GREEN : Color.RED);
+                    button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                 }
             }
         }
+    }
+
+    Color getBombCounterColor(int numberOfBombs) {
+        return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
+    }
+
+    private void createAndShowBoard() {
+        JFrame frame = new JFrame("Minesweeper");
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+        frame.setVisible(true);
+
+        textLabel.setText("Zecznij klikac");
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(game.height, game.width));
+        for (int i = 0; i < game.height; i++) {
+            for (int j = 0; j < game.width; j++) {
+                panel.add(buttons[i][j]);
+            }
+        }
+
+        JPanel outerPanel = new JPanel();
+        outerPanel.setLayout(new BorderLayout());
+        outerPanel.add(panel, BorderLayout.CENTER);
+        outerPanel.add(textLabel, BorderLayout.PAGE_END);
+
+        frame.add(outerPanel);
+        frame.pack();
     }
 
     JButton getButton(int x, int y) {
         return buttons[x][y];
     }
 
-    Game getGame() {
-        return game;
-    }
-
-    void setMessageText(String text) {
+    void setStatusText(String text) {
         textLabel.setText(text);
     }
 
-    void clearMessageBox() {
+    void clearStatusText() {
         textLabel.setText("");
     }
 
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new Application(10, 10, 10).createAndShowBoard();
-            }
-        });
+        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
     }
 
+    Game getGame() {
+        return game;
+    }
 }
