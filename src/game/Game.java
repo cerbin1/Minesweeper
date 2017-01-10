@@ -91,8 +91,8 @@ class Game {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
-                if (field.isBomb()) {
-                    if (field.isFlag()) {
+                if (field.isFlag()) {
+                    if (field.isBomb()) {
                         points++;
                     } else {
                         points--;
