@@ -63,6 +63,7 @@ public class Application extends JPanel {
                     if (field.numberOfBombsAdjacent == 0) {
                         button.setBackground(Color.darkGray);
                     } else {
+                        button.setForeground(getBombCounterColor(field.numberOfBombsAdjacent));
                         button.setText("" + field.numberOfBombsAdjacent);
                     }
                 });
