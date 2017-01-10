@@ -33,7 +33,7 @@ public class Application extends JPanel {
         this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(width, height);
-        registerFloodFillListeners();
+        addFloodFillListeners();
     }
 
     private JButton[][] createJButtons(int width, int height) {
@@ -55,12 +55,12 @@ public class Application extends JPanel {
         return button;
     }
 
-    private void registerFloodFillListeners() {
+    private void addFloodFillListeners() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
-                field.registerFloodFillListener(() -> {
+                field.addFloodFillListener(() -> {
                     if (field.numberOfBombsAdjacent == 0) {
                         button.setBackground(Color.darkGray);
                     } else {

@@ -8,7 +8,7 @@ class Field {
 
     private FloodFillListener listener;
 
-    void registerFloodFillListener(FloodFillListener listener) {
+    void addFloodFillListener(FloodFillListener listener) {
         this.listener = listener;
     }
 
