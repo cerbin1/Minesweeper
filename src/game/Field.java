@@ -2,9 +2,9 @@ package game;
 
 class Field {
     private boolean bomb = false;
-    boolean isDiscovered = false;
-    boolean isFlag = false;
-    int numberOfBombsAdjacent = 0;
+    private boolean isDiscovered = false;
+    private boolean isFlag = false;
+    private int numberOfBombsAdjacent = 0;
 
     private FloodFillListener listener;
 
