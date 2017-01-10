@@ -94,11 +94,7 @@ public class Application extends JPanel {
     }
 
     private void createAndShowBoard() {
-        JFrame frame = new JFrame("Minesweeper");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
-        frame.setVisible(true);
+        JFrame frame = createFrame("Minesweeber");
 
         textLabel.setText("Zecznij klikac");
 
@@ -117,6 +113,15 @@ public class Application extends JPanel {
 
         frame.add(outerPanel);
         frame.pack();
+    }
+
+    private JFrame createFrame(String frameName) {
+        JFrame frame = new JFrame(frameName);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+        frame.setVisible(true);
+        return frame;
     }
 
     JButton getButton(int x, int y) {
