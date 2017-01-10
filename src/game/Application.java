@@ -46,7 +46,6 @@ public class Application extends JPanel {
         return buttons;
     }
 
-
     private JButton createSingleJButton(int i, int j) {
         JButton button = new JButton();
         button.setPreferredSize(new Dimension(50, 50));
