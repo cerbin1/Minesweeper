@@ -77,7 +77,7 @@ public class Application extends JPanel {
                 JButton button = buttons[i][j];
                 Field field = game.getField(i, j);
 
-                if (field.isBomb) {
+                if (field.bomb) {
                     changeColorOfBombButton(button, field);
                 }
             }

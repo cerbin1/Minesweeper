@@ -32,8 +32,8 @@ class Game {
             while (true) {
                 int x = (int) Math.round(Math.random() * (width - 1));
                 int y = (int) Math.round(Math.random() * (height - 1));
-                if (!fields[x][y].isBomb) {
-                    fields[x][y].isBomb = true;
+                if (!fields[x][y].bomb) {
+                    fields[x][y].bomb = true;
                     break;
                 }
             }
@@ -52,7 +52,7 @@ class Game {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < width) && (0 <= y + j && y + j < height)) {
-                    if (fields[x + i][y + j].isBomb) {
+                    if (fields[x + i][y + j].bomb) {
                         fields[x][y].numberOfBombsAdjacent++;
                     }
                 }
@@ -70,7 +70,7 @@ class Game {
         }
         Field field = fields[x][y];
 
-        if (field.isFlag || field.isBomb || field.isDiscovered) {
+        if (field.isFlag || field.bomb || field.isDiscovered) {
             return;
         }
 
@@ -91,7 +91,7 @@ class Game {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
-                if (field.isBomb) {
+                if (field.bomb) {
                     if (field.isFlag) {
                         points++;
                     } else {

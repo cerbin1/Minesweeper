@@ -1,7 +1,7 @@
 package game;
 
 class Field {
-    boolean isBomb = false;
+    boolean bomb = false;
     boolean isDiscovered = false;
     boolean isFlag = false;
     int numberOfBombsAdjacent = 0;
