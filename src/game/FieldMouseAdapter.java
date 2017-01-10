@@ -42,7 +42,7 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setStatusText("pole klikniete juz lub flaga");
             return;
         }
-        if (field.bomb) {
+        if (field.isBomb()) {
             application.setStatusText("Bomba, przegrales");
             application.displayAllBombs();
         } else {

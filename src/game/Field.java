@@ -1,7 +1,7 @@
 package game;
 
 class Field {
-    boolean bomb = false;
+    private boolean bomb = false;
     boolean isDiscovered = false;
     boolean isFlag = false;
     int numberOfBombsAdjacent = 0;
@@ -20,5 +20,13 @@ class Field {
 
     int getAdjacentBombsCount() {
         return numberOfBombsAdjacent;
+    }
+
+    boolean isBomb() {
+        return bomb;
+    }
+
+    void setBomb(boolean bombStatus) {
+        bomb = bombStatus;
     }
 }
