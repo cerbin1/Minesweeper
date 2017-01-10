@@ -33,7 +33,7 @@ public class Application extends JPanel {
         this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(width, height);
-        addFloodFillListeners();
+        setFloodFillListeners();
     }
 
     private JButton[][] createJButtons(int width, int height) {
@@ -54,7 +54,7 @@ public class Application extends JPanel {
         return button;
     }
 
-    private void addFloodFillListeners() {
+    private void setFloodFillListeners() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = game.getField(i, j);
