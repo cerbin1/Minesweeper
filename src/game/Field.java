@@ -2,8 +2,8 @@ package game;
 
 class Field {
     private boolean bomb = false;
-    private boolean isDiscovered = false;
-    private boolean isFlag = false;
+    private boolean discovered = false;
+    private boolean flag = false;
     private int numberOfBombsAdjacent = 0;
 
     private FloodFillListener listener;
@@ -28,5 +28,29 @@ class Field {
 
     void setBomb(boolean bombStatus) {
         bomb = bombStatus;
+    }
+
+    boolean isDiscovered() {
+        return discovered;
+    }
+
+    void setDiscovered(boolean discovered) {
+        this.discovered = discovered;
+    }
+
+    boolean isFlag() {
+        return flag;
+    }
+
+    void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    int getNumberOfBombsAdjacent() {
+        return numberOfBombsAdjacent;
+    }
+
+    void incrementNumberOfBombsAdjacent() {
+        numberOfBombsAdjacent++;
     }
 }

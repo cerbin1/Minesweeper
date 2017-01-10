@@ -38,7 +38,7 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Field field, JButton button) {
-        if (field.isDiscovered || field.isFlag) {
+        if (field.isDiscovered() || field.isFlag()) {
             application.setStatusText("pole klikniete juz lub flaga");
             return;
         }
@@ -47,9 +47,9 @@ class FieldMouseAdapter extends MouseAdapter {
             application.displayAllBombs();
         } else {
             application.clearStatusText();
-            if (field.numberOfBombsAdjacent > 0) {
-                field.isDiscovered = true;
-                button.setForeground(application.getBombCounterColor(field.numberOfBombsAdjacent));
+            if (field.getNumberOfBombsAdjacent() > 0) {
+                field.setDiscovered(true);
+                button.setForeground(application.getBombCounterColor(field.getNumberOfBombsAdjacent()));
                 button.setText(Integer.toString(field.getAdjacentBombsCount()));
             } else {
                 game.floodFill(x, y);
@@ -62,15 +62,15 @@ class FieldMouseAdapter extends MouseAdapter {
 
     private void rightButtonClick(Field field, JButton button) {
         application.clearStatusText();
-        if (field.isDiscovered) {
+        if (field.isDiscovered()) {
             application.setStatusText("pole juz klikniete");
             return;
         }
-        if (field.isFlag) {
-            field.isFlag = false;
+        if (field.isFlag()) {
+            field.setFlag(false);
             button.setText("");
         } else {
-            field.isFlag = true;
+            field.setFlag(true);
             button.setText("?");
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setForeground(BLACK);

@@ -53,7 +53,7 @@ class Game {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < width) && (0 <= y + j && y + j < height)) {
                     if (fields[x + i][y + j].isBomb()) {
-                        fields[x][y].numberOfBombsAdjacent++;
+                        fields[x][y].incrementNumberOfBombsAdjacent();
                     }
                 }
             }
@@ -70,14 +70,14 @@ class Game {
         }
         Field field = fields[x][y];
 
-        if (field.isFlag || field.isBomb() || field.isDiscovered) {
+        if (field.isFlag() || field.isBomb() || field.isDiscovered()) {
             return;
         }
 
-        field.isDiscovered = true;
+        field.setDiscovered(true);
         field.triggerFloodFill();
 
-        if (field.numberOfBombsAdjacent == 0) {
+        if (field.getNumberOfBombsAdjacent() == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     floodFill(x + i, y + j);
@@ -92,7 +92,7 @@ class Game {
             for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
                 if (field.isBomb()) {
-                    if (field.isFlag) {
+                    if (field.isFlag()) {
                         points++;
                     } else {
                         points--;
@@ -107,7 +107,7 @@ class Game {
         int numberOfFields = height * width;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                if (fields[i][j].isDiscovered) {
+                if (fields[i][j].isDiscovered()) {
                     numberOfFields--;
                 }
             }
