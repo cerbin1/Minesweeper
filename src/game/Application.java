@@ -104,8 +104,8 @@ public class Application extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
-        for (int j = 0; j < game.height; j++) {
-            for (int i = 0; i < game.width; i++) {
+        for (int i = 0; i < game.width; i++) {
+            for (int j = 0; j < game.height; j++) {
                 panel.add(buttons[i][j]);
             }
         }

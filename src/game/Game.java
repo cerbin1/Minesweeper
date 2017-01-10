@@ -30,8 +30,8 @@ class Game {
     private void populateBombs() {
         for (int i = 0; i < numberOfBombs; i++) {
             while (true) {
-                int x = (int) Math.round(Math.random() * 9);
-                int y = (int) Math.round(Math.random() * 9);
+                int x = (int) Math.round(Math.random() * width - 1);
+                int y = (int) Math.round(Math.random() * height - 1);
                 if (!fields[x][y].isBomb) {
                     fields[x][y].isBomb = true;
                     break;
