@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 
 import static java.awt.Color.BLACK;
 
-public class FieldMouseAdapter extends MouseAdapter {
+class FieldMouseAdapter extends MouseAdapter {
     private final Application application;
     private final Game game;
     private final int x;
