@@ -77,7 +77,7 @@ class Game {
         field.setDiscovered(true);
         field.triggerFloodFill();
 
-        if (field.getNumberOfBombsAdjacent() == 0) {
+        if (field.getNearBombsCounter() == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     floodFill(x + i, y + j);

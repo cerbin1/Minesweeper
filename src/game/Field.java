@@ -4,7 +4,7 @@ class Field {
     private boolean bomb = false;
     private boolean discovered = false;
     private boolean flag = false;
-    private int numberOfBombsAdjacent = 0;
+    private int nearBombsCounter = 0;
 
     private FloodFillListener listener;
 
@@ -19,7 +19,7 @@ class Field {
     }
 
     int getAdjacentBombsCount() {
-        return numberOfBombsAdjacent;
+        return nearBombsCounter;
     }
 
     boolean isBomb() {
@@ -46,11 +46,11 @@ class Field {
         this.flag = flag;
     }
 
-    int getNumberOfBombsAdjacent() {
-        return numberOfBombsAdjacent;
+    int getNearBombsCounter() {
+        return nearBombsCounter;
     }
 
     void incrementNumberOfBombsAdjacent() {
-        numberOfBombsAdjacent++;
+        nearBombsCounter++;
     }
 }

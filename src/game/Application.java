@@ -60,11 +60,11 @@ public class Application extends JPanel {
                 Field field = game.getField(i, j);
                 JButton button = buttons[i][j];
                 field.addFloodFillListener(() -> {
-                    if (field.getNumberOfBombsAdjacent() == 0) {
+                    if (field.getNearBombsCounter() == 0) {
                         button.setBackground(Color.darkGray);
                     } else {
-                        button.setForeground(getBombCounterColor(field.getNumberOfBombsAdjacent()));
-                        button.setText("" + field.getNumberOfBombsAdjacent());
+                        button.setForeground(getBombCounterColor(field.getNearBombsCounter()));
+                        button.setText("" + field.getNearBombsCounter());
                     }
                 });
             }
@@ -86,7 +86,7 @@ public class Application extends JPanel {
 
     private void changeColorOfBombButton(JButton button, Field field) {
         button.setBackground(field.isFlag() ? GREEN : RED);
-        button.setForeground(getBombCounterColor(field.getNumberOfBombsAdjacent()));
+        button.setForeground(getBombCounterColor(field.getNearBombsCounter()));
     }
 
     Color getBombCounterColor(int numberOfBombs) {
