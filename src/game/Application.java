@@ -1,9 +1,11 @@
 package game;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -25,7 +27,7 @@ public class Application extends JPanel {
     private Game game;
     private JButton[][] buttons;
 
-    private JLabel textLabel = new JLabel();
+    private JLabel textLabel = new JLabel("TextLabel", SwingConstants.CENTER);
 
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
@@ -97,6 +99,8 @@ public class Application extends JPanel {
         JFrame frame = createFrame("Minesweeber");
 
         textLabel.setText("Zecznij klikac");
+        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
@@ -137,7 +141,7 @@ public class Application extends JPanel {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(15, 10, 10).createAndShowBoard());
+        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
     }
 
     Game getGame() {
