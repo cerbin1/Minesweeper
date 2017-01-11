@@ -18,10 +18,6 @@ class Field {
         }
     }
 
-    int getAdjacentBombsCount() {
-        return nearBombsCounter;
-    }
-
     boolean isBomb() {
         return bomb;
     }

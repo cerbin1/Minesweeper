@@ -50,7 +50,7 @@ class FieldMouseAdapter extends MouseAdapter {
             if (field.getNearBombsCounter() > 0) {
                 field.setDiscovered(true);
                 button.setForeground(application.getBombCounterColor(field.getNearBombsCounter()));
-                button.setText(Integer.toString(field.getAdjacentBombsCount()));
+                button.setText(Integer.toString(field.getNearBombsCounter()));
             } else {
                 game.floodFill(x, y);
             }
