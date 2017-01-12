@@ -6,7 +6,7 @@ class Game {
     final int numberOfBombs;
     final private Field[][] fields;
 
-    boolean isGameDone = false;
+    boolean gameDone = false;
 
     Game(int width, int height, int numberOfBombs) {
         this.width = width;

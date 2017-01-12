@@ -22,7 +22,7 @@ class FieldMouseAdapter extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (game.isGameDone) {
+        if (game.gameDone) {
             application.setStatusText("Rozpocznij nowa gre");
             return;
         }
