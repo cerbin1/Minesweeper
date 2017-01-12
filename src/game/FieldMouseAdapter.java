@@ -42,6 +42,7 @@ class FieldMouseAdapter extends MouseAdapter {
             if (field.isBomb()) {
                 game.plantSingleBomb();
                 field.setBomb(false);
+                game.setFirstClick(false);
             }
         }
         if (field.isDiscovered() || field.isFlag()) {
