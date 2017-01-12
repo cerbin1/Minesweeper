@@ -38,6 +38,12 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Field field, JButton button) {
+        if (game.isFirstClick()) {
+            if (field.isBomb()) {
+                game.plantSingleBomb();
+                field.setBomb(false);
+            }
+        }
         if (field.isDiscovered() || field.isFlag()) {
             application.setStatusText("pole klikniete juz lub flaga");
             return;
@@ -61,6 +67,7 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void rightButtonClick(Field field, JButton button) {
+        game.setFirstClick(false);
         application.clearStatusText();
         if (field.isDiscovered()) {
             application.setStatusText("pole juz klikniete");

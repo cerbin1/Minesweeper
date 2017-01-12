@@ -6,6 +6,7 @@ class Game {
     final int numberOfBombs;
     final private Field[][] fields;
 
+    private boolean firstClick = true;
     private boolean gameDone = false;
 
     Game(int width, int height, int numberOfBombs) {
@@ -29,13 +30,17 @@ class Game {
 
     private void populateBombs() {
         for (int i = 0; i < numberOfBombs; i++) {
-            while (true) {
-                int x = (int) Math.round(Math.random() * (width - 1));
-                int y = (int) Math.round(Math.random() * (height - 1));
-                if (!fields[x][y].isBomb()) {
-                    fields[x][y].setBomb(true);
-                    break;
-                }
+            plantSingleBomb();
+        }
+    }
+
+    void plantSingleBomb() {
+        while (true) {
+            int x = (int) Math.round(Math.random() * (width - 1));
+            int y = (int) Math.round(Math.random() * (height - 1));
+            if (!fields[x][y].isBomb()) {
+                fields[x][y].setBomb(true);
+                break;
             }
         }
     }
@@ -117,5 +122,13 @@ class Game {
 
     boolean isGameDone() {
         return gameDone;
+    }
+
+    boolean isFirstClick() {
+        return firstClick;
+    }
+
+    void setFirstClick(boolean firstClick) {
+        this.firstClick = firstClick;
     }
 }
