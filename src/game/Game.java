@@ -6,7 +6,6 @@ class Game {
     final int numberOfBombs;
     final private Field[][] fields;
 
-    private boolean firstClick = true;
     private boolean gameDone = false;
 
     Game(int width, int height, int numberOfBombs) {
@@ -122,13 +121,5 @@ class Game {
 
     boolean isGameDone() {
         return gameDone;
-    }
-
-    boolean isFirstClick() {
-        return firstClick;
-    }
-
-    void setFirstClick(boolean firstClick) {
-        this.firstClick = firstClick;
     }
 }

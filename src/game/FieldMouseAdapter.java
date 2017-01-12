@@ -13,6 +13,8 @@ class FieldMouseAdapter extends MouseAdapter {
     private final int x;
     private final int y;
 
+    private boolean isFirstClick = true;
+
     FieldMouseAdapter(Application application, int x, int y) {
         this.application = application;
         this.game = application.getGame();
@@ -38,11 +40,11 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Field field, JButton button) {
-        if (game.isFirstClick()) {
+        if (isFirstClick) {
             if (field.isBomb()) {
                 game.plantSingleBomb();
                 field.setBomb(false);
-                game.setFirstClick(false);
+                isFirstClick = false;
             }
         }
         if (field.isDiscovered() || field.isFlag()) {
@@ -68,7 +70,7 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void rightButtonClick(Field field, JButton button) {
-        game.setFirstClick(false);
+        isFirstClick = false;
         application.clearStatusText();
         if (field.isDiscovered()) {
             application.setStatusText("pole juz klikniete");
