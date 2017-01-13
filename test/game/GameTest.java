@@ -83,8 +83,8 @@ public class GameTest {
         // given
         Game game = new Game(5, 5, 0);
         Field discoveredField = game.getField(0, 0);
-        Field bombField = game.getField(0, 1);
         discoveredField.setDiscovered(true);
+        Field bombField = game.getField(0, 1);
         bombField.setBomb(true);
 
         // when
