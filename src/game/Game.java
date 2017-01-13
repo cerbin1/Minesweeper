@@ -14,7 +14,6 @@ class Game {
         this.numberOfBombs = numberOfBombs;
         this.fields = createFields(width, height);
         populateBombs();
-        fillBombsCounters();
     }
 
     private Field[][] createFields(int width, int height) {
@@ -39,12 +38,13 @@ class Game {
             int y = (int) Math.round(Math.random() * (height - 1));
             if (!fields[x][y].isBomb()) {
                 fields[x][y].setBomb(true);
+                System.out.println(x + ", " + y);
                 break;
             }
         }
     }
 
-    private void fillBombsCounters() {
+    void fillBombsCounters() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 fillSingleBombCounter(i, j, fields);

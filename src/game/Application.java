@@ -27,6 +27,8 @@ public class Application extends JPanel {
     private Game game;
     private JButton[][] buttons;
 
+    private boolean firstClick = true;
+
     private JLabel textLabel = new JLabel("TextLabel", SwingConstants.CENTER);
 
     private Application(int width, int height, int numberOfBombs) {
@@ -142,5 +144,13 @@ public class Application extends JPanel {
 
     Game getGame() {
         return game;
+    }
+
+    boolean isFirstClick() {
+        return firstClick;
+    }
+
+    void setFirstClick(boolean firstClick) {
+        this.firstClick = firstClick;
     }
 }
