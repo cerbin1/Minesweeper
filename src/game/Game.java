@@ -57,7 +57,7 @@ class Game {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < width) && (0 <= y + j && y + j < height)) {
                     if (fields[x + i][y + j].isBomb()) {
-                        fields[x][y].setNearBombsCounter();
+                        fields[x][y].setNearBombsCounter(this.numberOfBombs + 1);
                     }
                 }
             }
