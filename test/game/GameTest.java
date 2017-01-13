@@ -88,10 +88,10 @@ public class GameTest {
         bombField.setBomb(true);
 
         // when
-        int result = game.countDiscoveredFields() - 1;
+        int result = game.countDiscoveredFields();
 
         // then
-        assertEquals(result, (5 * 5) - 2);
+        assertEquals(result, (5 * 5) - 1);
     }
 
     @Test
