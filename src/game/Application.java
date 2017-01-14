@@ -145,7 +145,7 @@ public class Application extends JPanel {
         textLabel.setText(text);
     }
 
-    void clearStatusText() {
+    void clearMessageBox() {
         textLabel.setText("");
     }
 

@@ -56,7 +56,7 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setStatusText("Boom, you lose!");
             application.displayAllBombs();
         } else {
-            application.clearStatusText();
+            application.clearMessageBox();
             if (field.getNearBombsCounter() > 0) {
                 field.setDiscovered(true);
                 button.setForeground(application.getBombCounterColor(field.getNearBombsCounter()));
@@ -72,7 +72,7 @@ class FieldMouseAdapter extends MouseAdapter {
 
     private void rightButtonClick(Field field, JButton button) {
         application.setFirstClick(false);
-        application.clearStatusText();
+        application.clearMessageBox();
         if (field.isDiscovered()) {
             application.setStatusText("pole juz klikniete");
             return;
