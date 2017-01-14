@@ -29,7 +29,7 @@ public class Application extends JPanel {
 
     private boolean firstClick = true;
 
-    private JLabel textLabel;
+    private JLabel messageBox;
     private JLabel bombsCounter;
 
     private int bombsLeftToFlagCounter;
@@ -100,7 +100,7 @@ public class Application extends JPanel {
     private void createAndShowBoard() {
         JFrame frame = createFrame("Minesweeper");
 
-        textLabel = createDefaultTextLabel("TextLabel", "Start clicking");
+        messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
         bombsCounter = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsLeftToFlagCounter);
 
         JPanel panel = new JPanel();
@@ -115,7 +115,7 @@ public class Application extends JPanel {
         outerPanel.setLayout(new BorderLayout());
         outerPanel.add(bombsCounter, BorderLayout.PAGE_START);
         outerPanel.add(panel, BorderLayout.CENTER);
-        outerPanel.add(textLabel, BorderLayout.PAGE_END);
+        outerPanel.add(messageBox, BorderLayout.PAGE_END);
 
         frame.add(outerPanel);
         frame.pack();
@@ -143,18 +143,18 @@ public class Application extends JPanel {
     }
 
     void setStatusText(String text) {
-        textLabel.setText(text);
+        messageBox.setText(text);
     }
 
     void clearMessageBox() {
-        textLabel.setText("");
+        messageBox.setText("");
     }
 
     void updateBombsCounterText(int number) {
         bombsLeftToFlagCounter += number;
         bombsCounter.setText("Bombs left: " + bombsLeftToFlagCounter);
         if(bombsLeftToFlagCounter < 0) {
-            textLabel.setText("Some flags are wrong!");
+            messageBox.setText("Some flags are wrong!");
         }
     }
 
