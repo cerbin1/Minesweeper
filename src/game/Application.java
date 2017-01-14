@@ -23,6 +23,7 @@ public class Application extends JPanel {
 
     private final int width;
     private final int height;
+    private final int numberOfBombs;
 
     private Game game;
     private JButton[][] buttons;
@@ -30,10 +31,12 @@ public class Application extends JPanel {
     private boolean firstClick = true;
 
     private JLabel textLabel;
+    private JLabel bombsCounter;
 
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
+        this.numberOfBombs = numberOfBombs;
         this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(width, height);
@@ -97,6 +100,7 @@ public class Application extends JPanel {
         JFrame frame = createFrame("Minesweeper");
 
         textLabel = createDefaultTextLabel("TextLabel", "Start clicking");
+        bombsCounter = createDefaultTextLabel("BombsCounter", "Bombs left: " + numberOfBombs);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
@@ -108,6 +112,7 @@ public class Application extends JPanel {
 
         JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BorderLayout());
+        outerPanel.add(bombsCounter, BorderLayout.PAGE_START);
         outerPanel.add(panel, BorderLayout.CENTER);
         outerPanel.add(textLabel, BorderLayout.PAGE_END);
 
