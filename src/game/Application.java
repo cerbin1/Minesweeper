@@ -29,7 +29,7 @@ public class Application extends JPanel {
 
     private boolean firstClick = true;
 
-    private JLabel textLabel = new JLabel("TextLabel", SwingConstants.CENTER);
+    private JLabel textLabel;
 
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
@@ -96,7 +96,7 @@ public class Application extends JPanel {
     private void createAndShowBoard() {
         JFrame frame = createFrame("Minesweeber");
 
-        setDefaultText(textLabel);
+        textLabel = createDefaultTextLabel("TextLabel", "Zacznij klikac");
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
@@ -115,10 +115,12 @@ public class Application extends JPanel {
         frame.pack();
     }
 
-    private void setDefaultText(JLabel textLabel) {
-        textLabel.setText("Zecznij klikac");
+    private JLabel createDefaultTextLabel(String name, String defaultText) {
+        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
+        textLabel.setText(defaultText);
         textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
         textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        return textLabel;
     }
 
     private JFrame createFrame(String frameName) {
