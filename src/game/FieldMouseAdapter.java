@@ -78,9 +78,11 @@ class FieldMouseAdapter extends MouseAdapter {
             return;
         }
         if (field.isFlag()) {
+            application.updateBombsCounterText(1);
             field.setFlag(false);
             button.setText("");
         } else {
+            application.updateBombsCounterText(-1);
             field.setFlag(true);
             button.setText("?");
             button.setFont(new Font("Arial", Font.BOLD, 20));

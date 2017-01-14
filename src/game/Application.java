@@ -23,7 +23,6 @@ public class Application extends JPanel {
 
     private final int width;
     private final int height;
-    private final int numberOfBombs;
 
     private Game game;
     private JButton[][] buttons;
@@ -33,14 +32,16 @@ public class Application extends JPanel {
     private JLabel textLabel;
     private JLabel bombsCounter;
 
+    private int bombsLeftToFlagCounter;
+
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
-        this.numberOfBombs = numberOfBombs;
         this.game = GameFactory.create(width, height, numberOfBombs);
 
         this.buttons = createJButtons(width, height);
         setFloodFillListeners();
+        bombsLeftToFlagCounter = numberOfBombs;
     }
 
     private JButton[][] createJButtons(int width, int height) {
@@ -100,7 +101,7 @@ public class Application extends JPanel {
         JFrame frame = createFrame("Minesweeper");
 
         textLabel = createDefaultTextLabel("TextLabel", "Start clicking");
-        bombsCounter = createDefaultTextLabel("BombsCounter", "Bombs left: " + numberOfBombs);
+        bombsCounter = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsLeftToFlagCounter);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
@@ -147,6 +148,14 @@ public class Application extends JPanel {
 
     void clearMessageBox() {
         textLabel.setText("");
+    }
+
+    void updateBombsCounterText(int number) {
+        bombsLeftToFlagCounter += number;
+        bombsCounter.setText("Bombs left: " + bombsLeftToFlagCounter);
+        if(bombsLeftToFlagCounter < 0) {
+            textLabel.setText("Some flags are wrong!");
+        }
     }
 
     public static void main(String[] args) {
