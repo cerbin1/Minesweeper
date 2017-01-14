@@ -24,7 +24,7 @@ class FieldMouseAdapter extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         if (game.isGameDone()) {
-            application.setStatusText("Rozpocznij nowa gre");
+            application.setStatusText("Start new game");
             return;
         }
 
@@ -49,11 +49,11 @@ class FieldMouseAdapter extends MouseAdapter {
             game.fillBombsCounters();
         }
         if (field.isDiscovered() || field.isFlag()) {
-            application.setStatusText("pole klikniete juz lub flaga");
+            application.setStatusText("Field is already clicked or flagged");
             return;
         }
         if (field.isBomb()) {
-            application.setStatusText("Bomba, przegrales");
+            application.setStatusText("Boom, you lose!");
             application.displayAllBombs();
         } else {
             application.clearStatusText();
@@ -65,7 +65,7 @@ class FieldMouseAdapter extends MouseAdapter {
                 game.floodFill(x, y);
             }
             if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
-                application.setStatusText("Wygrales!");
+                application.setStatusText("You win!");
             }
         }
     }

@@ -94,9 +94,9 @@ public class Application extends JPanel {
     }
 
     private void createAndShowBoard() {
-        JFrame frame = createFrame("Minesweeber");
+        JFrame frame = createFrame("Minesweeper");
 
-        textLabel = createDefaultTextLabel("TextLabel", "Zacznij klikac");
+        textLabel = createDefaultTextLabel("TextLabel", "Start clicking");
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
