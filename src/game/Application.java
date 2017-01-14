@@ -96,9 +96,7 @@ public class Application extends JPanel {
     private void createAndShowBoard() {
         JFrame frame = createFrame("Minesweeber");
 
-        textLabel.setText("Zecznij klikac");
-        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        setDefaultText(textLabel);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.width, game.height));
@@ -115,6 +113,12 @@ public class Application extends JPanel {
 
         frame.add(outerPanel);
         frame.pack();
+    }
+
+    private void setDefaultText(JLabel textLabel) {
+        textLabel.setText("Zecznij klikac");
+        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
     }
 
     private JFrame createFrame(String frameName) {
