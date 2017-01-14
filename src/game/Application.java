@@ -153,7 +153,7 @@ public class Application extends JPanel {
     void updateBombsCounterText(int number) {
         bombsLeftToFlagCounter += number;
         bombsCounter.setText("Bombs left: " + bombsLeftToFlagCounter);
-        if(bombsLeftToFlagCounter < 0) {
+        if (bombsLeftToFlagCounter < 0) {
             messageBox.setText("Some flags are wrong!");
         }
     }

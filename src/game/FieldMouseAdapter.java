@@ -71,7 +71,10 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void rightButtonClick(Field field, JButton button) {
-        application.setFirstClick(false);
+        if (application.isFirstClick()) {
+            application.setFirstClick(false);
+            game.fillBombsCounters();
+        }
         application.clearMessageBox();
         if (field.isDiscovered()) {
             application.setStatusText("pole juz klikniete");
