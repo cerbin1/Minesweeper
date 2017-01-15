@@ -40,7 +40,6 @@ public class Application extends JPanel {
         game = GameFactory.create(width, height, numberOfBombs);
 
         buttons = createButtons();
-        setFloodFillListeners();
         bombsLeftToFlagCounter = numberOfBombs;
     }
 
@@ -60,23 +59,6 @@ public class Application extends JPanel {
         button.addMouseListener(new FieldMouseAdapter(this, i, j));
         button.setFont(new Font("Arial", Font.BOLD, 20));
         return button;
-    }
-
-    private void setFloodFillListeners() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                Field field = buttons[i][j].field;
-                JButton button = buttons[i][j].jButton;
-                field.addFloodFillListener(() -> {
-                    if (field.getNearBombsCounter() == 0) {
-                        button.setBackground(Color.darkGray);
-                    } else {
-                        button.setForeground(getBombCounterColor(field.getNearBombsCounter()));
-                        button.setText("" + field.getNearBombsCounter());
-                    }
-                });
-            }
-        }
     }
 
     void displayAllBombs() {
