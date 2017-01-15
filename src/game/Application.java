@@ -36,9 +36,9 @@ public class Application extends JPanel {
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
-        this.game = GameFactory.create(width, height, numberOfBombs);
+        game = GameFactory.create(width, height, numberOfBombs);
 
-        this.buttons = createJButtons(width, height);
+        buttons = createJButtons(width, height);
         setFloodFillListeners();
         bombsLeftToFlagCounter = numberOfBombs;
     }
@@ -120,14 +120,6 @@ public class Application extends JPanel {
         frame.pack();
     }
 
-    private JLabel createDefaultTextLabel(String name, String defaultText) {
-        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
-        textLabel.setText(defaultText);
-        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        return textLabel;
-    }
-
     private JFrame createFrame(String frameName) {
         JFrame frame = new JFrame(frameName);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -135,6 +127,14 @@ public class Application extends JPanel {
         frame.setResizable(true);
         frame.setVisible(true);
         return frame;
+    }
+
+    private JLabel createDefaultTextLabel(String name, String defaultText) {
+        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
+        textLabel.setText(defaultText);
+        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        return textLabel;
     }
 
     JButton getButton(int x, int y) {
@@ -157,10 +157,6 @@ public class Application extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
-    }
-
     Game getGame() {
         return game;
     }
@@ -171,5 +167,9 @@ public class Application extends JPanel {
 
     void setFirstClick(boolean firstClick) {
         this.firstClick = firstClick;
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
     }
 }
