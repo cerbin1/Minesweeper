@@ -48,7 +48,7 @@ public class Application extends JPanel {
         Button[][] buttons = new Button[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j));
+                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j), this);
             }
         }
         return buttons;
