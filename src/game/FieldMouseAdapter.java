@@ -24,7 +24,7 @@ class FieldMouseAdapter extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent e) {
         if (game.isGameDone()) {
-            application.setStatusText("Start new game");
+            application.setMessageBoxText("Start new game");
             return;
         }
 
@@ -49,14 +49,14 @@ class FieldMouseAdapter extends MouseAdapter {
             game.fillBombsCounters();
         }
         if (field.isDiscovered() || field.isFlag()) {
-            application.setStatusText("Field is already clicked or flagged");
+            application.setMessageBoxText("Field is already clicked or flagged");
             return;
         }
         if (field.isBomb()) {
-            application.setStatusText("Boom, you lose!");
+            application.setMessageBoxText("Boom, you lose!");
             application.displayAllBombs();
         } else {
-            application.clearMessageBox();
+            application.clearMessageBoxText();
             if (field.getNearBombsCounter() > 0) {
                 field.setDiscovered(true);
                 button.setForeground(application.getBombCounterColor(field.getNearBombsCounter()));
@@ -65,7 +65,7 @@ class FieldMouseAdapter extends MouseAdapter {
                 game.floodFill(x, y);
             }
             if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
-                application.setStatusText("You win!");
+                application.setMessageBoxText("You win!");
             }
         }
     }
@@ -75,23 +75,23 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setFirstClick(false);
             game.fillBombsCounters();
         }
-        application.clearMessageBox();
+        application.clearMessageBoxText();
         if (field.isDiscovered()) {
-            application.setStatusText("pole juz klikniete");
+            application.setMessageBoxText("pole juz klikniete");
             return;
         }
         if (field.isFlag()) {
-            application.updateBombsCounterText(1);
+            application.updateAmountOfBombsToFlag(1);
             field.setFlag(false);
             button.setText("");
         } else {
-            application.updateBombsCounterText(-1);
+            application.updateAmountOfBombsToFlag(-1);
             field.setFlag(true);
             button.setText("?");
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setForeground(BLACK);
             if (game.countFlagPoints() == game.numberOfBombs - game.countDiscoveredFields()) {
-                application.setStatusText("Wygrales!");
+                application.setMessageBoxText("Wygrales!");
             }
         }
     }
