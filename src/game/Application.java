@@ -65,8 +65,8 @@ public class Application extends JPanel {
     private void setFloodFillListeners() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Field field = buttons[i][j].getField();
-                JButton button = buttons[i][j].getjButton();
+                Field field = buttons[i][j].field;
+                JButton button = buttons[i][j].jButton;
                 field.addFloodFillListener(() -> {
                     if (field.getNearBombsCounter() == 0) {
                         button.setBackground(Color.darkGray);
@@ -82,8 +82,8 @@ public class Application extends JPanel {
     void displayAllBombs() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Field field = buttons[i][j].getField();
-                JButton button = buttons[i][j].getjButton();
+                Field field = buttons[i][j].field;
+                JButton button = buttons[i][j].jButton;
 
                 if (field.isBomb()) {
                     button.setBackground(field.isFlag() ? GREEN : RED);
@@ -107,7 +107,7 @@ public class Application extends JPanel {
         panel.setLayout(new GridLayout(game.width, game.height));
         for (int i = 0; i < game.width; i++) {
             for (int j = 0; j < game.height; j++) {
-                panel.add(buttons[i][j].getjButton());
+                panel.add(buttons[i][j].jButton);
             }
         }
 
