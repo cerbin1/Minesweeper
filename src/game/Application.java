@@ -26,7 +26,6 @@ public class Application extends JPanel {
 
     private Game game;
     private JButton[][] buttons;
-
     private boolean firstClick = true;
 
     private JLabel messageBox;
