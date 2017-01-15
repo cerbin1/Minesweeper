@@ -104,9 +104,9 @@ public class Application extends JPanel {
         labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsLeftToFlagCounter);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(game.width, game.height));
-        for (int i = 0; i < game.width; i++) {
-            for (int j = 0; j < game.height; j++) {
+        panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
+        for (int i = 0; i < game.getWidth(); i++) {
+            for (int j = 0; j < game.getHeight(); j++) {
                 panel.add(buttons[i][j].jButton);
             }
         }

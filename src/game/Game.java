@@ -1,9 +1,9 @@
 package game;
 
 class Game {
-    final int width;
-    final int height;
-    final int numberOfBombs;
+    private final int width;
+    private final int height;
+    private final int numberOfBombs;
     final private Field[][] fields;
 
     private boolean gameDone = false;
@@ -121,5 +121,17 @@ class Game {
 
     boolean isGameDone() {
         return gameDone;
+    }
+
+    int getWidth() {
+        return width;
+    }
+
+    int getHeight() {
+        return height;
+    }
+
+    int getNumberOfBombs() {
+        return numberOfBombs;
     }
 }

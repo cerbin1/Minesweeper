@@ -60,7 +60,7 @@ class FieldMouseAdapter extends MouseAdapter {
             } else {
                 game.floodFill(x, y);
             }
-            if (game.countDiscoveredFields() - game.numberOfBombs == 0) {
+            if (game.countDiscoveredFields() - game.getNumberOfBombs() == 0) {
                 application.setMessageBoxText("You win!");
             }
         }
@@ -86,7 +86,7 @@ class FieldMouseAdapter extends MouseAdapter {
             button.jButton.setText("?");
             button.jButton.setFont(new Font("Arial", Font.BOLD, 20));
             button.jButton.setForeground(BLACK);
-            if (game.countFlagPoints() == game.numberOfBombs - game.countDiscoveredFields()) {
+            if (game.countFlagPoints() == game.getNumberOfBombs() - game.countDiscoveredFields()) {
                 application.setMessageBoxText("Wygrales!");
             }
         }
