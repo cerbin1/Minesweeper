@@ -12,7 +12,7 @@ class Game {
         this.width = width;
         this.height = height;
         this.numberOfBombs = numberOfBombs;
-        this.fields = createFields(width, height);
+        fields = createFields(width, height);
         populateBombs();
     }
 
