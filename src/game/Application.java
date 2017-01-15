@@ -25,8 +25,9 @@ public class Application extends JPanel {
     private final int height;
 
     private Game game;
-    private JButton[][] buttons;
     private boolean firstClick = true;
+
+    private Button[][] buttons;
 
     private JLabel messageBox;
     private JLabel labelTextBombsToFlagLeft;
@@ -38,16 +39,16 @@ public class Application extends JPanel {
         this.height = height;
         game = GameFactory.create(width, height, numberOfBombs);
 
-        buttons = createJButtons(width, height);
+        buttons = createButtons();
         setFloodFillListeners();
         bombsLeftToFlagCounter = numberOfBombs;
     }
 
-    private JButton[][] createJButtons(int width, int height) {
-        JButton[][] buttons = new JButton[width][height];
+    private Button[][] createButtons() {
+        Button[][] buttons = new Button[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                buttons[i][j] = createSingleJButton(i, j);
+                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j));
             }
         }
         return buttons;
@@ -64,8 +65,8 @@ public class Application extends JPanel {
     private void setFloodFillListeners() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Field field = game.getField(i, j);
-                JButton button = buttons[i][j];
+                Field field = buttons[i][j].field;
+                JButton button = buttons[i][j].jButton;
                 field.addFloodFillListener(() -> {
                     if (field.getNearBombsCounter() == 0) {
                         button.setBackground(Color.darkGray);
@@ -81,8 +82,8 @@ public class Application extends JPanel {
     void displayAllBombs() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                JButton button = buttons[i][j];
-                Field field = game.getField(i, j);
+                JButton button = buttons[i][j].jButton;
+                Field field = buttons[i][j].field;
 
                 if (field.isBomb()) {
                     button.setBackground(field.isFlag() ? GREEN : RED);
@@ -106,7 +107,7 @@ public class Application extends JPanel {
         panel.setLayout(new GridLayout(game.width, game.height));
         for (int i = 0; i < game.width; i++) {
             for (int j = 0; j < game.height; j++) {
-                panel.add(buttons[i][j]);
+                panel.add(buttons[i][j].jButton);
             }
         }
 
@@ -137,7 +138,7 @@ public class Application extends JPanel {
         return textLabel;
     }
 
-    JButton getButton(int x, int y) {
+    Button getButton(int x, int y) {
         return buttons[x][y];
     }
 
