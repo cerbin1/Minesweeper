@@ -16,7 +16,7 @@ import java.awt.GridLayout;
 import static java.awt.Color.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class Application extends JPanel {
+public class Application {
     private final static Color[] BOMBS_COUNTER_COLORS = {
             BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK
     };
