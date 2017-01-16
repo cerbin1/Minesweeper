@@ -52,7 +52,7 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("Boom, you lose!");
             application.displayAllBombs();
         } else {
-            application.clearMessageBoxText();
+            application.clearMessageBox();
             if (button.field.getNearBombsCounter() > 0) {
                 button.field.setDiscovered(true);
                 button.jButton.setForeground(application.getBombCounterColor(button.field.getNearBombsCounter()));
@@ -71,7 +71,7 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setFirstClick(false);
             game.fillBombsCounters();
         }
-        application.clearMessageBoxText();
+        application.clearMessageBox();
         if (button.field.isDiscovered()) {
             application.setMessageBoxText("pole juz klikniete");
             return;

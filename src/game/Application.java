@@ -128,7 +128,7 @@ public class Application extends JPanel {
         messageBox.setText(text);
     }
 
-    void clearMessageBoxText() {
+    void clearMessageBox() {
         messageBox.setText("");
     }
 
