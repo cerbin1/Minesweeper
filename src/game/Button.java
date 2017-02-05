@@ -22,10 +22,6 @@ class Button {
         });
     }
 
-    public Field getField() {
-        return field;
-    }
-
     public JButton getjButton() {
         return jButton;
     }
