@@ -7,7 +7,7 @@ import static game.Application.getBombCounterColor;
 import static java.awt.Color.*;
 
 class Button {
-    Field field;
+    private Field field;
     JButton jButton;
 
     Button(Field field, JButton jButton) {
@@ -77,5 +77,9 @@ class Button {
         field.setDiscovered(true);
         jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
         jButton.setText(Integer.toString(field.getNearBombsCounter()));
+    }
+
+    boolean hasNearBombs() {
+        return field.getNearBombsCounter() == 0;
     }
 }
