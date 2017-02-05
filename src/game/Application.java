@@ -23,10 +23,10 @@ public class Application {
 
     private final Size size;
 
-    private Game game;
+    private final Game game;
     private boolean firstClick = true;
 
-    private Button[][] buttons;
+    private final Button[][] buttons;
 
     private JLabel messageBox, bombsLeftLabel;
 
@@ -80,7 +80,7 @@ public class Application {
         panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
         for (int i = 0; i < game.getWidth(); i++) {
             for (int j = 0; j < game.getHeight(); j++) {
-                panel.add(buttons[i][j].jButton);
+                panel.add(buttons[i][j].getJButton());
             }
         }
 

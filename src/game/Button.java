@@ -7,8 +7,8 @@ import static game.Application.getBombCounterColor;
 import static java.awt.Color.*;
 
 class Button {
-    private Field field;
-    JButton jButton;
+    private final Field field;
+    private final JButton jButton;
 
     Button(Field field, JButton jButton) {
         this.field = field;
@@ -22,7 +22,7 @@ class Button {
         });
     }
 
-    public JButton getjButton() {
+    JButton getJButton() {
         return jButton;
     }
 
