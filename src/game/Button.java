@@ -1,11 +1,10 @@
 package game;
 
-import javax.swing.JButton;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 import static game.Application.getBombCounterColor;
-import static java.awt.Color.GREEN;
-import static java.awt.Color.RED;
+import static java.awt.Color.*;
 
 class Button {
     Field field;
@@ -36,5 +35,25 @@ class Button {
             jButton.setBackground(field.isFlag() ? GREEN : RED);
             jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
         }
+    }
+
+    boolean isDiscovered() {
+        return field.isDiscovered();
+    }
+
+    boolean isFlag() {
+        return field.isFlag();
+    }
+
+    void setUnflagged() {
+        field.setFlag(false);
+        jButton.setText("");
+    }
+
+    void setFlagged() {
+        field.setFlag(true);
+        jButton.setText("?");
+        jButton.setFont(new Font("Arial", Font.BOLD, 20));
+        jButton.setForeground(BLACK);
     }
 }

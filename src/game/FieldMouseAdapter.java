@@ -1,11 +1,9 @@
 package game;
 
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static game.Application.getBombCounterColor;
-import static java.awt.Color.BLACK;
 
 class FieldMouseAdapter extends MouseAdapter {
     private final Application application;
@@ -73,20 +71,16 @@ class FieldMouseAdapter extends MouseAdapter {
             game.fillBombsCounters();
         }
         application.clearMessageBox();
-        if (button.field.isDiscovered()) {
+        if (button.isDiscovered()) {
             application.setMessageBoxText("pole juz klikniete");
             return;
         }
-        if (button.field.isFlag()) {
+        if (button.isFlag()) {
             application.updateAmountOfBombsToFlag(1);
-            button.field.setFlag(false);
-            button.jButton.setText("");
+            button.setUnflagged();
         } else {
             application.updateAmountOfBombsToFlag(-1);
-            button.field.setFlag(true);
-            button.jButton.setText("?");
-            button.jButton.setFont(new Font("Arial", Font.BOLD, 20));
-            button.jButton.setForeground(BLACK);
+            button.setFlagged();
             if (game.winCondition()) {
                 application.setMessageBoxText("Wygrales!");
             }
