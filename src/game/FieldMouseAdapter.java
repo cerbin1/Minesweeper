@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static game.Application.getBombCounterColor;
 import static java.awt.Color.BLACK;
 
 class FieldMouseAdapter extends MouseAdapter {
@@ -55,7 +56,7 @@ class FieldMouseAdapter extends MouseAdapter {
             application.clearMessageBox();
             if (button.field.getNearBombsCounter() > 0) {
                 button.field.setDiscovered(true);
-                button.jButton.setForeground(application.getBombCounterColor(button.field.getNearBombsCounter()));
+                button.jButton.setForeground(getBombCounterColor(button.field.getNearBombsCounter()));
                 button.jButton.setText(Integer.toString(button.field.getNearBombsCounter()));
             } else {
                 game.floodFill(x, y);

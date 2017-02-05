@@ -47,7 +47,7 @@ public class Application {
         Button[][] buttons = new Button[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j), this);
+                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j));
             }
         }
         return buttons;
@@ -64,18 +64,12 @@ public class Application {
     void displayAllBombs() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                Field field = buttons[i][j].field;
-                JButton button = buttons[i][j].jButton;
-
-                if (field.isBomb()) {
-                    button.setBackground(field.isFlag() ? GREEN : RED);
-                    button.setForeground(getBombCounterColor(field.getNearBombsCounter()));
-                }
+                buttons[i][j].displayBomb();
             }
         }
     }
 
-    Color getBombCounterColor(int numberOfBombs) {
+    static Color getBombCounterColor(int numberOfBombs) {
         return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
     }
 
