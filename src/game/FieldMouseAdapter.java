@@ -87,7 +87,7 @@ class FieldMouseAdapter extends MouseAdapter {
             button.jButton.setText("?");
             button.jButton.setFont(new Font("Arial", Font.BOLD, 20));
             button.jButton.setForeground(BLACK);
-            if (game.countFlagPoints() == game.getNumberOfBombs() - game.countDiscoveredFields()) {
+            if (game.winCondition()) {
                 application.setMessageBoxText("Wygrales!");
             }
         }

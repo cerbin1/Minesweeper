@@ -134,4 +134,8 @@ class Game {
     int getNumberOfBombs() {
         return numberOfBombs;
     }
+
+    boolean winCondition() {
+        return countFlagPoints() == getNumberOfBombs() - countDiscoveredFields();
+    }
 }
