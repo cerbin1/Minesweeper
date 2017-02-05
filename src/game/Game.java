@@ -90,17 +90,13 @@ class Game {
         }
     }
 
-    int countFlagPoints() {
-        int points = 0;
+    int countUnflaggedBombs() {
+        int points = numberOfBombs;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
                 if (field.isFlag()) {
-                    if (field.isBomb()) {
-                        points++;
-                    } else {
-                        points--;
-                    }
+                    points--;
                 }
             }
         }
@@ -117,6 +113,23 @@ class Game {
             }
         }
         return numberOfFields;
+    }
+
+    int countFlagPoints() {
+        int points = 0;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                Field field = fields[i][j];
+                if (field.isFlag()) {
+                    if (field.isBomb()) {
+                        points++;
+                    } else {
+                        points--;
+                    }
+                }
+            }
+        }
+        return points;
     }
 
     boolean isGameDone() {

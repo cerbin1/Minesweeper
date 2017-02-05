@@ -32,15 +32,15 @@ public class Application {
     private JLabel messageBox;
     private JLabel labelTextBombsToFlagLeft;
 
-    private int bombsLeftToFlagCounter;
+    private final int numberOfBombs;
 
     private Application(int width, int height, int numberOfBombs) {
         this.width = width;
         this.height = height;
         game = GameFactory.create(width, height, numberOfBombs);
+        this.numberOfBombs = numberOfBombs;
 
         buttons = createButtons();
-        bombsLeftToFlagCounter = numberOfBombs;
     }
 
     private Button[][] createButtons() {
@@ -77,7 +77,7 @@ public class Application {
         JFrame frame = createFrame("Minesweeper");
 
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
-        labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsLeftToFlagCounter);
+        labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + numberOfBombs);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
@@ -126,10 +126,10 @@ public class Application {
         messageBox.setText("");
     }
 
-    void updateAmountOfBombsToFlag(int number) {
-        bombsLeftToFlagCounter += number;
-        labelTextBombsToFlagLeft.setText("Bombs left: " + bombsLeftToFlagCounter);
-        if (bombsLeftToFlagCounter < 0) {
+    void updateAmountOfBombsToFlag() {
+        int unflaggedBombs = game.countUnflaggedBombs();
+        labelTextBombsToFlagLeft.setText("Bombs left: " + unflaggedBombs);
+        if (unflaggedBombs < 0) {
             messageBox.setText("Some flags are wrong!");
         }
     }

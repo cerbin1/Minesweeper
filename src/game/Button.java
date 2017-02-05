@@ -41,6 +41,14 @@ class Button {
         return field.isDiscovered();
     }
 
+    void toggleFlag() {
+        if (isFlag()) {
+            setUnflagged();
+        } else {
+            setFlagged();
+        }
+    }
+
     boolean isFlag() {
         return field.isFlag();
     }
