@@ -64,7 +64,7 @@ class FieldMouseAdapter extends MouseAdapter {
             return;
         }
         button.toggleFlag();
-        application.updateAmountOfBombsToFlag();
+        application.updateFlaggedBombsCount();
         if (game.winCondition()) {
             application.setMessageBoxText("Wygrales!");
         }

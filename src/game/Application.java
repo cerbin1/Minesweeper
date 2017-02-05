@@ -126,7 +126,7 @@ public class Application {
         messageBox.setText("");
     }
 
-    void updateAmountOfBombsToFlag() {
+    void updateFlaggedBombsCount() {
         int unflaggedBombs = game.countUnflaggedBombs();
         labelTextBombsToFlagLeft.setText("Bombs left: " + unflaggedBombs);
         if (unflaggedBombs < 0) {
