@@ -76,6 +76,6 @@ class Button {
     }
 
     boolean hasNearBombs() {
-        return field.getNearBombsCounter() == 0;
+        return field.getNearBombsCounter() > 0;
     }
 }
