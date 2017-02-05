@@ -49,12 +49,12 @@ class Button {
         return field.isFlag();
     }
 
-    void setUnflagged() {
+    private void setUnflagged() {
         field.setFlag(false);
         jButton.setText("");
     }
 
-    void setFlagged() {
+    private void setFlagged() {
         field.setFlag(true);
         jButton.setText("?");
         jButton.setFont(new Font("Arial", Font.BOLD, 20));
