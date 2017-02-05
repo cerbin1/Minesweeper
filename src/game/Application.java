@@ -30,7 +30,7 @@ public class Application {
     private Button[][] buttons;
 
     private JLabel messageBox;
-    private JLabel labelTextBombsToFlagLeft;
+    private JLabel bombsLeftLabel;
 
     private final int bombsCount;
 
@@ -77,7 +77,7 @@ public class Application {
         JFrame frame = createFrame("Minesweeper");
 
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
-        labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
+        bombsLeftLabel = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
@@ -89,7 +89,7 @@ public class Application {
 
         JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BorderLayout());
-        outerPanel.add(labelTextBombsToFlagLeft, BorderLayout.PAGE_START);
+        outerPanel.add(bombsLeftLabel, BorderLayout.PAGE_START);
         outerPanel.add(panel, BorderLayout.CENTER);
         outerPanel.add(messageBox, BorderLayout.PAGE_END);
 
@@ -128,7 +128,7 @@ public class Application {
 
     void updateFlaggedBombsCount() {
         int unflaggedBombs = game.countUnflaggedBombs();
-        labelTextBombsToFlagLeft.setText("Bombs left: " + unflaggedBombs);
+        bombsLeftLabel.setText("Bombs left: " + unflaggedBombs);
         if (unflaggedBombs < 0) {
             messageBox.setText("Some flags are wrong!");
         }
