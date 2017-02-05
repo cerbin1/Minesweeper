@@ -32,13 +32,13 @@ public class Application {
     private JLabel messageBox;
     private JLabel labelTextBombsToFlagLeft;
 
-    private final int numberOfBombs;
+    private final int bombsCount;
 
-    private Application(int width, int height, int numberOfBombs) {
+    private Application(int width, int height, int bombsCount) {
         this.width = width;
         this.height = height;
-        game = GameFactory.create(width, height, numberOfBombs);
-        this.numberOfBombs = numberOfBombs;
+        game = GameFactory.create(width, height, bombsCount);
+        this.bombsCount = bombsCount;
 
         buttons = createButtons();
     }
@@ -69,15 +69,15 @@ public class Application {
         }
     }
 
-    static Color getBombCounterColor(int numberOfBombs) {
-        return BOMBS_COUNTER_COLORS[numberOfBombs - 1];
+    static Color getBombCounterColor(int bombsCount) {
+        return BOMBS_COUNTER_COLORS[bombsCount - 1];
     }
 
     private void createAndShowBoard() {
         JFrame frame = createFrame("Minesweeper");
 
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
-        labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + numberOfBombs);
+        labelTextBombsToFlagLeft = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));

@@ -3,15 +3,15 @@ package game;
 class Game {
     private final int width;
     private final int height;
-    private final int numberOfBombs;
+    private final int bombsCount;
     final private Field[][] fields;
 
     private boolean gameDone = false;
 
-    Game(int width, int height, int numberOfBombs) {
+    Game(int width, int height, int bombsCount) {
         this.width = width;
         this.height = height;
-        this.numberOfBombs = numberOfBombs;
+        this.bombsCount = bombsCount;
         fields = createFields(width, height);
         populateBombs();
     }
@@ -27,7 +27,7 @@ class Game {
     }
 
     private void populateBombs() {
-        for (int i = 0; i < numberOfBombs; i++) {
+        for (int i = 0; i < bombsCount; i++) {
             plantSingleBomb();
         }
     }
@@ -91,7 +91,7 @@ class Game {
     }
 
     int countUnflaggedBombs() {
-        int points = numberOfBombs;
+        int points = bombsCount;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 Field field = fields[i][j];
@@ -144,11 +144,11 @@ class Game {
         return height;
     }
 
-    int getNumberOfBombs() {
-        return numberOfBombs;
+    int getBombsCount() {
+        return bombsCount;
     }
 
     boolean winCondition() {
-        return countFlagPoints() == getNumberOfBombs() - countDiscoveredFields();
+        return countFlagPoints() == getBombsCount() - countDiscoveredFields();
     }
 }

@@ -59,7 +59,7 @@ class FieldMouseAdapter extends MouseAdapter {
             } else {
                 game.floodFill(x, y);
             }
-            if (game.countDiscoveredFields() - game.getNumberOfBombs() == 0) {
+            if (game.countDiscoveredFields() - game.getBombsCount() == 0) {
                 application.setMessageBoxText("You win!");
             }
         }
