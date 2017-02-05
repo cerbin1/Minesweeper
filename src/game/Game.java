@@ -8,15 +8,15 @@ class Game {
 
     private boolean gameDone = false;
 
-    Game(int width, int height, int bombsCount) {
-        this.width = width;
-        this.height = height;
+    Game(Size size, int bombsCount) {
+        this.width = size.getWidth();
+        this.height = size.getHeight();
         this.bombsCount = bombsCount;
-        fields = createFields(width, height);
+        fields = createFields();
         populateBombs();
     }
 
-    private Field[][] createFields(int width, int height) {
+    private Field[][] createFields() {
         Field[][] fields = new Field[width][height];
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -103,7 +103,7 @@ class Game {
         return points;
     }
 
-    int countDiscoveredFields() {
+    private int countDiscoveredFields() {
         int numberOfFields = height * width;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -115,7 +115,7 @@ class Game {
         return numberOfFields;
     }
 
-    int countFlagPoints() {
+    private int countFlagPoints() {
         int points = 0;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -144,7 +144,7 @@ class Game {
         return height;
     }
 
-    int getBombsCount() {
+    private int getBombsCount() {
         return bombsCount;
     }
 

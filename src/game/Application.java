@@ -21,32 +21,29 @@ public class Application {
             BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK
     };
 
-    private final int width;
-    private final int height;
+    private final Size size;
 
     private Game game;
     private boolean firstClick = true;
 
     private Button[][] buttons;
 
-    private JLabel messageBox;
-    private JLabel bombsLeftLabel;
+    private JLabel messageBox, bombsLeftLabel;
 
     private final int bombsCount;
 
-    private Application(int width, int height, int bombsCount) {
-        this.width = width;
-        this.height = height;
-        game = GameFactory.create(width, height, bombsCount);
+    private Application(Size size, int bombsCount) {
+        this.size = size;
+        game = GameFactory.create(size, bombsCount);
         this.bombsCount = bombsCount;
 
         buttons = createButtons();
     }
 
     private Button[][] createButtons() {
-        Button[][] buttons = new Button[width][height];
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        Button[][] buttons = new Button[size.getWidth()][size.getHeight()];
+        for (int i = 0; i < size.getWidth(); i++) {
+            for (int j = 0; j < size.getHeight(); j++) {
                 buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j));
             }
         }
@@ -62,8 +59,8 @@ public class Application {
     }
 
     void displayAllBombs() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = 0; i < size.getWidth(); i++) {
+            for (int j = 0; j < size.getHeight(); j++) {
                 buttons[i][j].displayBomb();
             }
         }
@@ -147,7 +144,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
+        SwingUtilities.invokeLater(() -> new Application(new Size(10, 10), 10).createAndShowBoard());
     }
 
     void repositionFirstClickedBomb(Button button) {
