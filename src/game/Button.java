@@ -72,4 +72,10 @@ class Button {
     void setBomb(boolean bomb) {
         field.setBomb(bomb);
     }
+
+    void discover() {
+        field.setDiscovered(true);
+        jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
+        jButton.setText(Integer.toString(field.getNearBombsCounter()));
+    }
 }

@@ -3,8 +3,6 @@ package game;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static game.Application.getBombCounterColor;
-
 class FieldMouseAdapter extends MouseAdapter {
     private final Application application;
     private final Game game;
@@ -35,23 +33,21 @@ class FieldMouseAdapter extends MouseAdapter {
 
     private void leftButtonClick(Button button) {
         application.repositionFirstClickedBomb(button);
-        if (button.field.isDiscovered() || button.field.isFlag()) {
+        if (button.isDiscovered() || button.isFlag()) {
             application.setMessageBoxText("Field is already clicked or flagged");
             return;
         }
-        if (button.field.isBomb()) {
+        if (button.isBomb()) {
             application.setMessageBoxText("Boom, you lose!");
             application.displayAllBombs();
         } else {
             application.clearMessageBox();
-            if (button.field.getNearBombsCounter() > 0) {
-                button.field.setDiscovered(true);
-                button.jButton.setForeground(getBombCounterColor(button.field.getNearBombsCounter()));
-                button.jButton.setText(Integer.toString(button.field.getNearBombsCounter()));
-            } else {
+            if (button.field.getNearBombsCounter() == 0) {
                 game.floodFill(x, y);
+            } else {
+                button.discover();
             }
-            if (game.countDiscoveredFields() - game.getBombsCount() == 0) {
+            if (game.winCondition()) {
                 application.setMessageBoxText("You win!");
             }
         }

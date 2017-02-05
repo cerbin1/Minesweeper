@@ -149,6 +149,14 @@ class Game {
     }
 
     boolean winCondition() {
+        return flagsWinCondition() || bombsWinCondition();
+    }
+
+    private boolean flagsWinCondition() {
         return countFlagPoints() == getBombsCount() - countDiscoveredFields();
+    }
+
+    private boolean bombsWinCondition() {
+        return countDiscoveredFields() - getBombsCount() == 0;
     }
 }
