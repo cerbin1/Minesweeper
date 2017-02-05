@@ -11,12 +11,11 @@ class Button {
         this.field = field;
         this.jButton = jButton;
         field.addFloodFillListener(() -> {
-            if (field.getNearBombsCounter() == 0) {
-                jButton.setBackground(Color.darkGray);
-            } else {
+            if (field.getNearBombsCounter() != 0) {
                 jButton.setForeground(application.getBombCounterColor(field.getNearBombsCounter()));
                 jButton.setText("" + field.getNearBombsCounter());
             }
+            jButton.setBackground(Color.darkGray);
         });
     }
 }
