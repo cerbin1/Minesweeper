@@ -64,4 +64,12 @@ class Button {
         jButton.setFont(new Font("Arial", Font.BOLD, 20));
         jButton.setForeground(BLACK);
     }
+
+    boolean isBomb() {
+        return field.isBomb();
+    }
+
+    void setBomb(boolean bomb) {
+        field.setBomb(bomb);
+    }
 }

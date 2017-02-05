@@ -149,4 +149,16 @@ public class Application {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new Application(10, 10, 10).createAndShowBoard());
     }
+
+    void repositionFirstClickedBomb(Button button) {
+        if (isFirstClick()) {
+            if (button.isBomb()) {
+                System.out.println("losuje bombe nowa");
+                game.plantSingleBomb();
+                button.setBomb(false);
+            }
+            game.fillBombsCounters();
+            setFirstClick(false);
+        }
+    }
 }

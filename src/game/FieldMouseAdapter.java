@@ -34,15 +34,7 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Button button) {
-        if (application.isFirstClick()) {
-            if (button.field.isBomb()) {
-                System.out.println("losuje bombe nowa");
-                game.plantSingleBomb();
-                button.field.setBomb(false);
-            }
-            application.setFirstClick(false);
-            game.fillBombsCounters();
-        }
+        application.repositionFirstClickedBomb(button);
         if (button.field.isDiscovered() || button.field.isFlag()) {
             application.setMessageBoxText("Field is already clicked or flagged");
             return;
