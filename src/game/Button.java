@@ -13,13 +13,17 @@ class Button {
     Button(Field field, JButton jButton) {
         this.field = field;
         this.jButton = jButton;
-        field.addFloodFillListener(() -> {
+        field.addFloodFillListener(createFloodFillListener());
+    }
+
+    private FloodFillListener createFloodFillListener() {
+        return () -> {
             if (field.getNearBombsCounter() != 0) {
                 jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
                 jButton.setText("" + field.getNearBombsCounter());
             }
             jButton.setBackground(Color.darkGray);
-        });
+        };
     }
 
     JButton getJButton() {
