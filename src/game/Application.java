@@ -21,6 +21,10 @@ public class Application {
             BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK
     };
 
+    private final static String[] BOMB_COUNTERS_COLORS_HTML = {
+            "blue", "green", "red"
+    };
+
     private final Size size;
 
     private final Game game;
@@ -68,6 +72,10 @@ public class Application {
 
     static Color getBombCounterColor(int bombsCount) {
         return BOMBS_COUNTER_COLORS[bombsCount - 1];
+    }
+
+    static String getBombCounterColorHtml(int bombsCount) {
+        return BOMB_COUNTERS_COLORS_HTML[bombsCount - 1];
     }
 
     private void createAndShowBoard() {
