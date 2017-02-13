@@ -68,13 +68,7 @@ public class Application {
         bombsLeftLabel = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
         JPanel panel = createJPanelWithJButtons();
-
-        JPanel outerPanel = new JPanel();
-        outerPanel.setLayout(new BorderLayout());
-        outerPanel.add(bombsLeftLabel, BorderLayout.PAGE_START);
-        outerPanel.add(panel, BorderLayout.CENTER);
-        outerPanel.add(messageBox, BorderLayout.PAGE_END);
-
+        JPanel outerPanel = createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
     }
@@ -88,6 +82,15 @@ public class Application {
             }
         }
         return panel;
+    }
+
+    private JPanel createOuterPanel(JPanel panel) {
+        JPanel outerPanel = new JPanel();
+        outerPanel.setLayout(new BorderLayout());
+        outerPanel.add(bombsLeftLabel, BorderLayout.PAGE_START);
+        outerPanel.add(panel, BorderLayout.CENTER);
+        outerPanel.add(messageBox, BorderLayout.PAGE_END);
+        return outerPanel;
     }
 
     private JFrame createFrame(String frameName) {
