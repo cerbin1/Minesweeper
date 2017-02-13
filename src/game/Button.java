@@ -19,10 +19,15 @@ class Button {
     private FloodFillListener createFloodFillListener() {
         return () -> {
             if (field.getNearBombsCounter() != 0) {
-                jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
-                jButton.setText("" + field.getNearBombsCounter());
+                jButton.setMargin(new Insets(0, 0, 0, 0));
+                field.setDiscovered(true);
+                jButton.setEnabled(false);
+                jButton.setFont(new Font("Arial", 0, 30));
+                jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
+                jButton.setText(Integer.toString(field.getNearBombsCounter()));
+            } else {
+                jButton.setBackground(Color.darkGray);
             }
-            jButton.setBackground(Color.darkGray);
         };
     }
 
@@ -33,7 +38,6 @@ class Button {
     void displayBomb() {
         if (field.isBomb()) {
             jButton.setBackground(field.isFlag() ? GREEN : RED);
-            jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
         }
     }
 
@@ -61,7 +65,8 @@ class Button {
     private void setFlagged() {
         field.setFlag(true);
         jButton.setText("?");
-        jButton.setFont(new Font("Arial", Font.BOLD, 20));
+        jButton.setFont(new Font("Arial", 0, 30));
+        jButton.setMargin(new Insets(0, 0, 0, 0));
         jButton.setForeground(BLACK);
     }
 
@@ -74,9 +79,14 @@ class Button {
     }
 
     void discover() {
+        Font font = new Font("Arial", 0, 30);
+        jButton.setMargin(new Insets(0, 0, 0, 0));
         field.setDiscovered(true);
-        jButton.setForeground(getBombCounterColor(field.getNearBombsCounter()));
+        getJButton().setEnabled(false);
+        jButton.setFont(font);
+        jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
         jButton.setText(Integer.toString(field.getNearBombsCounter()));
+
     }
 
     boolean hasNearBombs() {
