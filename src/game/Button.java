@@ -36,6 +36,15 @@ class Button {
     void displayBomb() {
         if (field.isBomb()) {
             jButton.setBackground(field.isFlag() ? GREEN : RED);
+           /* File file = new File("C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\src\\resources\\bomb.png");
+            System.out.println(file.exists());
+            try {
+                Image image = ImageIO.read(getClass().getResource("/resources/1.png"));
+//                Image image1 = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
+                jButton.setIcon(new ImageIcon(image));
+            } catch (IOException ignored) {
+                throw new RuntimeException("File not found");
+            }*/
         }
     }
 

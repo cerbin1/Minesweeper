@@ -142,10 +142,6 @@ public class Application {
         this.firstClick = firstClick;
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(new Size(10, 10), 10).createAndShowBoard());
-    }
-
     void repositionFirstClickedBomb(Button button) {
         if (isFirstClick()) {
             if (button.isBomb()) {
@@ -156,5 +152,9 @@ public class Application {
             game.fillBombsCounters();
             setFirstClick(false);
         }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new Application(new Size(10, 10), 10).createAndShowBoard());
     }
 }
