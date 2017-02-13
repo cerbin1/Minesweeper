@@ -63,9 +63,7 @@ class Button {
     private void setFlagged() {
         field.setFlag(true);
         jButton.setText("?");
-        jButton.setFont(new Font("Arial", 0, 30));
-        jButton.setMargin(new Insets(0, 0, 0, 0));
-        jButton.setForeground(BLACK);
+        jButton.setForeground(new Color(239, 144, 35));
     }
 
     boolean isBomb() {
