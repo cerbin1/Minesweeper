@@ -148,19 +148,15 @@ class Game {
         return height;
     }
 
-    private int getBombsCount() {
-        return bombsCount;
-    }
-
     boolean winCondition() {
         return flagsWinCondition() || bombsWinCondition();
     }
 
     private boolean flagsWinCondition() {
-        return countFlagPoints() == getBombsCount() - countDiscoveredFields();
+        return countFlagPoints() == bombsCount - countDiscoveredFields();
     }
 
     private boolean bombsWinCondition() {
-        return countDiscoveredFields() - getBombsCount() == 0;
+        return countDiscoveredFields() - bombsCount == 0;
     }
 }
