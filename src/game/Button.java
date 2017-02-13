@@ -79,7 +79,6 @@ class Button {
         getJButton().setEnabled(false);
         jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
         jButton.setText(Integer.toString(field.getNearBombsCounter()));
-
     }
 
     boolean hasNearBombs() {
