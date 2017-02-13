@@ -75,11 +75,10 @@ class Button {
     }
 
     void discover() {
-        Font font = new Font("Arial", 0, 30);
-        jButton.setMargin(new Insets(0, 0, 0, 0));
         field.setDiscovered(true);
         getJButton().setEnabled(false);
-        jButton.setFont(font);
+        jButton.setMargin(new Insets(0, 0, 0, 0));
+        jButton.setFont(new Font("Arial", 0, 30));
         jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
         jButton.setText(Integer.toString(field.getNearBombsCounter()));
 
