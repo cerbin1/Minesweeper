@@ -1,11 +1,7 @@
 package game;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.server.ExportException;
 
 class FieldMouseAdapter extends MouseAdapter {
     private final Application application;

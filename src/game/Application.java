@@ -1,17 +1,7 @@
 package game;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
 import static java.awt.Color.*;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
