@@ -57,7 +57,7 @@ class Game {
             for (int j = -1; j < 2; j++) {
                 if ((0 <= x + i && x + i < width) && (0 <= y + j && y + j < height)) {
                     if (fields[x + i][y + j].isBomb()) {
-                        fields[x][y].setNearBombsCounter(fields[x][y].getNearBombsCounter() + 1);
+                        fields[x][y].setNearBombsCounter(fields[x][y].getNearBombsCount() + 1);
                     }
                 }
             }
@@ -81,7 +81,7 @@ class Game {
         field.setDiscovered(true);
         field.triggerFloodFill();
 
-        if (field.getNearBombsCounter() == 0) {
+        if (field.getNearBombsCount() == 0) {
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     floodFill(x + i, y + j);

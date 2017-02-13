@@ -13,16 +13,16 @@ class Button {
     Button(Field field, JButton jButton) {
         this.field = field;
         this.jButton = jButton;
-        field.addFloodFillListener(createFloodFillListener());
+        field.setFloodFillListener(createFloodFillListener());
     }
 
     private FloodFillListener createFloodFillListener() {
         return () -> {
-            if (field.getNearBombsCounter() != 0) {
+            if (field.getNearBombsCount() != 0) {
                 field.setDiscovered(true);
                 jButton.setEnabled(false);
-                jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
-                jButton.setText(Integer.toString(field.getNearBombsCounter()));
+                jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
+                jButton.setText(Integer.toString(field.getNearBombsCount()));
             } else {
                 jButton.setBackground(Color.darkGray);
             }
@@ -77,11 +77,11 @@ class Button {
     void discover() {
         field.setDiscovered(true);
         getJButton().setEnabled(false);
-        jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
-        jButton.setText(Integer.toString(field.getNearBombsCounter()));
+        jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
+        jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
 
     boolean hasNearBombs() {
-        return field.getNearBombsCounter() > 0;
+        return field.getNearBombsCount() > 0;
     }
 }

@@ -8,7 +8,7 @@ class Field {
 
     private FloodFillListener listener;
 
-    void addFloodFillListener(FloodFillListener listener) {
+    void setFloodFillListener(FloodFillListener listener) {
         this.listener = listener;
     }
 
@@ -42,7 +42,7 @@ class Field {
         this.flag = flag;
     }
 
-    int getNearBombsCounter() {
+    int getNearBombsCount() {
         return nearBombsCounter;
     }
 
