@@ -74,7 +74,7 @@ class Game {
         }
         Field field = fields[x][y];
 
-        if (field.isFlag() || field.isBomb() || field.isDiscovered()) {
+        if (shouldFloodFillEndOn(field)) {
             return;
         }
 
@@ -88,6 +88,10 @@ class Game {
                 }
             }
         }
+    }
+
+    private boolean shouldFloodFillEndOn(Field field) {
+        return field.isFlag() || field.isBomb() || field.isDiscovered();
     }
 
     int countUnflaggedBombs() {

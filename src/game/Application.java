@@ -40,10 +40,10 @@ public class Application {
         return buttons;
     }
 
-    private JButton createSingleJButton(int i, int j) {
+    private JButton createSingleJButton(int x, int y) {
         JButton jButton = new JButton();
         jButton.setPreferredSize(new Dimension(50, 50));
-        jButton.addMouseListener(new FieldMouseAdapter(this, i, j));
+        jButton.addMouseListener(new FieldMouseAdapter(this, x, y));
         jButton.setFont(new Font("Arial", 0, 30));
         jButton.setMargin(new Insets(0, 0, 0, 0));
         return jButton;
