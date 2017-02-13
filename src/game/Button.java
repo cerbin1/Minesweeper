@@ -19,10 +19,8 @@ class Button {
     private FloodFillListener createFloodFillListener() {
         return () -> {
             if (field.getNearBombsCounter() != 0) {
-                jButton.setMargin(new Insets(0, 0, 0, 0));
                 field.setDiscovered(true);
                 jButton.setEnabled(false);
-                jButton.setFont(new Font("Arial", 0, 30));
                 jButton.setBackground(getBombCounterColor(field.getNearBombsCounter()));
                 jButton.setText(Integer.toString(field.getNearBombsCounter()));
             } else {

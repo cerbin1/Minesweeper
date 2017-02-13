@@ -45,11 +45,12 @@ public class Application {
     }
 
     private JButton createSingleJButton(int i, int j) {
-        JButton button = new JButton();
-        button.setPreferredSize(new Dimension(50, 50));
-        button.addMouseListener(new FieldMouseAdapter(this, i, j));
-        button.setFont(new Font("Arial", Font.BOLD, 20));
-        return button;
+        JButton jButton = new JButton();
+        jButton.setPreferredSize(new Dimension(50, 50));
+        jButton.addMouseListener(new FieldMouseAdapter(this, i, j));
+        jButton.setFont(new Font("Arial", 0, 30));
+        jButton.setMargin(new Insets(0, 0, 0, 0));
+        return jButton;
     }
 
     void displayAllBombs() {
