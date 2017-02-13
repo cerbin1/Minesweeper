@@ -107,7 +107,7 @@ class Game {
         return points;
     }
 
-    private int countDiscoveredFields() {
+    int countDiscoveredFields() {
         int numberOfFields = height * width;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
@@ -119,7 +119,7 @@ class Game {
         return numberOfFields;
     }
 
-    private int countFlagPoints() {
+    int countFlagPoints() {
         int points = 0;
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {

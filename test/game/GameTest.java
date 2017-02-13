@@ -8,7 +8,7 @@ public class GameTest {
     @Test
     public void shouldCountFlagsOnStart() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
 
         // when
         int result = game.countFlagPoints();
@@ -20,7 +20,7 @@ public class GameTest {
     @Test
     public void shouldCountUnflaggedBomb() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
         Field flaggedBomb = game.getField(0, 0);
         Field unflaggedBomb = game.getField(0, 1);
         flaggedBomb.setBomb(true);
@@ -37,7 +37,7 @@ public class GameTest {
     @Test
     public void shouldCountFlaggedBombs() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
         Field flaggedBomb = game.getField(0, 0);
         Field flaggedField = game.getField(0, 2);
         flaggedBomb.setBomb(true);
@@ -55,7 +55,7 @@ public class GameTest {
     @Test
     public void shouldCountUndiscoveredFieldsOnStart() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
 
         // when
         int result = game.countDiscoveredFields();
@@ -67,7 +67,7 @@ public class GameTest {
     @Test
     public void shouldCountDiscoveredField() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
         Field field = game.getField(0, 0);
         field.setDiscovered(true);
 
@@ -81,7 +81,7 @@ public class GameTest {
     @Test
     public void shouldCountDiscoveredAndBombField() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
         Field discoveredField = game.getField(0, 0);
         discoveredField.setDiscovered(true);
         Field bombField = game.getField(0, 1);
@@ -97,7 +97,7 @@ public class GameTest {
     @Test
     public void shouldCountAllDiscoveredFields() {
         // given
-        Game game = new Game(5, 5, 0);
+        Game game = new Game(new Size(5, 5), 0);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 Field field = game.getField(i, j);
