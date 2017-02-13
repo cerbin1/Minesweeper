@@ -62,7 +62,7 @@ public class Application {
     }
 
     private void createAndShowBoard() {
-        JFrame frame = createFrame("Minesweeper");
+        JFrame frame = createJFrame("Minesweeper");
 
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
         bombsLeftLabel = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
@@ -71,6 +71,23 @@ public class Application {
         JPanel outerPanel = createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
+    }
+
+    private JFrame createJFrame(String frameName) {
+        JFrame frame = new JFrame(frameName);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+        frame.setVisible(true);
+        return frame;
+    }
+
+    private JLabel createDefaultTextLabel(String name, String defaultText) {
+        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
+        textLabel.setText(defaultText);
+        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        return textLabel;
     }
 
     private JPanel createJPanelWithJButtons() {
@@ -91,23 +108,6 @@ public class Application {
         outerPanel.add(panel, BorderLayout.CENTER);
         outerPanel.add(messageBox, BorderLayout.PAGE_END);
         return outerPanel;
-    }
-
-    private JFrame createFrame(String frameName) {
-        JFrame frame = new JFrame(frameName);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
-        frame.setVisible(true);
-        return frame;
-    }
-
-    private JLabel createDefaultTextLabel(String name, String defaultText) {
-        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
-        textLabel.setText(defaultText);
-        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        return textLabel;
     }
 
     Button getButton(int x, int y) {
