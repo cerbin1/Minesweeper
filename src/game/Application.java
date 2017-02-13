@@ -67,13 +67,7 @@ public class Application {
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
         bombsLeftLabel = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
-        for (int i = 0; i < game.getWidth(); i++) {
-            for (int j = 0; j < game.getHeight(); j++) {
-                panel.add(buttons[i][j].getJButton());
-            }
-        }
+        JPanel panel = createJPanelWithJButtons();
 
         JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BorderLayout());
@@ -83,6 +77,17 @@ public class Application {
 
         frame.add(outerPanel);
         frame.pack();
+    }
+
+    private JPanel createJPanelWithJButtons() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
+        for (int i = 0; i < game.getWidth(); i++) {
+            for (int j = 0; j < game.getHeight(); j++) {
+                panel.add(buttons[i][j].getJButton());
+            }
+        }
+        return panel;
     }
 
     private JFrame createFrame(String frameName) {
