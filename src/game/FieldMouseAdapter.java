@@ -63,6 +63,12 @@ class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("pole juz klikniete");
             return;
         }
+        if (game.countUnflaggedBombs() < 1) {
+            if (!button.isFlag()) {
+                application.setMessageBoxText("Can't place more flags, some of them are wrong.");
+                return;
+            }
+        }
         button.toggleFlag();
         application.updateFlaggedBombsCount();
         if (game.winCondition()) {
