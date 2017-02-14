@@ -1,6 +1,6 @@
 package game;
 
-public class Field {
+class Field {
     private boolean bomb = false;
     private boolean discovered = false;
     private boolean flag = false;
@@ -18,7 +18,7 @@ public class Field {
         }
     }
 
-    public boolean isBomb() {
+    boolean isBomb() {
         return bomb;
     }
 
@@ -34,7 +34,7 @@ public class Field {
         this.discovered = discovered;
     }
 
-    public boolean isFlag() {
+    boolean isFlag() {
         return flag;
     }
 
