@@ -21,12 +21,12 @@ class Button {
         return () -> {
             if (field.getNearBombsCount() != 0) {
                 field.setDiscovered(true);
-                jButton.setEnabled(false);
                 jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
                 jButton.setText(Integer.toString(field.getNearBombsCount()));
             } else {
                 jButton.setBackground(Color.darkGray);
             }
+                jButton.setEnabled(false);
         };
     }
 
