@@ -35,17 +35,36 @@ class Button {
     }
 
     void displayIfBomb() {
-        if (field.isBomb() && field.isFlag()) {
-            getJButton().setEnabled(false);
-            setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
-            getJButton().setBackground(Color.GREEN);
-        } else if (!field.isBomb() && field.isFlag()) {
-            setJButtonImageIcon(new ImageCreator().getMissedFlag());
-            getJButton().setBackground(Color.RED);
+        if (isBombHit()) {
+            setBombHitLook();
+        } else if (isBombMissed()) {
+            setBombMissedLook();
         } else if (field.isBomb()) {
-            setJButtonImageIcon(new ImageCreator().getBomb());
-            getJButton().setBackground(Color.RED);
+            setBombLook();
         }
+        jButton.setEnabled(false);
+    }
+
+    private boolean isBombHit() {
+        return field.isBomb() && field.isFlag();
+    }
+
+    private void setBombHitLook() {
+        setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
+        getJButton().setBackground(Color.GREEN);
+    }
+
+    private boolean isBombMissed() {
+        return !field.isBomb() && field.isFlag();
+    }
+
+    private void setBombMissedLook() {
+        setJButtonImageIcon(new ImageCreator().getMissedFlag());
+        getJButton().setBackground(Color.red);
+    }
+
+    private void setBombLook() {
+        setJButtonImageIcon(new ImageCreator().getBomb());
     }
 
     private void setJButtonImageIcon(Image image) {
