@@ -92,6 +92,7 @@ class Button {
     private void setUnflagged() {
         field.setFlag(false);
         setJButtonImageIcon(new ImageCreator().getEmptyFlag());
+        jButton.setBackground(null);
     }
 
     private void setFlagged() {
