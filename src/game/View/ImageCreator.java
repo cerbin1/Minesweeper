@@ -1,11 +1,13 @@
-package game;
+package game.View;
+
+import game.Field;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-class ImageCreator {
-    Image getImage(Field field) {
+public class ImageCreator {
+    public Image getImage(Field field) {
         if (field.isFlag() && field.isBomb()) {
             return getImageIfCorrect("/flaggedBomb.png");
         } else if (field.isBomb()) {

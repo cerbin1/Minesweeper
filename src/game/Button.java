@@ -1,5 +1,7 @@
 package game;
 
+import game.View.ImageCreator;
+
 import javax.swing.*;
 import java.awt.*;
 
