@@ -35,16 +35,22 @@ class Button {
     }
 
     void displayBomb() {
-        if (field.isBomb()) {
-            setJButtonImageIcon();
+        if (field.isBomb() && field.isFlag()) {
             getJButton().setEnabled(false);
+            setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
+            getJButton().setBackground(Color.GREEN);
+        } else if (!field.isBomb() && field.isFlag()) {
+            setJButtonImageIcon(new ImageCreator().getMissedFlag());
+            getJButton().setBackground(Color.RED);
+        } else if (field.isBomb()) {
+            setJButtonImageIcon(new ImageCreator().getBomb());
             getJButton().setBackground(Color.RED);
         }
     }
 
-    private void setJButtonImageIcon() {
-        jButton.setIcon(new ImageIcon(new ImageCreator().getImage(field)));
-        jButton.setDisabledIcon(new ImageIcon(new ImageCreator().getImage(field)));
+    private void setJButtonImageIcon(Image image) {
+        jButton.setIcon(new ImageIcon(image));
+        jButton.setDisabledIcon(new ImageIcon(image));
     }
 
     boolean isDiscovered() {
@@ -65,12 +71,12 @@ class Button {
 
     private void setUnflagged() {
         field.setFlag(false);
-        setJButtonImageIcon();
+        setJButtonImageIcon(new ImageCreator().getEmptyFlag());
     }
 
     private void setFlagged() {
         field.setFlag(true);
-        setJButtonImageIcon();
+        setJButtonImageIcon(new ImageCreator().getFlag());
         jButton.setBackground(new Color(240, 208, 132));
     }
 
