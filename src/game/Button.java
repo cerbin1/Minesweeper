@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static game.Application.getBombCounterColor;
+import static java.awt.Color.*;
 
 class Button {
     private final Field field;
@@ -24,7 +25,7 @@ class Button {
                 jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
                 jButton.setText(Integer.toString(field.getNearBombsCount()));
             } else {
-                jButton.setBackground(Color.darkGray);
+                jButton.setBackground(darkGray);
             }
                 jButton.setEnabled(false);
         };
@@ -51,7 +52,7 @@ class Button {
 
     private void setBombHitLook() {
         setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
-        getJButton().setBackground(Color.GREEN);
+        getJButton().setBackground(GREEN);
     }
 
     private boolean isBombMissed() {
@@ -60,7 +61,7 @@ class Button {
 
     private void setBombMissedLook() {
         setJButtonImageIcon(new ImageCreator().getMissedFlag());
-        getJButton().setBackground(Color.red);
+        getJButton().setBackground(RED);
     }
 
     private void setBombLook() {
