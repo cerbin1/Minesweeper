@@ -27,7 +27,7 @@ class Button {
             } else {
                 jButton.setBackground(darkGray);
             }
-                jButton.setEnabled(false);
+            jButton.setEnabled(false);
         };
     }
 
