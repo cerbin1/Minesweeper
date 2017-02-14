@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import static game.Application.getBombCounterColor;
-import static java.awt.Color.*;
 
 class Button {
     private final Field field;
@@ -35,17 +34,15 @@ class Button {
 
     void displayBomb() {
         if (field.isBomb()) {
-            jButton.setBackground(field.isFlag() ? GREEN : RED);
-           /* File file = new File("C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\src\\resources\\bomb.png");
-            System.out.println(file.exists());
-            try {
-                Image image = ImageIO.read(getClass().getResource("/resources/1.png"));
-//                Image image1 = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-                jButton.setIcon(new ImageIcon(image));
-            } catch (IOException ignored) {
-                throw new RuntimeException("File not found");
-            }*/
+            setJButtonImageIcon();
+            getJButton().setEnabled(false);
+            getJButton().setBackground(Color.RED);
         }
+    }
+
+    private void setJButtonImageIcon() {
+        jButton.setIcon(new ImageIcon(new ImageCreator().getImage(field)));
+        jButton.setDisabledIcon(new ImageIcon(new ImageCreator().getImage(field)));
     }
 
     boolean isDiscovered() {
@@ -66,13 +63,13 @@ class Button {
 
     private void setUnflagged() {
         field.setFlag(false);
-        jButton.setText("");
+        setJButtonImageIcon();
     }
 
     private void setFlagged() {
         field.setFlag(true);
-        jButton.setText("?");
-        jButton.setForeground(new Color(239, 144, 35));
+        setJButtonImageIcon();
+        jButton.setBackground(new Color(240, 208, 132));
     }
 
     boolean isBomb() {
