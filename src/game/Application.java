@@ -22,10 +22,14 @@ public class Application {
 
     private final int bombsCount;
 
+    private final JComponentsGenerator jComponentsGenerator;
+
     private Application(Size size, int bombsCount) {
         this.size = size;
         game = GameFactory.create(size, bombsCount);
         this.bombsCount = bombsCount;
+
+        jComponentsGenerator = new JComponentsGenerator(this);
 
         buttons = createButtons();
     }
@@ -34,20 +38,20 @@ public class Application {
         Button[][] buttons = new Button[size.getWidth()][size.getHeight()];
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
-                buttons[i][j] = new Button(game.getField(i, j), createSingleJButton(i, j));
+                buttons[i][j] = new Button(game.getField(i, j), jComponentsGenerator.createSingleJButton(this, i, j));
             }
         }
         return buttons;
     }
 
-    private JButton createSingleJButton(int x, int y) {
-        JButton jButton = new JButton();
-        jButton.setPreferredSize(new Dimension(50, 50));
-        jButton.addMouseListener(new FieldMouseAdapter(this, x, y));
-        jButton.setFont(new Font("Arial", 0, 30));
-        jButton.setMargin(new Insets(0, 0, 0, 0));
-        return jButton;
+    JLabel getMessageBox() {
+        return messageBox;
     }
+
+    JLabel getBombsLeftLabel() {
+        return bombsLeftLabel;
+    }
+
 
     void displayAllBombs() {
         for (int i = 0; i < size.getWidth(); i++) {
@@ -62,53 +66,17 @@ public class Application {
     }
 
     private void createAndShowBoard() {
-        JFrame frame = createJFrame("Minesweeper");
+        JFrame frame = jComponentsGenerator.createJFrame("Minesweeper");
 
-        messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
-        bombsLeftLabel = createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
+        messageBox = jComponentsGenerator.createDefaultTextLabel("TextLabel", "Start clicking");
+        bombsLeftLabel = jComponentsGenerator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
-        JPanel panel = createJPanelWithJButtons();
-        JPanel outerPanel = createOuterPanel(panel);
+        JPanel panel = jComponentsGenerator.createJPanelWithJButtons();
+        JPanel outerPanel = jComponentsGenerator.createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
     }
 
-    private JFrame createJFrame(String frameName) {
-        JFrame frame = new JFrame(frameName);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
-        frame.setVisible(true);
-        return frame;
-    }
-
-    private JLabel createDefaultTextLabel(String name, String defaultText) {
-        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
-        textLabel.setText(defaultText);
-        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        return textLabel;
-    }
-
-    private JPanel createJPanelWithJButtons() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
-        for (int i = 0; i < game.getWidth(); i++) {
-            for (int j = 0; j < game.getHeight(); j++) {
-                panel.add(buttons[i][j].getJButton());
-            }
-        }
-        return panel;
-    }
-
-    private JPanel createOuterPanel(JPanel panel) {
-        JPanel outerPanel = new JPanel();
-        outerPanel.setLayout(new BorderLayout());
-        outerPanel.add(bombsLeftLabel, BorderLayout.PAGE_START);
-        outerPanel.add(panel, BorderLayout.CENTER);
-        outerPanel.add(messageBox, BorderLayout.PAGE_END);
-        return outerPanel;
-    }
 
     Button getButton(int x, int y) {
         return buttons[x][y];
