@@ -34,7 +34,7 @@ class Button {
         return jButton;
     }
 
-    void displayBomb() {
+    void displayIfBomb() {
         if (field.isBomb() && field.isFlag()) {
             getJButton().setEnabled(false);
             setJButtonImageIcon(new ImageCreator().getFlaggedBomb());

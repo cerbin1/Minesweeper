@@ -52,7 +52,7 @@ public class Application {
     void displayAllBombs() {
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
-                buttons[i][j].displayBomb();
+                buttons[i][j].displayIfBomb();
             }
         }
     }
