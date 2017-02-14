@@ -1,14 +1,13 @@
 package game;
 
-class Game {
+public class Game {
     private final int width;
     private final int height;
     private final int bombsCount;
-    final private Field[][] fields;
+    private boolean gameDone = false;
+    private final  Field[][] fields;
 
-    private final boolean gameDone = false;
-
-    Game(Size size, int bombsCount) {
+    public Game(Size size, int bombsCount) {
         this.width = size.getWidth();
         this.height = size.getHeight();
         this.bombsCount = bombsCount;
@@ -136,8 +135,12 @@ class Game {
         return points;
     }
 
-    boolean isGameDone() {
+    public boolean isGameDone() {
         return gameDone;
+    }
+
+    void setGameDone() {
+        this.gameDone = true;
     }
 
     int getWidth() {

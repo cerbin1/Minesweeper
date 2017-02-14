@@ -40,6 +40,7 @@ class FieldMouseAdapter extends MouseAdapter {
         if (button.isBomb()) {
             application.setMessageBoxText("Boom, you lose!");
             application.displayAllBombs();
+            game.setGameDone();
         } else {
             application.clearMessageBox();
             if (button.hasNearBombs()) {
@@ -49,6 +50,7 @@ class FieldMouseAdapter extends MouseAdapter {
             }
             if (game.winCondition()) {
                 application.setMessageBoxText("You win!");
+                game.setGameDone();
             }
         }
     }
@@ -73,6 +75,7 @@ class FieldMouseAdapter extends MouseAdapter {
         application.updateFlaggedBombsCount();
         if (game.winCondition()) {
             application.setMessageBoxText("Wygrales!");
+            game.setGameDone();
         }
     }
 }

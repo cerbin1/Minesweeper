@@ -22,9 +22,9 @@ public class Application {
 
     private final int bombsCount;
 
-    private Application(Size size, int bombsCount) {
+    public Application(Size size, int bombsCount, Game game) {
         this.size = size;
-        game = GameFactory.create(size, bombsCount);
+        this.game = game;
         this.bombsCount = bombsCount;
 
         buttons = createButtons();
@@ -49,7 +49,7 @@ public class Application {
         return jButton;
     }
 
-    void displayAllBombs() {
+    protected void displayAllBombs() {
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
                 buttons[i][j].displayBomb();
@@ -61,7 +61,7 @@ public class Application {
         return BOMBS_COUNTER_COLORS[bombsCount - 1];
     }
 
-    private void createAndShowBoard() {
+    public void createAndShowBoard() {
         JFrame frame = createJFrame("Minesweeper");
 
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
@@ -152,9 +152,5 @@ public class Application {
             game.fillBombsCounters();
             setFirstClick(false);
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Application(new Size(10, 10), 10).createAndShowBoard());
     }
 }

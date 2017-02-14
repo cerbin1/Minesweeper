@@ -1,10 +1,10 @@
 package game;
 
-class Size {
+public class Size {
     private final int width;
     private final int height;
 
-    Size(int width, int height) {
+    public Size(int width, int height) {
         this.width = width;
         this.height = height;
     }
