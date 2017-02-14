@@ -49,6 +49,7 @@ class FieldMouseAdapter extends MouseAdapter {
             }
             if (game.winCondition()) {
                 application.setMessageBoxText("You win!");
+                application.displayAllBombs();
             }
         }
     }
