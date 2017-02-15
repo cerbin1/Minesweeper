@@ -5,10 +5,10 @@ import java.awt.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-class JComponentsGenerator {
+class ComponentGenerator {
     private Application application;
 
-    JComponentsGenerator(Application application) {
+    ComponentGenerator(Application application) {
         this.application = application;
     }
 

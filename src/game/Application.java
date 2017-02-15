@@ -22,14 +22,14 @@ public class Application {
 
     private final int bombsCount;
 
-    private final JComponentsGenerator jComponentsGenerator;
+    private final ComponentGenerator componentGenerator;
 
     public Application(Size size, int bombsCount, Game game) {
         this.size = size;
         this.game = game;
         this.bombsCount = bombsCount;
 
-        jComponentsGenerator = new JComponentsGenerator(this);
+        componentGenerator = new ComponentGenerator(this);
 
         buttons = createButtons();
     }
@@ -38,7 +38,7 @@ public class Application {
         Button[][] buttons = new Button[size.getWidth()][size.getHeight()];
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
-                buttons[i][j] = new Button(game.getField(i, j), jComponentsGenerator.createSingleJButton(this, i, j));
+                buttons[i][j] = new Button(game.getField(i, j), componentGenerator.createSingleJButton(this, i, j));
             }
         }
         return buttons;
@@ -66,13 +66,13 @@ public class Application {
     }
 
     public void createAndShowBoard() {
-        JFrame frame = jComponentsGenerator.createJFrame("Minesweeper");
+        JFrame frame = componentGenerator.createJFrame("Minesweeper");
 
-        messageBox = jComponentsGenerator.createDefaultTextLabel("TextLabel", "Start clicking");
-        bombsLeftLabel = jComponentsGenerator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
+        messageBox = componentGenerator.createDefaultTextLabel("TextLabel", "Start clicking");
+        bombsLeftLabel = componentGenerator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
-        JPanel panel = jComponentsGenerator.createJPanelWithJButtons();
-        JPanel outerPanel = jComponentsGenerator.createOuterPanel(panel);
+        JPanel panel = componentGenerator.createJPanelWithJButtons();
+        JPanel outerPanel = componentGenerator.createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
     }
