@@ -1,5 +1,7 @@
 package game;
 
+import game.View.ImageCreator;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -20,12 +22,12 @@ class Button {
         return () -> {
             if (field.getNearBombsCount() != 0) {
                 field.setDiscovered(true);
-                jButton.setEnabled(false);
                 jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
                 jButton.setText(Integer.toString(field.getNearBombsCount()));
             } else {
-                jButton.setBackground(Color.darkGray);
+                jButton.setBackground(darkGray);
             }
+            jButton.setEnabled(false);
         };
     }
 
@@ -33,19 +35,42 @@ class Button {
         return jButton;
     }
 
-    void displayBomb() {
-        if (field.isBomb()) {
-            jButton.setBackground(field.isFlag() ? GREEN : RED);
-           /* File file = new File("C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\src\\resources\\bomb.png");
-            System.out.println(file.exists());
-            try {
-                Image image = ImageIO.read(getClass().getResource("/resources/1.png"));
-//                Image image1 = image.getScaledInstance(10, 10, Image.SCALE_SMOOTH);
-                jButton.setIcon(new ImageIcon(image));
-            } catch (IOException ignored) {
-                throw new RuntimeException("File not found");
-            }*/
+    void displayIfBomb() {
+        if (isBombHit()) {
+            setBombHitLook();
+        } else if (isBombMissed()) {
+            setBombMissedLook();
+        } else if (field.isBomb()) {
+            setBombLook();
         }
+        jButton.setEnabled(false);
+    }
+
+    private boolean isBombHit() {
+        return field.isBomb() && field.isFlag();
+    }
+
+    private void setBombHitLook() {
+        setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
+        getJButton().setBackground(GREEN);
+    }
+
+    private boolean isBombMissed() {
+        return !field.isBomb() && field.isFlag();
+    }
+
+    private void setBombMissedLook() {
+        setJButtonImageIcon(new ImageCreator().getMissedFlag());
+        getJButton().setBackground(RED);
+    }
+
+    private void setBombLook() {
+        setJButtonImageIcon(new ImageCreator().getBomb());
+    }
+
+    private void setJButtonImageIcon(Image image) {
+        jButton.setIcon(new ImageIcon(image));
+        jButton.setDisabledIcon(new ImageIcon(image));
     }
 
     boolean isDiscovered() {
@@ -66,13 +91,14 @@ class Button {
 
     private void setUnflagged() {
         field.setFlag(false);
-        jButton.setText("");
+        setJButtonImageIcon(new ImageCreator().getEmptyFlag());
+        jButton.setBackground(null);
     }
 
     private void setFlagged() {
         field.setFlag(true);
-        jButton.setText("?");
-        jButton.setForeground(new Color(239, 144, 35));
+        setJButtonImageIcon(new ImageCreator().getFlag());
+        jButton.setBackground(new Color(240, 208, 132));
     }
 
     boolean isBomb() {
