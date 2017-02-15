@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import static java.awt.Color.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class Application {
     private final static Color[] BOMBS_COUNTER_COLORS = {
