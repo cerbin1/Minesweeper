@@ -23,13 +23,17 @@ class Button {
         return () -> {
             if (field.getNearBombsCount() != 0) {
                 field.setDiscovered(true);
-                jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
-                jButton.setText(Integer.toString(field.getNearBombsCount()));
+                setBombsCounter();
             } else {
                 jButton.setBackground(darkGray);
             }
             jButton.setEnabled(false);
         };
+    }
+
+    private void setBombsCounter() {
+        jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
+        jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
 
     JButton getJButton() {
@@ -113,8 +117,7 @@ class Button {
     void discover() {
         field.setDiscovered(true);
         getJButton().setEnabled(false);
-        jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
-        jButton.setText(Integer.toString(field.getNearBombsCount()));
+        setBombsCounter();
     }
 
     boolean hasNearBombs() {
