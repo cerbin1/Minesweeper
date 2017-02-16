@@ -55,7 +55,7 @@ class Button {
 
     private void setBombHitLook() {
         setJButtonImageIcon(new ImageCreator().getFlaggedBomb());
-        getJButton().setBackground(GREEN);
+        jButton.setBackground(GREEN);
     }
 
     private boolean isBombMissed() {
@@ -64,7 +64,7 @@ class Button {
 
     private void setBombMissedLook() {
         setJButtonImageIcon(new ImageCreator().getMissedFlag());
-        getJButton().setBackground(RED);
+        jButton.setBackground(RED);
     }
 
     private void setBombLook() {
@@ -114,7 +114,7 @@ class Button {
 
     void discoverButtonWithBombsNear() {
         field.setDiscovered(true);
-        getJButton().setEnabled(false);
+        jButton.setEnabled(false);
         jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
         jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
