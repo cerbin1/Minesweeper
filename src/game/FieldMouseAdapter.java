@@ -32,51 +32,59 @@ class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Button button) {
-        application.repositionFirstClickedBomb(button);
-        if (button.isDiscovered() || button.isFlag()) {
-            application.setMessageBoxText("Field is already clicked or flagged");
-            return;
-        }
-        if (button.isBomb()) {
-            application.setMessageBoxText("Boom, you lose!");
-            application.displayAllBombs();
-            game.setGameDone();
+        if (game.isGameDone()) {
+            application.setMessageBoxText("Game is done");
         } else {
-            application.clearMessageBox();
-            if (button.hasNearBombs()) {
-                button.discover();
-            } else {
-                game.floodFill(x, y);
+            application.repositionFirstClickedBomb(button);
+            if (button.isDiscovered() || button.isFlag()) {
+                application.setMessageBoxText("Field is already clicked or flagged");
+                return;
             }
-            if (game.winCondition()) {
+            if (button.isBomb()) {
+                application.setMessageBoxText("Boom, you lose!");
                 application.displayAllBombs();
-                application.setMessageBoxText("You win!");
                 game.setGameDone();
+            } else {
+                application.clearMessageBox();
+                if (button.hasNearBombs()) {
+                    button.discover();
+                } else {
+                    game.floodFill(x, y);
+                }
+                if (game.winCondition()) {
+                    application.displayAllBombs();
+                    application.setMessageBoxText("You win!");
+                    game.setGameDone();
+                }
             }
         }
     }
 
     private void rightButtonClick(Button button) {
-        if (application.isFirstClick()) {
-            application.setFirstClick(false);
-            game.fillBombsCounters();
-        }
-        application.clearMessageBox();
-        if (button.isDiscovered()) {
-            application.setMessageBoxText("Field is discovered!");
-            return;
-        }
-        if (game.countUnflaggedBombs() < 1) {
-            if (!button.isFlag()) {
-                application.setMessageBoxText("Can't place more flags!");
+        if (game.isGameDone()) {
+            application.setMessageBoxText("Game is done");
+        } else {
+            if (application.isFirstClick()) {
+                application.setFirstClick(false);
+                game.fillBombsCounters();
+            }
+            application.clearMessageBox();
+            if (button.isDiscovered()) {
+                application.setMessageBoxText("Field is discovered!");
                 return;
             }
-        }
-        button.toggleFlag();
-        application.updateFlaggedBombsCount();
-        if (game.winCondition()) {
-            application.setMessageBoxText("Wygrales!");
-            game.setGameDone();
+            if (game.countUnflaggedBombs() < 1) {
+                if (!button.isFlag()) {
+                    application.setMessageBoxText("Can't place more flags!");
+                    return;
+                }
+            }
+            button.toggleFlag();
+            application.updateFlaggedBombsCount();
+            if (game.winCondition()) {
+                application.setMessageBoxText("Wygrales!");
+                game.setGameDone();
+            }
         }
     }
 }
