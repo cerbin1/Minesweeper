@@ -114,12 +114,12 @@ class Button {
 
     void discoverButtonWithNearBombs() {
         field.setDiscovered(true);
-        getJButton().setEnabled(false);
+        jButton.setEnabled(false);
         jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
         jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
 
-    boolean hasNearBombs() {
+    boolean hasBombsNear() {
         return field.getNearBombsCount() > 0;
     }
 }

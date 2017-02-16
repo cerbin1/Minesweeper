@@ -46,7 +46,7 @@ class FieldMouseAdapter extends MouseAdapter {
                 game.setGameDone();
             } else {
                 application.clearMessageBox();
-                if (button.hasNearBombs()) {
+                if (button.hasBombsNear()) {
                     button.discoverButtonWithNearBombs();
                 } else {
                     game.floodFill(x, y);
