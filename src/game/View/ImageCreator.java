@@ -29,8 +29,10 @@ public class ImageCreator {
     private Image getImageIfCorrect(String name) {
         try {
             return ImageIO.read(getClass().getResource(name)).getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        } catch (IOException ignored) {
-            throw new RuntimeException("File not found");
+        } catch (IOException e) {
+            throw new IllegalArgumentException("No access to file " + name.substring(1));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("File " + name.substring(1) + " not found");
         }
     }
 }
