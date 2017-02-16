@@ -1,8 +1,10 @@
 package game;
 
+import static java.lang.Math.random;
+import static java.lang.Math.round;
+
 public class Game {
-    private final int width;
-    private final int height;
+    private final int width, height;
     private final int bombsCount;
     private boolean gameDone = false;
     private final Field[][] fields;
@@ -33,11 +35,10 @@ public class Game {
 
     void plantSingleBomb() {
         while (true) {
-            int x = (int) Math.round(Math.random() * (width - 1));
-            int y = (int) Math.round(Math.random() * (height - 1));
+            int x = (int) round(random() * (width - 1));
+            int y = (int) round(random() * (height - 1));
             if (!fields[x][y].isBomb()) {
                 fields[x][y].setBomb(true);
-                System.out.println(x + ", " + y);
                 break;
             }
         }
