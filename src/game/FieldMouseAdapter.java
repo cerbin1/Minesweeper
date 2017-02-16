@@ -52,9 +52,7 @@ class FieldMouseAdapter extends MouseAdapter {
                     game.floodFill(x, y);
                 }
                 if (game.winCondition()) {
-                    application.displayAllBombs();
-                    application.setMessageBoxText("You win!");
-                    game.setGameDone();
+                    application.setGameAsWon();
                 }
             }
         }
@@ -82,8 +80,7 @@ class FieldMouseAdapter extends MouseAdapter {
             button.toggleFlag();
             application.updateFlaggedBombsCount();
             if (game.winCondition()) {
-                application.setMessageBoxText("Wygrales!");
-                game.setGameDone();
+                application.setGameAsWon();
             }
         }
     }

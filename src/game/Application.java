@@ -119,4 +119,10 @@ public class Application {
             setFirstClick(false);
         }
     }
+
+    void setGameAsWon() {
+        displayAllBombs();
+        setMessageBoxText("You win!");
+        game.setGameDone();
+    }
 }
