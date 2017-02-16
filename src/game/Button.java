@@ -22,18 +22,12 @@ class Button {
     private FloodFillListener createFloodFillListener() {
         return () -> {
             if (field.getNearBombsCount() != 0) {
-                field.setDiscovered(true);
-                setBombsCounter();
+                discoverButton();
             } else {
                 jButton.setBackground(darkGray);
             }
             jButton.setEnabled(false);
         };
-    }
-
-    private void setBombsCounter() {
-        jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
-        jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
 
     JButton getJButton() {
@@ -117,7 +111,8 @@ class Button {
     void discoverButton() {
         field.setDiscovered(true);
         getJButton().setEnabled(false);
-        setBombsCounter();
+        jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
+        jButton.setText(Integer.toString(field.getNearBombsCount()));
     }
 
     boolean hasNearBombs() {
