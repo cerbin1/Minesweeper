@@ -54,7 +54,7 @@ public class Game {
     private void fillSingleBombCounter(int x, int y, Field[][] fields) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (isFieldInsideBoard(x + i, y + j)) {
+                if (boardContains(x + i, y + j)) {
                     if (fields[x + i][y + j].isBomb()) {
                         fields[x][y].setNearBombsCounter(fields[x][y].getNearBombsCount() + 1);
                     }
@@ -63,7 +63,7 @@ public class Game {
         }
     }
 
-    private boolean isFieldInsideBoard(int x, int y) {
+    private boolean boardContains(int x, int y) {
         return (0 <= x && x < width) && (0 <= y && y < height);
     }
 
@@ -72,7 +72,7 @@ public class Game {
     }
 
     void floodFill(int x, int y) {
-        if (!isFieldInsideBoard(x, y)) {
+        if (!boardContains(x, y)) {
             return;
         }
         Field field = fields[x][y];
