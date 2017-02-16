@@ -50,7 +50,7 @@ public class GameTest {
         // then
         assertEquals(result, 0);
     }
-    //jezeli wszystkie pola sa odkryte, jezeli zadne pole nie jest odkryte, jezeli 1 pole jest odkryte
+    //jezeli wszystkie pola so odkryte, jezeli żodne pole nie je odkryte, jezeli 1 pole je odkryte
 
     @Test
     public void shouldCountUndiscoveredFieldsOnStart() {
