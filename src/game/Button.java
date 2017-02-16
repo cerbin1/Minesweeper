@@ -3,6 +3,7 @@ package game;
 import game.View.ImageCreator;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.*;
 
 import static game.Application.getBombCounterColor;
