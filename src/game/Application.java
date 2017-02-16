@@ -112,7 +112,6 @@ public class Application {
     void repositionFirstClickedBomb(Button button) {
         if (firstClick) {
             if (button.isBomb()) {
-                System.out.println("losuje bombe nowa");
                 game.plantSingleBomb();
                 button.setBomb(false);
             }
