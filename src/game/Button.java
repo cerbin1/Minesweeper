@@ -24,10 +24,14 @@ class Button {
             if (field.getNearBombsCount() != 0) {
                 discoverButtonWithBombsNear();
             } else {
-                jButton.setBackground(darkGray);
+                discoverButtonWithoutBombsNear();
             }
-            jButton.setEnabled(false);
         };
+    }
+
+    private void discoverButtonWithoutBombsNear() {
+        jButton.setBackground(darkGray);
+        jButton.setEnabled(false);
     }
 
     JButton getJButton() {
