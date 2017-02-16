@@ -22,7 +22,7 @@ class Button {
     private FloodFillListener createFloodFillListener() {
         return () -> {
             if (field.getNearBombsCount() != 0) {
-                discoverButton();
+                discoverButtonWithBombsNear();
             } else {
                 jButton.setBackground(darkGray);
             }
@@ -108,7 +108,7 @@ class Button {
         field.setBomb(bomb);
     }
 
-    void discoverButton() {
+    void discoverButtonWithBombsNear() {
         field.setDiscovered(true);
         getJButton().setEnabled(false);
         jButton.setBackground(getBombCounterColor(field.getNearBombsCount()));
