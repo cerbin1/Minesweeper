@@ -114,7 +114,7 @@ class Button {
         field.setBomb(bomb);
     }
 
-    void discover() {
+    void discoverButton() {
         field.setDiscovered(true);
         getJButton().setEnabled(false);
         setBombsCounter();
