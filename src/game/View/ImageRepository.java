@@ -4,8 +4,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
 
-public class ImageCreator {
+import static java.awt.Image.SCALE_SMOOTH;
 
+public class ImageRepository {
     public Image getBomb() {
         return getImageIfCorrect("/bomb.png");
     }
@@ -28,11 +29,11 @@ public class ImageCreator {
 
     private Image getImageIfCorrect(String name) {
         try {
-            return ImageIO.read(getClass().getResource(name)).getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            return ImageIO.read(getClass().getResource(name)).getScaledInstance(50, 50, SCALE_SMOOTH);
         } catch (IOException e) {
-            throw new IllegalArgumentException("No access to file " + name.substring(1));
+            throw new RuntimeException("No access to file " + name.substring(1));
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("File " + name.substring(1) + " not found");
+            throw new RuntimeException("File " + name.substring(1) + " not found");
         }
     }
 }
