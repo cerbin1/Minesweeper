@@ -55,7 +55,7 @@ public class Application {
     protected void displayAllBombs() {
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
-                buttons[i][j].displayIfBomb();
+                buttons[i][j].displayBomb();
             }
         }
     }

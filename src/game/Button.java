@@ -36,7 +36,7 @@ class Button {
         return jButton;
     }
 
-    void displayIfBomb() {
+    void displayBomb() {
         if (isBombHit()) {
             setBombHitLook();
         } else if (isBombMissed()) {
