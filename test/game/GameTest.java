@@ -68,7 +68,7 @@ public class GameTest {
         // given
         Game game = new Game(new Size(5, 5), 0);
         Field field = game.getField(0, 0);
-        field.setDiscovered(true);
+        field.discover();
 
         // when
         int result = game.countDiscoveredFields();
@@ -82,7 +82,7 @@ public class GameTest {
         // given
         Game game = new Game(new Size(5, 5), 0);
         Field discoveredField = game.getField(0, 0);
-        discoveredField.setDiscovered(true);
+        discoveredField.discover();
         Field bombField = game.getField(0, 1);
         bombField.setBomb(true);
 
@@ -100,7 +100,7 @@ public class GameTest {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 Field field = game.getField(i, j);
-                field.setDiscovered(true);
+                field.discover();
             }
         }
 

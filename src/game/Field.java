@@ -30,8 +30,8 @@ class Field {
         return discovered;
     }
 
-    void setDiscovered(boolean discovered) {
-        this.discovered = discovered;
+    void discover() {
+        this.discovered = true;
     }
 
     boolean isFlag() {
