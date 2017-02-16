@@ -107,7 +107,7 @@ public class Game {
         return points[0];
     }
 
-    private int countDiscoveredFields() {
+    int countDiscoveredFields() {
         int[] numberOfFields = {height * width};
         forEachFields(field -> {
             if (field.isDiscovered()) {
@@ -117,7 +117,7 @@ public class Game {
         return numberOfFields[0];
     }
 
-    private int countFlagPoints() {
+    int countFlagPoints() {
         int[] points = {0};
         forEachFields(field -> {
             if (field.isFlag()) {
