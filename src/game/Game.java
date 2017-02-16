@@ -81,7 +81,7 @@ public class Game {
             return;
         }
 
-        field.setDiscovered(true);
+        field.discover();
         field.triggerFloodFill();
 
         if (field.getNearBombsCount() == 0) {
