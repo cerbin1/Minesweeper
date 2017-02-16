@@ -72,7 +72,7 @@ public class Game {
     }
 
     void floodFill(int x, int y) {
-        if ((0 > x || x >= width) || (0 > y || y >= height)) {
+        if (!isFieldInBoard(x, y)) {
             return;
         }
         Field field = fields[x][y];
