@@ -5,7 +5,7 @@ public class Game {
     private final int height;
     private final int bombsCount;
     private boolean gameDone = false;
-    private final  Field[][] fields;
+    private final Field[][] fields;
 
     public Game(Size size, int bombsCount) {
         this.width = size.getWidth();
@@ -98,45 +98,45 @@ public class Game {
     }
 
     int countUnflaggedBombs() {
-        int points = bombsCount;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                Field field = fields[i][j];
-                if (field.isFlag()) {
-                    points--;
-                }
+        int[] points = {bombsCount};
+        forEachFields(field -> {
+            if (field.isFlag()) {
+                points[0]--;
             }
-        }
-        return points;
+        });
+        return points[0];
     }
 
-    int countDiscoveredFields() {
-        int numberOfFields = height * width;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                if (fields[i][j].isDiscovered()) {
-                    numberOfFields--;
-                }
+    private int countDiscoveredFields() {
+        int[] numberOfFields = {height * width};
+        forEachFields(field -> {
+            if (field.isDiscovered()) {
+                numberOfFields[0]--;
             }
-        }
-        return numberOfFields;
+        });
+        return numberOfFields[0];
     }
 
-    int countFlagPoints() {
-        int points = 0;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                Field field = fields[i][j];
-                if (field.isFlag()) {
-                    if (field.isBomb()) {
-                        points++;
-                    } else {
-                        points--;
-                    }
+    private int countFlagPoints() {
+        int[] points = {0};
+        forEachFields(field -> {
+            if (field.isFlag()) {
+                if (field.isBomb()) {
+                    points[0]++;
+                } else {
+                    points[0]--;
                 }
             }
+        });
+        return points[0];
+    }
+
+    private void forEachFields(FieldIterator iterator) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                iterator.iterate(fields[i][j]);
+            }
         }
-        return points;
     }
 
     public boolean isGameDone() {
@@ -166,4 +166,5 @@ public class Game {
     private boolean bombsWinCondition() {
         return countDiscoveredFields() - bombsCount == 0;
     }
+
 }
