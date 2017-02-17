@@ -53,11 +53,13 @@ public class Game {
     }
 
     private void fillSingleBombCounter(int x, int y) {
+        Field field = fields[x][y];
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if (boardContains(x + i, y + j)) {
                     if (fields[x + i][y + j].isBomb()) {
-                        fields[x][y].incrementNearBombsCount();
+                        int incrementedNearBombsCount = field.getNearBombsCount() + 1;
+                        field.setNearBombsCounter(incrementedNearBombsCount);
                     }
                 }
             }
