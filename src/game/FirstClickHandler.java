@@ -1,10 +1,10 @@
 package game;
 
-class FirstClick {
+class FirstClickHandler {
     private Game game;
     private boolean firstClick = true;
 
-    FirstClick(Application application) {
+    FirstClickHandler(Application application) {
         this.game = application.getGame();
     }
 
