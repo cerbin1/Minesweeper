@@ -4,8 +4,8 @@ class FirstClickHandler {
     private Game game;
     private boolean firstClick = true;
 
-    FirstClickHandler(Application application) {
-        this.game = application.getGame();
+    FirstClickHandler(Game game) {
+        this.game = game;
     }
 
     void repositionBombIfFirstClickedBomb(Button button) {
@@ -24,6 +24,6 @@ class FirstClickHandler {
     }
 
     void setFirstClickAsUsed() {
-        this.firstClick = true;
+        this.firstClick = false;
     }
 }

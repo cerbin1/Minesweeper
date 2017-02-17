@@ -18,7 +18,7 @@ public class FieldMouseAdapter extends MouseAdapter {
         this.game = application.getGame();
         this.x = x;
         this.y = y;
-        this.firstClickHandler = new FirstClickHandler(application);
+        this.firstClickHandler = application.getFirstClickHandler();
     }
 
     @Override

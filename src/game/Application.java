@@ -24,10 +24,13 @@ public class Application {
 
     private final ComponentCreator componentCreator;
 
+    private final FirstClickHandler firstClickHandler;
+
     public Application(Size size, int bombsCount, Game game) {
         this.size = size;
         this.game = game;
         this.bombsCount = bombsCount;
+        this.firstClickHandler = new FirstClickHandler(this.getGame());
 
         componentCreator = new ComponentCreator(this);
 
@@ -105,5 +108,9 @@ public class Application {
         displayAllBombs();
         setMessageBoxText("You win!");
         game.finish();
+    }
+
+    FirstClickHandler getFirstClickHandler() {
+        return firstClickHandler;
     }
 }
