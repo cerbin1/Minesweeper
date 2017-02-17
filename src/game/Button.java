@@ -109,8 +109,8 @@ class Button {
         return field.isBomb();
     }
 
-    void setBomb(boolean bomb) {
-        field.setBomb(bomb);
+    void markAsBomb() {
+        field.setBomb(true);
     }
 
     void discoverButtonWithNearBombs() {
