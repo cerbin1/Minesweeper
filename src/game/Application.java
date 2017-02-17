@@ -113,7 +113,7 @@ public class Application {
         if (firstClick) {
             if (button.isBomb()) {
                 game.plantSingleBomb();
-                button.markAsBomb();
+                button.unmarkAsBomb();
             }
             game.fillBombsCounters();
             setFirstClick(false);
