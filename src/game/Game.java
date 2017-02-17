@@ -6,7 +6,7 @@ import static java.lang.Math.round;
 public class Game {
     private final int width, height;
     private final int bombsCount;
-    private boolean gameDone = false;
+    private boolean finished = false;
     private final Field[][] fields;
 
     public Game(Size size, int bombsCount) {
@@ -139,12 +139,12 @@ public class Game {
         return counter.getCount();
     }
 
-    public boolean isGameDone() {
-        return gameDone;
+    public boolean isFinished() {
+        return finished;
     }
 
-    void setGameDone() {
-        this.gameDone = true;
+    void finish() {
+        this.finished = true;
     }
 
     public int getWidth() {

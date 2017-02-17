@@ -20,7 +20,7 @@ public class FieldMouseAdapter extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent event) {
-        if (game.isGameDone()) {
+        if (game.isFinished()) {
             application.setMessageBoxText("Start new game");
             return;
         }
@@ -34,7 +34,7 @@ public class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void leftButtonClick(Button button) {
-        if (game.isGameDone()) {
+        if (game.isFinished()) {
             application.setMessageBoxText("Game is done");
         } else {
             application.repositionFirstClickedBomb(button);
@@ -45,7 +45,7 @@ public class FieldMouseAdapter extends MouseAdapter {
             if (button.isBomb()) {
                 application.setMessageBoxText("Boom, you lose!");
                 application.displayAllBombs();
-                game.setGameDone();
+                game.finish();
             } else {
                 application.clearMessageBox();
                 if (button.hasBombsNear()) {
@@ -61,7 +61,7 @@ public class FieldMouseAdapter extends MouseAdapter {
     }
 
     private void rightButtonClick(Button button) {
-        if (game.isGameDone()) {
+        if (game.isFinished()) {
             application.setMessageBoxText("Game is done");
         } else {
             if (application.isFirstClick()) {

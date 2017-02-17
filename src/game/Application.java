@@ -125,6 +125,6 @@ public class Application {
     void setGameAsWon() {
         displayAllBombs();
         setMessageBoxText("You win!");
-        game.setGameDone();
+        game.finish();
     }
 }
