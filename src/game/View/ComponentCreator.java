@@ -1,4 +1,8 @@
-package game;
+package game.View;
+
+import game.Application;
+import game.FieldMouseAdapter;
+import game.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,14 +10,14 @@ import java.awt.*;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-class ComponentCreator {
+public class ComponentCreator {
     private Application application;
 
-    ComponentCreator(Application application) {
+    public ComponentCreator(Application application) {
         this.application = application;
     }
 
-    JButton createSingleJButton(Application application, int x, int y) {
+    public JButton createSingleJButton(Application application, int x, int y) {
         JButton jButton = new JButton();
         jButton.setPreferredSize(new Dimension(50, 50));
         jButton.addMouseListener(new FieldMouseAdapter(application, x, y));
@@ -22,7 +26,7 @@ class ComponentCreator {
         return jButton;
     }
 
-    JFrame createMainJFrame() {
+    public JFrame createMainJFrame() {
         JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -31,7 +35,7 @@ class ComponentCreator {
         return frame;
     }
 
-    JLabel createDefaultTextLabel(String name, String defaultText) {
+    public JLabel createDefaultTextLabel(String name, String defaultText) {
         JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
         textLabel.setText(defaultText);
         textLabel.setBorder(createEmptyBorder(15, 15, 15, 15));
@@ -39,7 +43,7 @@ class ComponentCreator {
         return textLabel;
     }
 
-    JPanel createJPanelWithJButtons() {
+    public JPanel createJPanelWithJButtons() {
         JPanel panel = new JPanel();
         Game game = application.getGame();
         panel.setLayout(new GridLayout(game.getWidth(), game.getHeight()));
@@ -51,7 +55,7 @@ class ComponentCreator {
         return panel;
     }
 
-    JPanel createOuterPanel(JPanel panel) {
+    public JPanel createOuterPanel(JPanel panel) {
         JPanel outerPanel = new JPanel();
         outerPanel.setLayout(new BorderLayout());
         outerPanel.add(application.getBombsLeftLabel(), BorderLayout.PAGE_START);

@@ -147,11 +147,11 @@ public class Game {
         this.gameDone = true;
     }
 
-    int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    int getHeight() {
+    public int getHeight() {
         return height;
     }
 

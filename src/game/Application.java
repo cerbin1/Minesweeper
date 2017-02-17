@@ -1,5 +1,7 @@
 package game;
 
+import game.View.ComponentCreator;
+
 import javax.swing.*;
 import java.awt.Color;
 
@@ -43,11 +45,11 @@ public class Application {
         return buttons;
     }
 
-    JLabel getMessageBox() {
+    public JLabel getMessageBox() {
         return messageBox;
     }
 
-    JLabel getBombsLeftLabel() {
+    public JLabel getBombsLeftLabel() {
         return bombsLeftLabel;
     }
 
@@ -77,7 +79,7 @@ public class Application {
     }
 
 
-    Button getButton(int x, int y) {
+    public Button getButton(int x, int y) {
         return buttons[x][y];
     }
 
@@ -97,7 +99,7 @@ public class Application {
         }
     }
 
-    Game getGame() {
+    public Game getGame() {
         return game;
     }
 

@@ -3,30 +3,32 @@ package game;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-class FieldMouseAdapter extends MouseAdapter {
+import static java.awt.event.MouseEvent.BUTTON1;
+import static java.awt.event.MouseEvent.BUTTON3;
+
+public class FieldMouseAdapter extends MouseAdapter {
     private final Application application;
     private final Game game;
-    private final int x;
-    private final int y;
+    private final int x, y;
 
-    FieldMouseAdapter(Application application, int x, int y) {
+    public FieldMouseAdapter(Application application, int x, int y) {
         this.application = application;
-        game = application.getGame();
+        this.game = application.getGame();
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent event) {
         if (game.isGameDone()) {
             application.setMessageBoxText("Start new game");
             return;
         }
         Button button = application.getButton(x, y);
 
-        if (e.getButton() == MouseEvent.BUTTON1) {
+        if (event.getButton() == BUTTON1) {
             leftButtonClick(button);
-        } else if (e.getButton() == MouseEvent.BUTTON3) {
+        } else if (event.getButton() == BUTTON3) {
             rightButtonClick(button);
         }
     }
