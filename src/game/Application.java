@@ -21,14 +21,14 @@ public class Application {
 
     private final int bombsCount;
 
-    private final ComponentGenerator componentGenerator;
+    private final ComponentCreator componentGenerator;
 
     public Application(Size size, int bombsCount, Game game) {
         this.size = size;
         this.game = game;
         this.bombsCount = bombsCount;
 
-        componentGenerator = new ComponentGenerator(this);
+        componentGenerator = new ComponentCreator(this);
 
         buttons = createButtons();
     }
@@ -65,7 +65,7 @@ public class Application {
     }
 
     public void createAndShowBoard() {
-        JFrame frame = componentGenerator.createJFrame("Minesweeper");
+        JFrame frame = componentGenerator.createMainJFrame();
 
         messageBox = componentGenerator.createDefaultTextLabel("TextLabel", "Start clicking");
         bombsLeftLabel = componentGenerator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);

@@ -3,12 +3,13 @@ package game;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-class ComponentGenerator {
+class ComponentCreator {
     private Application application;
 
-    ComponentGenerator(Application application) {
+    ComponentCreator(Application application) {
         this.application = application;
     }
 
@@ -21,8 +22,8 @@ class ComponentGenerator {
         return jButton;
     }
 
-    JFrame createJFrame(String frameName) {
-        JFrame frame = new JFrame(frameName);
+    JFrame createMainJFrame() {
+        JFrame frame = new JFrame("Minesweeper");
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
@@ -33,7 +34,7 @@ class ComponentGenerator {
     JLabel createDefaultTextLabel(String name, String defaultText) {
         JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
         textLabel.setText(defaultText);
-        textLabel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        textLabel.setBorder(createEmptyBorder(15, 15, 15, 15));
         textLabel.setFont(new Font("Arial", Font.BOLD, 20));
         return textLabel;
     }
