@@ -167,5 +167,4 @@ public class Game {
     private boolean bombsWinCondition() {
         return countDiscoveredFields() - bombsCount == 0;
     }
-
 }
