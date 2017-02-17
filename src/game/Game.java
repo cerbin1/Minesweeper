@@ -99,45 +99,42 @@ public class Game {
     }
 
     int countUnflaggedBombs() {
-        int[] points = {bombsCount};
-        forEachFields(field -> {
+        return bombsCount - forEachFields((field, count) -> {
             if (field.isFlag()) {
-                points[0]--;
+                count.inc();
             }
         });
-        return points[0];
     }
 
     int countDiscoveredFields() {
-        int[] numberOfFields = {height * width};
-        forEachFields(field -> {
+        int fieldsCount = forEachFields((field, count) -> {
             if (field.isDiscovered()) {
-                numberOfFields[0]--;
+                count.inc();
             }
         });
-        return numberOfFields[0];
+        return height * width - fieldsCount;
     }
 
     int countFlagPoints() {
-        int[] points = {0};
-        forEachFields(field -> {
+        return forEachFields((field, count) -> {
             if (field.isFlag()) {
                 if (field.isBomb()) {
-                    points[0]++;
+                    count.inc();
                 } else {
-                    points[0]--;
+                    count.dec();
                 }
             }
         });
-        return points[0];
     }
 
-    private void forEachFields(FieldIterator iterator) {
+    private int forEachFields(CountingFieldIterator iterator) {
+        Counter counter = new Counter();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                iterator.iterate(fields[i][j]);
+                iterator.iterate(fields[i][j], counter);
             }
         }
+        return counter.getCount();
     }
 
     public boolean isGameDone() {
