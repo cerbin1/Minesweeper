@@ -46,7 +46,7 @@ class Field {
         return nearBombsCounter;
     }
 
-    void setNearBombsCounter(int number) {
-        nearBombsCounter = number;
+    void incrementNearBombsCount() {
+        nearBombsCounter++;
     }
 }

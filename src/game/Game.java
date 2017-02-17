@@ -47,17 +47,17 @@ public class Game {
     void fillBombsCounters() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                fillSingleBombCounter(i, j, fields);
+                fillSingleBombCounter(i, j);
             }
         }
     }
 
-    private void fillSingleBombCounter(int x, int y, Field[][] fields) {
+    private void fillSingleBombCounter(int x, int y) {
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 if (boardContains(x + i, y + j)) {
                     if (fields[x + i][y + j].isBomb()) {
-                        fields[x][y].setNearBombsCounter(fields[x][y].getNearBombsCount() + 1);
+                        fields[x][y].incrementNearBombsCount();
                     }
                 }
             }
