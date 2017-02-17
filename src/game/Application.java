@@ -9,21 +9,14 @@ import static java.awt.Color.*;
 
 public class Application {
     private final static Color[] BOMBS_COUNTER_COLORS = {
-            BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK
-    };
+            BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK};
 
     private final Size size;
-
     private final Game game;
-
     private final Button[][] buttons;
-
     private JLabel messageBox, bombsLeftLabel;
-
     private final int bombsCount;
-
     private final ComponentCreator componentCreator;
-
     private final FirstClickHandler firstClickHandler;
 
     public Application(Size size, int bombsCount, Game game) {
