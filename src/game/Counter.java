@@ -1,13 +1,13 @@
 package game;
 
-public class Counter {
+class Counter {
     private int count = 0;
 
-    public void inc() {
+    void inc() {
         count++;
     }
 
-    public void dec() {
+    void dec() {
         count--;
     }
 

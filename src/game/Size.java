@@ -1,8 +1,7 @@
 package game;
 
 public class Size {
-    private final int width;
-    private final int height;
+    private final int width, height;
 
     public Size(int width, int height) {
         this.width = width;

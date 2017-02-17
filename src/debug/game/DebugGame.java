@@ -9,7 +9,7 @@ public class DebugGame extends Game {
     }
 
     @Override
-    public boolean isGameDone() {
+    public boolean isFinished() {
         return false;
     }
 }
