@@ -8,26 +8,26 @@ import static java.awt.Image.SCALE_SMOOTH;
 
 public class ImageRepository {
     public Image getBomb() {
-        return getImageIfCorrect("/bomb.png");
+        return getImageIcon("/bomb.png");
     }
 
     public Image getFlaggedBomb() {
-        return getImageIfCorrect("/flaggedBomb.png");
+        return getImageIcon("/flaggedBomb.png");
     }
 
     public Image getMissedFlag() {
-        return getImageIfCorrect("/missedFlag.png");
+        return getImageIcon("/missedFlag.png");
     }
 
     public Image getEmptyFlag() {
-        return getImageIfCorrect("/emptyFlag.png");
+        return getImageIcon("/emptyFlag.png");
     }
 
     public Image getFlag() {
-        return getImageIfCorrect("/flag.png");
+        return getImageIcon("/flag.png");
     }
 
-    private Image getImageIfCorrect(String name) {
+    private Image getImageIcon(String name) {
         try {
             return ImageIO.read(getClass().getResource(name)).getScaledInstance(50, 50, SCALE_SMOOTH);
         } catch (IOException e) {
