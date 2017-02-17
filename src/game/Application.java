@@ -21,14 +21,14 @@ public class Application {
 
     private final int bombsCount;
 
-    private final ComponentCreator componentGenerator;
+    private final ComponentCreator componentCreator;
 
     public Application(Size size, int bombsCount, Game game) {
         this.size = size;
         this.game = game;
         this.bombsCount = bombsCount;
 
-        componentGenerator = new ComponentCreator(this);
+        componentCreator = new ComponentCreator(this);
 
         buttons = createButtons();
     }
@@ -37,7 +37,7 @@ public class Application {
         Button[][] buttons = new Button[size.getWidth()][size.getHeight()];
         for (int i = 0; i < size.getWidth(); i++) {
             for (int j = 0; j < size.getHeight(); j++) {
-                buttons[i][j] = new Button(game.getField(i, j), componentGenerator.createSingleJButton(this, i, j));
+                buttons[i][j] = new Button(game.getField(i, j), componentCreator.createSingleJButton(this, i, j));
             }
         }
         return buttons;
@@ -65,13 +65,13 @@ public class Application {
     }
 
     public void createAndShowBoard() {
-        JFrame frame = componentGenerator.createMainJFrame();
+        JFrame frame = componentCreator.createMainJFrame();
 
-        messageBox = componentGenerator.createDefaultTextLabel("TextLabel", "Start clicking");
-        bombsLeftLabel = componentGenerator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
+        messageBox = componentCreator.createDefaultTextLabel("TextLabel", "Start clicking");
+        bombsLeftLabel = componentCreator.createDefaultTextLabel("BombsCounter", "Bombs left: " + bombsCount);
 
-        JPanel panel = componentGenerator.createJPanelWithJButtons();
-        JPanel outerPanel = componentGenerator.createOuterPanel(panel);
+        JPanel panel = componentCreator.createJPanelWithJButtons();
+        JPanel outerPanel = componentCreator.createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
     }
