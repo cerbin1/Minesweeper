@@ -6,28 +6,28 @@ import java.awt.event.MouseEvent;
 import static java.awt.event.MouseEvent.BUTTON1;
 import static java.awt.event.MouseEvent.BUTTON3;
 
-public class FieldMouseAdapter extends MouseAdapter {
-    private final Application application;
+class FieldMouseAdapter extends MouseAdapter {
     private final Game game;
     private final int x, y;
 
     private final FirstClickHandler firstClickHandler;
+    private Mediator mediator;
 
-    public FieldMouseAdapter(Application application, int x, int y) {
-        this.application = application;
-        this.game = application.getGame();
+    FieldMouseAdapter(Mediator mediator, int x, int y) {
+        this.mediator = mediator;
+        this.game = mediator.getGame();
         this.x = x;
         this.y = y;
-        this.firstClickHandler = application.getFirstClickHandler();
+        this.firstClickHandler = mediator.getFirstClickHandler();
     }
 
     @Override
     public void mousePressed(MouseEvent event) {
         if (game.isFinished()) {
-            application.setMessageBoxText("Start new game");
+            mediator.displayMessage("Start new game");
             return;
         }
-        Button button = application.getButton(x, y);
+        Button button = mediator.getButton(x, y);
 
         if (event.getButton() == BUTTON1) {
             leftButtonClick(button);
@@ -38,52 +38,50 @@ public class FieldMouseAdapter extends MouseAdapter {
 
     private void leftButtonClick(Button button) {
         if (game.isFinished()) {
-            application.setMessageBoxText("Game is done");
+            mediator.displayMessage("Game is done");
             return;
         }
         firstClickHandler.repositionFirstClickedBomb(button);
         if (button.isDiscovered() || button.isFlag()) {
-            application.setMessageBoxText("Field is already clicked or flagged");
+            mediator.displayMessage("Field is already clicked or flagged");
             return;
         }
         if (button.isBomb()) {
-            application.setMessageBoxText("Boom, you lose!");
-            application.displayAllBombs();
-            game.finish();
+            mediator.gameFinished(false);
         } else {
-            application.clearMessageBox();
+            mediator.clearMessage();
             if (button.hasBombsNear()) {
                 button.discoverButtonWithNearBombs();
             } else {
                 game.floodFill(x, y);
             }
             if (game.winCondition()) {
-                application.setGameAsWon();
+                mediator.gameFinished(true);
             }
         }
     }
 
     private void rightButtonClick(Button button) {
         if (game.isFinished()) {
-            application.setMessageBoxText("Game is done");
+            mediator.displayMessage("Game is done");
             return;
         }
         firstClickHandler.setFirstClicked();
-        application.clearMessageBox();
+        mediator.clearMessage();
         if (button.isDiscovered()) {
-            application.setMessageBoxText("Field is discovered!");
+            mediator.displayMessage("Field is discovered!");
             return;
         }
         if (game.countUnflaggedBombs() < 1) {
             if (!button.isFlag()) {
-                application.setMessageBoxText("Can't place more flags!");
+                mediator.displayMessage("Can't place more flags!");
                 return;
             }
         }
         button.toggleFlag();
-        application.updateFlaggedBombsCount();
+        mediator.updateFlaggedBombsCount();
         if (game.winCondition()) {
-            application.setGameAsWon();
+            mediator.gameFinished(true);
         }
     }
 }

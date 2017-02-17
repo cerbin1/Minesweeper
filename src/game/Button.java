@@ -3,13 +3,14 @@ package game;
 import game.View.ImageRepository;
 
 import javax.swing.*;
-import java.awt.Color;
 import java.awt.*;
 
-import static game.Application.getBombCounterColor;
 import static java.awt.Color.*;
 
-public class Button {
+class Button {
+    private final static Color[] BOMBS_COUNTER_COLORS = {
+            BLUE, GREEN, RED, MAGENTA, ORANGE, LIGHT_GRAY, YELLOW, PINK};
+
     private final Field field;
     private final JButton jButton;
 
@@ -34,7 +35,7 @@ public class Button {
         jButton.setEnabled(false);
     }
 
-    public JButton getJButton() {
+    JButton getJButton() {
         return jButton;
     }
 
@@ -119,6 +120,10 @@ public class Button {
         int nearBombsCount = field.getNearBombsCount();
         jButton.setBackground(getBombCounterColor(nearBombsCount));
         jButton.setText(Integer.toString(nearBombsCount));
+    }
+
+    private Color getBombCounterColor(int bombsCount) {
+        return BOMBS_COUNTER_COLORS[bombsCount - 1];
     }
 
     boolean hasBombsNear() {
