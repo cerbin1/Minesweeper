@@ -69,7 +69,7 @@ public class FieldMouseAdapter extends MouseAdapter {
             return;
         }
         if (firstClick.isFirstClick()) {
-            firstClick.setFirstClick(false);
+            firstClick.setFirstClickAsUsed();
             game.fillBombsCounters();
         }
         application.clearMessageBox();

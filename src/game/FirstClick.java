@@ -15,7 +15,7 @@ class FirstClick {
                 button.unmarkAsBomb();
             }
             game.fillBombsCounters();
-            setFirstClick(false);
+            setFirstClickAsUsed();
         }
     }
 
@@ -23,7 +23,7 @@ class FirstClick {
         return firstClick;
     }
 
-    void setFirstClick(boolean firstClick) {
-        this.firstClick = firstClick;
+    void setFirstClickAsUsed() {
+        this.firstClick = true;
     }
 }
