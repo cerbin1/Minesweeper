@@ -8,22 +8,21 @@ class FirstClickHandler {
         this.game = game;
     }
 
-    void repositionBombIfFirstClickedBomb(Button button) {
+    void repositionFirstClickedBomb(Button button) {
         if (firstClick) {
             if (button.isBomb()) {
                 game.plantSingleBomb();
                 button.unmarkAsBomb();
             }
+            firstClick = false;
             game.fillBombsCounters();
-            setFirstClickAsUsed();
         }
     }
 
-    boolean isFirstClick() {
-        return firstClick;
-    }
-
-    void setFirstClickAsUsed() {
-        this.firstClick = false;
+    void setFirstClicked() {
+        if (firstClick) {
+            firstClick = false;
+            game.fillBombsCounters();
+        }
     }
 }

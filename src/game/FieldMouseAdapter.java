@@ -41,7 +41,7 @@ public class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("Game is done");
             return;
         }
-        firstClickHandler.repositionBombIfFirstClickedBomb(button);
+        firstClickHandler.repositionFirstClickedBomb(button);
         if (button.isDiscovered() || button.isFlag()) {
             application.setMessageBoxText("Field is already clicked or flagged");
             return;
@@ -68,10 +68,7 @@ public class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("Game is done");
             return;
         }
-        if (firstClickHandler.isFirstClick()) {
-            firstClickHandler.setFirstClickAsUsed();
-            game.fillBombsCounters();
-        }
+        firstClickHandler.setFirstClicked();
         application.clearMessageBox();
         if (button.isDiscovered()) {
             application.setMessageBoxText("Field is discovered!");
