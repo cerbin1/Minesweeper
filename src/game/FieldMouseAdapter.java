@@ -36,26 +36,26 @@ public class FieldMouseAdapter extends MouseAdapter {
     private void leftButtonClick(Button button) {
         if (game.isFinished()) {
             application.setMessageBoxText("Game is done");
+            return;
+        }
+        application.repositionFirstClickedBomb(button);
+        if (button.isDiscovered() || button.isFlag()) {
+            application.setMessageBoxText("Field is already clicked or flagged");
+            return;
+        }
+        if (button.isBomb()) {
+            application.setMessageBoxText("Boom, you lose!");
+            application.displayAllBombs();
+            game.finish();
         } else {
-            application.repositionFirstClickedBomb(button);
-            if (button.isDiscovered() || button.isFlag()) {
-                application.setMessageBoxText("Field is already clicked or flagged");
-                return;
-            }
-            if (button.isBomb()) {
-                application.setMessageBoxText("Boom, you lose!");
-                application.displayAllBombs();
-                game.finish();
+            application.clearMessageBox();
+            if (button.hasBombsNear()) {
+                button.discoverButtonWithNearBombs();
             } else {
-                application.clearMessageBox();
-                if (button.hasBombsNear()) {
-                    button.discoverButtonWithNearBombs();
-                } else {
-                    game.floodFill(x, y);
-                }
-                if (game.winCondition()) {
-                    application.setGameAsWon();
-                }
+                game.floodFill(x, y);
+            }
+            if (game.winCondition()) {
+                application.setGameAsWon();
             }
         }
     }
@@ -63,27 +63,27 @@ public class FieldMouseAdapter extends MouseAdapter {
     private void rightButtonClick(Button button) {
         if (game.isFinished()) {
             application.setMessageBoxText("Game is done");
-        } else {
-            if (application.isFirstClick()) {
-                application.setFirstClick(false);
-                game.fillBombsCounters();
-            }
-            application.clearMessageBox();
-            if (button.isDiscovered()) {
-                application.setMessageBoxText("Field is discovered!");
+            return;
+        }
+        if (application.isFirstClick()) {
+            application.setFirstClick(false);
+            game.fillBombsCounters();
+        }
+        application.clearMessageBox();
+        if (button.isDiscovered()) {
+            application.setMessageBoxText("Field is discovered!");
+            return;
+        }
+        if (game.countUnflaggedBombs() < 1) {
+            if (!button.isFlag()) {
+                application.setMessageBoxText("Can't place more flags!");
                 return;
             }
-            if (game.countUnflaggedBombs() < 1) {
-                if (!button.isFlag()) {
-                    application.setMessageBoxText("Can't place more flags!");
-                    return;
-                }
-            }
-            button.toggleFlag();
-            application.updateFlaggedBombsCount();
-            if (game.winCondition()) {
-                application.setGameAsWon();
-            }
+        }
+        button.toggleFlag();
+        application.updateFlaggedBombsCount();
+        if (game.winCondition()) {
+            application.setGameAsWon();
         }
     }
 }
