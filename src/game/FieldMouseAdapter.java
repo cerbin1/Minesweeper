@@ -7,11 +7,11 @@ import static java.awt.event.MouseEvent.BUTTON1;
 import static java.awt.event.MouseEvent.BUTTON3;
 
 class FieldMouseAdapter extends MouseAdapter {
+    private final Mediator mediator;
     private final Game game;
     private final int x, y;
 
     private final FirstClickHandler firstClickHandler;
-    private Mediator mediator;
 
     FieldMouseAdapter(Mediator mediator, int x, int y) {
         this.mediator = mediator;
