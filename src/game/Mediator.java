@@ -13,13 +13,16 @@ public class Mediator implements GameStateListener {
     private GameFrame gameFrame;
     private final FirstClickHandler firstClickHandler;
 
-
     public Mediator(Size size, Game game) {
         this.size = size;
         this.game = game;
         this.firstClickHandler = new FirstClickHandler(game);
         this.buttons = createButtons();
         this.gameFrame = new GameFrame(this);
+    }
+
+    public void showFrame() {
+        gameFrame.showFrame();
     }
 
     private Button[][] createButtons() {

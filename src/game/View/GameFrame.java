@@ -9,29 +9,28 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GameFrame implements GameStateListener {
+    private JFrame frame;
     private JLabel messageBox, bombsLeftLabel;
 
     public GameFrame(Mediator mediator) {
         initializeComponents(mediator);
     }
 
+    public void showFrame() {
+        frame.setVisible(true);
+    }
+
     private void initializeComponents(Mediator mediator) {
-        JFrame frame = createMainJFrame();
+        frame = new JFrame("Minesweeper");
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.setResizable(true);
         messageBox = createDefaultTextLabel("TextLabel", "Start clicking");
         bombsLeftLabel = createDefaultTextLabel("BombsCounter", "");
         JPanel panel = createJPanelWithJButtons(mediator);
         JPanel outerPanel = createOuterPanel(panel);
         frame.add(outerPanel);
         frame.pack();
-    }
-
-    private JFrame createMainJFrame() {
-        JFrame frame = new JFrame("Minesweeper");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
-        frame.setVisible(true);
-        return frame;
     }
 
     private JLabel createDefaultTextLabel(String name, String defaultText) {
