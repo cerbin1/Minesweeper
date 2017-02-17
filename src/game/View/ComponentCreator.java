@@ -18,12 +18,12 @@ public class ComponentCreator {
     }
 
     public JButton createSingleJButton(Application application, int x, int y) {
-        JButton jButton = new JButton();
-        jButton.setPreferredSize(new Dimension(50, 50));
-        jButton.addMouseListener(new FieldMouseAdapter(application, x, y));
-        jButton.setFont(new Font("Arial", 0, 30));
-        jButton.setMargin(new Insets(0, 0, 0, 0));
-        return jButton;
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(50, 50));
+        button.addMouseListener(new FieldMouseAdapter(application, x, y));
+        button.setFont(new Font("Arial", 0, 30));
+        button.setMargin(new Insets(0, 0, 0, 0));
+        return button;
     }
 
     public JFrame createMainJFrame() {
@@ -36,11 +36,11 @@ public class ComponentCreator {
     }
 
     public JLabel createDefaultTextLabel(String name, String defaultText) {
-        JLabel textLabel = new JLabel(name, SwingConstants.CENTER);
-        textLabel.setText(defaultText);
-        textLabel.setBorder(createEmptyBorder(15, 15, 15, 15));
-        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        return textLabel;
+        JLabel label = new JLabel(name, SwingConstants.CENTER);
+        label.setText(defaultText);
+        label.setBorder(createEmptyBorder(15, 15, 15, 15));
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        return label;
     }
 
     public JPanel createJPanelWithJButtons() {
@@ -55,12 +55,12 @@ public class ComponentCreator {
         return panel;
     }
 
-    public JPanel createOuterPanel(JPanel panel) {
-        JPanel outerPanel = new JPanel();
-        outerPanel.setLayout(new BorderLayout());
-        outerPanel.add(application.getBombsLeftLabel(), BorderLayout.PAGE_START);
-        outerPanel.add(panel, BorderLayout.CENTER);
-        outerPanel.add(application.getMessageBox(), BorderLayout.PAGE_END);
-        return outerPanel;
+    public JPanel createOuterPanel(JPanel innerPanel) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(application.getBombsLeftLabel(), BorderLayout.PAGE_START);
+        panel.add(innerPanel, BorderLayout.CENTER);
+        panel.add(application.getMessageBox(), BorderLayout.PAGE_END);
+        return panel;
     }
 }
