@@ -11,11 +11,14 @@ public class FieldMouseAdapter extends MouseAdapter {
     private final Game game;
     private final int x, y;
 
+    private final FirstClick firstClick;
+
     public FieldMouseAdapter(Application application, int x, int y) {
         this.application = application;
         this.game = application.getGame();
         this.x = x;
         this.y = y;
+        this.firstClick = new FirstClick(application);
     }
 
     @Override
@@ -38,7 +41,7 @@ public class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("Game is done");
             return;
         }
-        application.repositionFirstClickedBomb(button);
+        firstClick.repositionBombIfFirstClickedBomb(button);
         if (button.isDiscovered() || button.isFlag()) {
             application.setMessageBoxText("Field is already clicked or flagged");
             return;
@@ -65,8 +68,8 @@ public class FieldMouseAdapter extends MouseAdapter {
             application.setMessageBoxText("Game is done");
             return;
         }
-        if (application.isFirstClick()) {
-            application.setFirstClick(false);
+        if (firstClick.isFirstClick()) {
+            firstClick.setFirstClick(false);
             game.fillBombsCounters();
         }
         application.clearMessageBox();

@@ -15,7 +15,6 @@ public class Application {
     private final Size size;
 
     private final Game game;
-    private boolean firstClick = true;
 
     private final Button[][] buttons;
 
@@ -78,7 +77,6 @@ public class Application {
         frame.pack();
     }
 
-
     public Button getButton(int x, int y) {
         return buttons[x][y];
     }
@@ -101,25 +99,6 @@ public class Application {
 
     public Game getGame() {
         return game;
-    }
-
-    boolean isFirstClick() {
-        return firstClick;
-    }
-
-    void setFirstClick(boolean firstClick) {
-        this.firstClick = firstClick;
-    }
-
-    void repositionFirstClickedBomb(Button button) {
-        if (firstClick) {
-            if (button.isBomb()) {
-                game.plantSingleBomb();
-                button.unmarkAsBomb();
-            }
-            game.fillBombsCounters();
-            setFirstClick(false);
-        }
     }
 
     void setGameAsWon() {
