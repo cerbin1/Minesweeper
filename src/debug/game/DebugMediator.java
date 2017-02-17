@@ -9,4 +9,10 @@ public class DebugMediator extends Mediator {
         super(size, game);
         displayAllBombs();
     }
+
+    @Override
+    public void bombsCountChanged(int bombsCount) {
+        super.bombsCountChanged(bombsCount);
+        displayAllBombs();
+    }
 }
