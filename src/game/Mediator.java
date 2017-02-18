@@ -9,7 +9,7 @@ public class Mediator implements GameStateListener {
     private final Size size;
     private final Game game;
     private final Button[][] buttons;
-    private GameFrame gameFrame;
+    private final GameFrame gameFrame;
     private final FirstClickHandler firstClickHandler;
 
     public Mediator(Size size, Game game) {
