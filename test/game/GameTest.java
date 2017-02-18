@@ -111,4 +111,36 @@ public class GameTest {
         assertEquals(result, 0);
     }
 
+    @Test
+    public void shouldPopulateBombs() {
+        // given
+        Game game = new Game(new Size(5, 5), 4);
+
+        // when
+        int bombsCount = game.countUnflaggedBombs();
+
+        // then
+        assertEquals(bombsCount, 4);
+    }
+
+    @Test
+    public void shouldNotBeFinished() {
+        // given
+        Game game = new Game(new Size(1, 1), 0);
+
+        // then
+        assertFalse(game.isFinished());
+    }
+
+    @Test
+    public void shouldBeFinished() {
+        // given
+        Game game = new Game(new Size(1, 1), 0);
+
+        // when
+        game.finish();
+
+        // then
+        assertTrue(game.isFinished());
+    }
 }
