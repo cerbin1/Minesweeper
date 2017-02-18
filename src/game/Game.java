@@ -152,7 +152,7 @@ public class Game {
     }
 
     private boolean flagsWinCondition() {
-        return countFlagPoints() == bombsCount - countDiscoveredFields();
+        return countFlagPoints() > 0 && countFlagPoints() == bombsCount - countDiscoveredFields();
     }
 
     private boolean bombsWinCondition() {
