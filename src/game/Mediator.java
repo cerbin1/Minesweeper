@@ -87,9 +87,6 @@ public class Mediator implements GameStateListener {
     void updateFlaggedBombsCount() {
         int unflaggedBombs = game.countUnflaggedBombs();
         bombsCountChanged(unflaggedBombs);
-        if (unflaggedBombs < 0) {
-            displayMessage("Some flags are wrong!");
-        }
     }
 
     void playSound() {
