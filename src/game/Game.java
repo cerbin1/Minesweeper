@@ -147,14 +147,6 @@ public class Game {
         this.finished = true;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     boolean winCondition() {
         return flagsWinCondition() || bombsWinCondition();
     }
