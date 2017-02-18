@@ -1,7 +1,13 @@
 package game;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static java.awt.event.MouseEvent.BUTTON1;
 import static java.awt.event.MouseEvent.BUTTON3;
@@ -47,6 +53,14 @@ class FieldMouseAdapter extends MouseAdapter {
             return;
         }
         if (button.isBomb()) {
+            try {
+                String soundPath = "C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\resource\\bip.wav";
+                InputStream inputStream = new FileInputStream(soundPath);
+                AudioStream audioStream = new AudioStream(inputStream);
+                AudioPlayer.player.start(audioStream);
+            } catch (IOException e) {
+                System.out.println("Error");
+            }
             mediator.gameFinished(false);
         } else {
             mediator.clearMessage();
