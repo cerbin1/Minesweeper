@@ -110,7 +110,7 @@ class Button {
         return field.isBomb();
     }
 
-    void unMarkAsBomb() {
+    void unmarkAsBomb() {
         field.setBomb(false);
     }
 

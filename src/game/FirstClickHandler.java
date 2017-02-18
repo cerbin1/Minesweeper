@@ -12,7 +12,7 @@ class FirstClickHandler {
         if (firstClick) {
             if (button.isBomb()) {
                 game.plantSingleBomb();
-                button.unMarkAsBomb();
+                button.unmarkAsBomb();
             }
             firstClick = false;
             game.fillBombsCounters();
