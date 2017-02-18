@@ -68,7 +68,6 @@ class FieldMouseAdapter extends MouseAdapter {
         }
     }
 
-
     private void rightButtonClick(Button button) {
         if (game.isFinished()) {
             mediator.displayMessage("Game is done");
