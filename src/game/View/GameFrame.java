@@ -56,9 +56,9 @@ public class GameFrame implements GameStateListener {
     private JPanel createOuterPanel(JPanel innerPanel) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.add(messageBox, BorderLayout.PAGE_START);
+        panel.add(bombsLeftLabel, BorderLayout.PAGE_START);
         panel.add(innerPanel, BorderLayout.CENTER);
-        panel.add(bombsLeftLabel, BorderLayout.PAGE_END);
+        panel.add(messageBox, BorderLayout.PAGE_END);
         return panel;
     }
 
