@@ -53,14 +53,7 @@ class FieldMouseAdapter extends MouseAdapter {
             return;
         }
         if (button.isBomb()) {
-            try {
-                String soundPath = "C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\resource\\bip.wav";
-                InputStream inputStream = new FileInputStream(soundPath);
-                AudioStream audioStream = new AudioStream(inputStream);
-                AudioPlayer.player.start(audioStream);
-            } catch (IOException e) {
-                System.out.println("Error");
-            }
+            mediator.playSound();
             mediator.gameFinished(false);
         } else {
             mediator.clearMessage();
@@ -74,6 +67,7 @@ class FieldMouseAdapter extends MouseAdapter {
             }
         }
     }
+
 
     private void rightButtonClick(Button button) {
         if (game.isFinished()) {

@@ -1,9 +1,14 @@
 package game;
 
 import game.View.GameFrame;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Mediator implements GameStateListener {
     private final Size size;
@@ -84,6 +89,17 @@ public class Mediator implements GameStateListener {
         bombsCountChanged(unflaggedBombs);
         if (unflaggedBombs < 0) {
             displayMessage("Some flags are wrong!");
+        }
+    }
+
+    void playSound() {
+        try {
+            String soundPath = "C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\resource\\bip.wav";
+            InputStream inputStream = new FileInputStream(soundPath);
+            AudioStream audioStream = new AudioStream(inputStream);
+            AudioPlayer.player.start(audioStream);
+        } catch (IOException e) {
+            System.out.println("Error");
         }
     }
 
