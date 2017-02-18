@@ -1,7 +1,6 @@
 package game;
 
 import game.View.GameFrame;
-import game.View.GameStateListener;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package game.View;
+package game;
 
 public interface GameStateListener {
     void bombsCountChanged(int bombsCount);

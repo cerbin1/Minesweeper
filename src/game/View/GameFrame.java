@@ -1,5 +1,6 @@
 package game.View;
 
+import game.GameStateListener;
 import game.Mediator;
 
 import javax.swing.*;
