@@ -120,6 +120,7 @@ class Button {
         int nearBombsCount = field.getNearBombsCount();
         jButton.setBackground(getBombCounterColor(nearBombsCount));
         jButton.setText(Integer.toString(nearBombsCount));
+        jButton.setHorizontalTextPosition(SwingConstants.CENTER);
     }
 
     private Color getBombCounterColor(int bombsCount) {
