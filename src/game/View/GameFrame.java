@@ -2,14 +2,10 @@ package game.View;
 
 import game.GameStateListener;
 import game.Mediator;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import sound.SoundRepository;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -67,17 +63,6 @@ public class GameFrame implements GameStateListener {
         return panel;
     }
 
-    private void playSound() {
-        try {
-            String soundPath = "resource/bip.wav";
-            InputStream inputStream = new FileInputStream(soundPath);
-            AudioStream audioStream = new AudioStream(inputStream);
-            AudioPlayer.player.start(audioStream);
-        } catch (IOException e) {
-            System.out.println("Error");
-        }
-    }
-
     @Override
     public void bombsCountChanged(int bombsCount) {
         bombsLeftLabel.setText("Bombs left: " + bombsCount);
@@ -89,7 +74,7 @@ public class GameFrame implements GameStateListener {
             messageBox.setText("You win!");
         } else {
             messageBox.setText("Boom! You lose!");
-            playSound();
+            SoundRepository.playSound();
         }
     }
 
