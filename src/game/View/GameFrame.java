@@ -69,7 +69,7 @@ public class GameFrame implements GameStateListener {
 
     private void playSound() {
         try {
-            String soundPath = "C:\\Users\\bartek\\Desktop\\Projekty\\Minesweeper\\resource\\bip.wav";
+            String soundPath = "resource/bip.wav";
             InputStream inputStream = new FileInputStream(soundPath);
             AudioStream audioStream = new AudioStream(inputStream);
             AudioPlayer.player.start(audioStream);
