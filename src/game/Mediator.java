@@ -1,6 +1,7 @@
 package game;
 
 import game.View.GameFrame;
+import sound.SoundRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -94,6 +95,9 @@ public class Mediator implements GameStateListener {
         displayAllBombs();
         game.finish();
         gameFrame.gameFinished(win);
+        if(!win) {
+            SoundRepository.playSound();
+        }
     }
 
     @Override

@@ -74,7 +74,6 @@ public class GameFrame implements GameStateListener {
             messageBox.setText("You win!");
         } else {
             messageBox.setText("Boom! You lose!");
-            SoundRepository.playSound();
         }
     }
 
