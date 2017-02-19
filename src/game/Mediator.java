@@ -1,7 +1,7 @@
 package game;
 
 import game.View.GameFrame;
-import sound.SoundRepository;
+import game.sound.SoundRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +12,13 @@ public class Mediator implements GameStateListener {
     private final Button[][] buttons;
     private final GameFrame gameFrame;
     private final FirstClickHandler firstClickHandler;
+    private final SoundRepository soundRepository;
 
-    public Mediator(Size size, Game game) {
+    public Mediator(Size size, Game game, SoundRepository soundRepository) {
         this.size = size;
         this.game = game;
         this.firstClickHandler = new FirstClickHandler(game);
+        this.soundRepository = soundRepository;
         this.buttons = createButtons();
         this.gameFrame = new GameFrame(this);
     }
@@ -95,8 +97,8 @@ public class Mediator implements GameStateListener {
         displayAllBombs();
         game.finish();
         gameFrame.gameFinished(win);
-        if(!win) {
-            SoundRepository.playSound();
+        if (!win) {
+            soundRepository.playSound();
         }
     }
 

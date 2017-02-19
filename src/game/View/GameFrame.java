@@ -2,7 +2,6 @@ package game.View;
 
 import game.GameStateListener;
 import game.Mediator;
-import sound.SoundRepository;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package sound;
+package game.sound;
 
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class SoundRepository {
-    public static void playSound() {
+    public void playSound() {
         String bombClicked = "resource/bip.wav";
         try {
             InputStream inputStream = new FileInputStream(bombClicked);
