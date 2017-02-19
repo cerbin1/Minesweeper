@@ -1,6 +1,6 @@
 package game;
 
-import game.View.ImageRepository;
+import game.view.ImageRepository;
 
 import javax.swing.*;
 import java.awt.*;

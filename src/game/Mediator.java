@@ -1,6 +1,6 @@
 package game;
 
-import game.View.GameFrame;
+import game.view.GameFrame;
 import game.sound.SoundRepository;
 
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package game.View;
+package game.view;
 
 import game.GameStateListener;
 import game.Mediator;
