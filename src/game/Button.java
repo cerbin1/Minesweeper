@@ -3,6 +3,7 @@ package game;
 import game.view.ImageRepository;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.*;
 
 import static java.awt.Color.*;
@@ -127,7 +128,7 @@ class Button {
         return BOMBS_COUNTER_COLORS[bombsCount - 1];
     }
 
-    boolean hasBombsNear() {
+    boolean hasNearBombs() {
         return field.getNearBombsCount() > 0;
     }
 }

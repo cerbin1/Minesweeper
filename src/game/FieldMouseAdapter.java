@@ -50,7 +50,7 @@ class FieldMouseAdapter extends MouseAdapter {
             mediator.gameFinished(false);
         } else {
             mediator.clearMessage();
-            if (button.hasBombsNear()) {
+            if (button.hasNearBombs()) {
                 button.discoverButtonWithNearBombs();
             } else {
                 game.floodFill(x, y);
