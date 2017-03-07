@@ -14,8 +14,8 @@ public class Mediator implements GameStateListener {
     private final FirstClickHandler firstClickHandler;
     private final SoundRepository soundRepository;
 
-    public Mediator(Size size, Game game, SoundRepository soundRepository) {
-        this.size = size;
+    public Mediator(Game game, SoundRepository soundRepository) {
+        this.size = game.getSize();
         this.game = game;
         this.firstClickHandler = new FirstClickHandler(game);
         this.soundRepository = soundRepository;

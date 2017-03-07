@@ -10,6 +10,6 @@ public class Release {
         Size size = new Size(10, 10);
         Game game = new Game(size, 10);
         SoundRepository soundRepository = new SoundRepository();
-        new Mediator(size, game, soundRepository).showFrame();
+        new Mediator(game, soundRepository).showFrame();
     }
 }

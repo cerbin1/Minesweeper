@@ -13,8 +13,12 @@ public class Game {
         this.width = size.getWidth();
         this.height = size.getHeight();
         this.bombsCount = bombsCount;
-        fields = createFields();
+        this.fields = createFields();
         populateBombs();
+    }
+
+    Size getSize() {
+        return new Size(width, height);
     }
 
     private Field[][] createFields() {
@@ -56,13 +60,16 @@ public class Game {
         Field field = fields[x][y];
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                if (boardContains(x + i, y + j)) {
-                    if (fields[x + i][y + j].isBomb()) {
-                        int incrementedNearBombsCount = field.getNearBombsCount() + 1;
-                        field.setNearBombsCounter(incrementedNearBombsCount);
-                    }
-                }
+                fillSingleBombCounterField(x + i, y + j, field);
             }
+        }
+    }
+
+    private void fillSingleBombCounterField(int x, int y, Field field) {
+        if (!boardContains(x, y)) return;
+        if (fields[x][y].isBomb()) {
+            int bombsCount = field.getNearBombsCount();
+            field.setNearBombsCounter(bombsCount + 1);
         }
     }
 
@@ -75,28 +82,26 @@ public class Game {
     }
 
     void floodFill(int x, int y) {
-        if (!boardContains(x, y)) {
-            return;
-        }
+        if (!boardContains(x, y)) return;
+        if (shouldFloodFillEnd(fields[x][y])) return;
+
         Field field = fields[x][y];
-
-        if (shouldFloodFillEndOn(field)) {
-            return;
-        }
-
         field.discover();
         field.triggerFloodFill();
+        recursiveFloodFill(x, y, field);
+    }
 
-        if (field.getNearBombsCount() == 0) {
-            for (int i = -1; i < 2; i++) {
-                for (int j = -1; j < 2; j++) {
-                    floodFill(x + i, y + j);
-                }
+    private void recursiveFloodFill(int x, int y, Field field) {
+        if (field.getNearBombsCount() > 0) return;
+
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                floodFill(x + i, y + j);
             }
         }
     }
 
-    private boolean shouldFloodFillEndOn(Field field) {
+    private boolean shouldFloodFillEnd(Field field) {
         return field.isFlag() || field.isBomb() || field.isDiscovered();
     }
 
