@@ -36,6 +36,15 @@ class Button {
         jButton.setEnabled(false);
     }
 
+    void discoverButtonWithNearBombs() {
+        field.discover();
+        jButton.setEnabled(false);
+        int nearBombsCount = field.getNearBombsCount();
+        jButton.setBackground(getBombCounterColor(nearBombsCount));
+        jButton.setText(Integer.toString(nearBombsCount));
+        jButton.setHorizontalTextPosition(SwingConstants.CENTER);
+    }
+
     JButton getJButton() {
         return jButton;
     }
@@ -113,15 +122,6 @@ class Button {
 
     void unmarkAsBomb() {
         field.setBomb(false);
-    }
-
-    void discoverButtonWithNearBombs() {
-        field.discover();
-        jButton.setEnabled(false);
-        int nearBombsCount = field.getNearBombsCount();
-        jButton.setBackground(getBombCounterColor(nearBombsCount));
-        jButton.setText(Integer.toString(nearBombsCount));
-        jButton.setHorizontalTextPosition(SwingConstants.CENTER);
     }
 
     private Color getBombCounterColor(int bombsCount) {
